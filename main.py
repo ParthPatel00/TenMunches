@@ -10,7 +10,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 CATEGORIES = [
     "coffee", "pizza", "burger", "vegan", "bakery", "brunch", "sushi", "thai", "chinese", "indian", "mexican",
-    "korean", "italian", "mediterranean", "seafood", "sandwiches", "juice", "ice cream", "bars", "bbq", "ramen"
+    "korean", "italian", "mediterranean", "seafood", "sandwiches", "ice cream", "bars", "bbq", "ramen"
 ]
 # CATEGORIES = ["coffee", "python"]
 
