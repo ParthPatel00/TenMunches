@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useRef, useState } from "react";
+import { ArrowUp } from "lucide-react";
+import Hero from "./components/Hero.tsx";
+import CategorySelector from "./components/CategorySelector.tsx";
+import ResultsSection from "./components/ResultSection.tsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [topPlaces, setTopPlaces] = useState<any[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    fetch("/top_places.json")
+      .then((res) => res.json())
+      .then((data) => setTopPlaces(data))
+      .catch((err) => console.error("Failed to load data", err));
+  }, []);
+
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+
+    // Smooth scroll to results
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
+  useEffect(() => {
+    const onScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="font-sans bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white transition-colors">
+      <Hero />
+      <CategorySelector data={topPlaces} onSelect={handleCategorySelect} />
+      <div ref={resultsRef}>
+        {selectedCategory && (
+          <ResultsSection category={selectedCategory} data={topPlaces} />
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-5 right-5 z-50 bg-black text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition"
+        >
+          <ArrowUp />
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
