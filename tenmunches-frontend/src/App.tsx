@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <div className="font-sans bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white transition-colors">
+    <div className="font-sans bg-gray-50 text-gray-900 transition-colors">
       <Hero data={topPlaces} onSelect={handleCategorySelect} />
 
       <div ref={resultsRef}>

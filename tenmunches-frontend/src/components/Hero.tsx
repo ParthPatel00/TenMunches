@@ -78,7 +78,7 @@ const Hero = ({ data, onSelect }: Props) => {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="flex items-center gap-2 bg-white text-black dark:bg-black dark:text-white px-5 py-2 rounded-full shadow hover:shadow-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-sm md:text-base backdrop-blur bg-opacity-80"
+            className="flex items-center gap-2 bg-white text-black px-5 py-2 rounded-full shadow hover:shadow-lg hover:bg-gray-100 transition-all text-sm md:text-base backdrop-blur bg-opacity-80"
           >
             <span className="text-lg">{categoryIcons[category] || "🍽️"}</span>
             <span className="capitalize">{category}</span>
@@ -87,7 +87,7 @@ const Hero = ({ data, onSelect }: Props) => {
       </motion.div>
 
       {/* Optional fade to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent dark:from-gray-950 z-0" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent z-0" />
     </section>
   );
 };

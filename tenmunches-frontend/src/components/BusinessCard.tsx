@@ -68,26 +68,13 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
           </div>
         </div>
 
-        <p className="text-sm text-gray-500 dark:text-gray-300">
-          {business.address}
-        </p>
-
-        {/* <div className="flex gap-2 flex-wrap">
-          {topThemes.map((theme, i) => (
-            <span
-              key={i}
-              className="bg-black text-white dark:bg-white dark:text-black px-3 py-1 text-xs rounded-full"
-            >
-              {theme}
-            </span>
-          ))}
-        </div> */}
+        <p className="text-sm text-gray-500">{business.address}</p>
 
         <div className="space-y-2 mb-2">
           {visibleTestimonials.map((quote, i) => (
             <p
               key={i}
-              className="text-sm italic text-gray-700 dark:text-gray-200 border-l-4 pl-3 border-gray-300 dark:border-gray-600"
+              className="text-sm italic text-gray-700 border-l-4 pl-3 border-gray-300"
             >
               “{quote}”
             </p>
