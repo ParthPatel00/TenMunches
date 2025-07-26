@@ -1,0 +1,1192 @@
+[
+  {
+    "category": "coffee",
+    "top_10": [
+      {
+        "id": null,
+        "name": "The Coffee Movement",
+        "rating": 4.8,
+        "review_count": 1152,
+        "address": "1030 Washington St, San Francisco, CA 94108, USA",
+        "categories": [
+          "food",
+          "cafe",
+          "store",
+          "establishment",
+          "point_of_interest"
+        ],
+        "url": "https://maps.google.com/?cid=2067360649617373617",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpc3hXHFbSBwjz6eTxWJXufGe09i00eYIGIegWWYclF6uRgI6ZaIRC63UnbktTE8kUvKPnWkg-YmBZT4k64lcWn-SDPqPdNIBaZNpAow7bQOjDyom6rroZTBWvE1pJNwyIRh3auPm0ajPv3w1qHtTrqftjlp24MoFvHGGBh3bWNglZz7Nyv52HDG0xKFqGHcAlp3T-BbtddRaMZ7EJMylgF_VTtbDG6rkdJukixq20B4zTbkvQ6CKKHMKv3003zYV8Dj1x0914vojxNzTaFx3_w9ZLDzytO5nfAaoibcFfc-A76gHRoScLFakdsb1CQtSsdRYqiFFMKAaOwgwxWm14N90-TNWXObsW1WqNYtbSDVMgbnLeDBFK51hGyeGp-0CzHZW_SjfNKS8qiySlj39UEHj6n2rmBj6yQ1_jx7FSDuqA&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Bryce Richardson",
+            "rating": 5,
+            "text": "Came here from a recommendation from another barista as \"probably the best in the city\" and from my experience it definitely was. This was exactly what I was looking for, great coffee/espresso, service, and a focus on the craft. I tried to sample as much as the menu as possible. The cortado stood out as one of the best I've ever had and the coffee flight really allowed me to compare the differences between their selection of beans. It was a delight to pair the flight with my pastry. The lighter roast went well and the rounding it out after finishing with the more medium one.\n\nThis is definitely a spot I'll seek out every visit to SF.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Sophie Litton",
+            "rating": 5,
+            "text": "Long overdue review, definitely one of my go to coffee spots in the city. Love their seasonal lattes especially the ginger spice latte.\n\nThe service here is always friendly and drinks are consistent.\n\nThere is no seating inside, but I usually like to pick up coffee here and walk down to washington square park or take a scenic walk to abacus row for some window shopping:)",
+            "time": "4 months ago"
+          },
+          {
+            "author": "Lydia Cheng",
+            "rating": 5,
+            "text": "The coffee quality is great here. I like how their menu is simple and refined. I got the vanilla rosemary latte with oat milk and it was a great pairing for the rainy day I visited. The inside is pretty small with no place to sit but there is a small patio outside.",
+            "time": "5 months ago"
+          },
+          {
+            "author": "Oliver Pe",
+            "rating": 5,
+            "text": "Early Jan 2025  Been visiting this 3rd wave coffee house every time we are in the city and the people behind the counter knows their coffee.  The brewing is definitely properly done to highlight the nuances of the beans' origins.\n\nService is counter only with courteous diy clean up of the outdoor bar counter where you can enjoy your drinks on a good day, else takeaway.\n\nThis set up is very casual but that is the style of these types of brewers.\n\nDo expect queues as this very small place has a loyal following.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "P",
+            "rating": 3,
+            "text": "My friend and I tried the rosemary latte, but it tasted like regular coffee; we couldn\u2019t detect anything special about it. If you visit on the weekend or a holiday, be prepared for a line. There is no indoor dining, only a small area for people to enjoy their coffee outside. You might want to grab your coffee and take a walk towards Chinatown or explore other nearby areas.",
+            "time": "5 months ago"
+          }
+        ],
+        "themes_summary": {
+          "service": 3,
+          "taste": 1
+        },
+        "score": 5.8,
+        "testimonials": [
+          "Came here from a recommendation from another barista as \"probably the best in the city\" and from my experience it definitely was. This was exactly what I was looking for, great coffee/espresso, service, and a focus on the craft. I tried to sample as much as the menu as possible. The cortado stood out as one of the best I've ever had and the coffee flight really allowed me to compare the differences between their selection of beans. It was a delight to pair the flight with my pastry. The lighter roast went well and the rounding it out after finishing with the more medium one.\n\nThis is definitely a spot I'll seek out every visit to SF.",
+          "Long overdue review, definitely one of my go to coffee spots in the city. Love their seasonal lattes especially the ginger spice latte.\n\nThe service here is always friendly and drinks are consistent.\n\nThere is no seating inside, but I usually like to pick up coffee here and walk down to washington square park or take a scenic walk to abacus row for some window shopping:)",
+          "The coffee quality is great here. I like how their menu is simple and refined. I got the vanilla rosemary latte with oat milk and it was a great pairing for the rainy day I visited. The inside is pretty small with no place to sit but there is a small patio outside."
+        ]
+      },
+      {
+        "id": null,
+        "name": "The Coffee Berry SF",
+        "rating": 5,
+        "review_count": 392,
+        "address": "1410 Lombard St, San Francisco, CA 94123, USA",
+        "categories": [
+          "cafe",
+          "food",
+          "store",
+          "establishment",
+          "point_of_interest"
+        ],
+        "url": "https://maps.google.com/?cid=5181132708478222499",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpdcbUz2DiC_Vy2xpsvPHf0fBahHo-d16scaXCl7k9Wtr5uA7NQ36RMaOF9jkulRGSDO83tZ070ejJWos7XhLxPDzSpxDisqeJPtR9rp6AYToMfPdYZSjxRTTibfV9LFciQt6Ehvxg5rpElLVD1hSbefVqIZ6W_LlzOyefQqxNGijlNCfP_U8FyzbfNm2vIPH1IAjwtrV_JtZsHQn_GMjgSEwoWBTTVayvvhCmYoQKfmvLd7JMDVK5UvRoMLxhAecjcZSHmjWz87Zd2a6GLl5ooZCWh6CZNU_Z3qYCsSKcpgkOW5q4lW-Xg_412hVosTA2BL43LA4VrNQhi_wo9sriExyP3SHAhcQBQYxoXoH7nhPuxl71betPpMu-XJ1bhes6CaNljwzcS5J3fd_aEGsmCPbWF0iuPHQmzhStNIsxs99cP_zmrdYRo96hXCQHaL&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Terri Ramos",
+            "rating": 5,
+            "text": "If you are in SF and looking for a great place for a cup of coffee and a baked treat (sweet or savory), make sure to try the Coffee Berry. The workers (owners?) will immediately make you feel welcome and valued. The drinks and food are delicious and dogs are welcome. You\u2019ll find a lot of locals with their pups. It\u2019s always a good sign when the locals are going! My daughter and I were staying at the hotel across the street and we found them on the first morning. On the second day when I visited without my daughter they asked if she was sleeping in, which she was. I was impressed they remembered and asked about her. Just a wonderful small business to check out if you are visiting or a local!",
+            "time": "a week ago"
+          },
+          {
+            "author": "Charles Cook",
+            "rating": 5,
+            "text": "We had the savoury pull-apart bread and the twice-baked ube croissant and both were incredible. The pull-apart bread was moist throughout and super flavourful. The ube croissant was crispy, with creamy filling, and an amazing sweet crust. Coffees are also great, but the pastries are the true reason for coming!\nAlso, they have a few nice tables outside, lovely for sunny days.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "John Hunnicutt",
+            "rating": 5,
+            "text": "Sitting here at Coffee Berry in San Francisco and just had to share how great this place is. The service is absolutely perfect \u2013 so attentive and friendly. And the pastries are top-notch! A truly excellent experience.",
+            "time": "a week ago"
+          },
+          {
+            "author": "Neesh Shah",
+            "rating": 5,
+            "text": "I love Coffee Berry as an addition to my neighborhood. I\u2019m lucky enough to live right around the corner so it\u2019s always there for a quick stop. The staff are always nice and greet you with a smile. They have a lot of pastry options and the espresso and coffee are always on point. My personal go to recently has been the Espresso Tonic but you can\u2019t really go wrong. Also dog friendly!",
+            "time": "4 months ago"
+          },
+          {
+            "author": "Farshad P",
+            "rating": 5,
+            "text": "I always believe that to test the quality of a coffeeshop, it should be based on their espresso. No frills, sugar, milk, if you can make this taste good, then you know what you\u2019re doing. And I am happy to say that The Coffee Berry does that.\n\nServing sight glass coffee beans, located on the iconic Lombard street this is a great place to get coffee, chill inside by the window or the outside seating and watch time pass by. Really loved the calm vibe, and the espresso. It was smooth, not burnt at all, strong and great tasting notes.\n\nCan\u2019t say enough good things, this place is solid and and I get why they have a perfect score.",
+            "time": "3 months ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 3,
+          "service": 2,
+          "price": 1,
+          "ambiance": 1
+        },
+        "score": 5.75,
+        "testimonials": [
+          "If you are in SF and looking for a great place for a cup of coffee and a baked treat (sweet or savory), make sure to try the Coffee Berry. The workers (owners?) will immediately make you feel welcome and valued. The drinks and food are delicious and dogs are welcome. You\u2019ll find a lot of locals with their pups. It\u2019s always a good sign when the locals are going! My daughter and I were staying at the hotel across the street and we found them on the first morning. On the second day when I visited without my daughter they asked if she was sleeping in, which she was. I was impressed they remembered and asked about her. Just a wonderful small business to check out if you are visiting or a local!",
+          "We had the savoury pull-apart bread and the twice-baked ube croissant and both were incredible. The pull-apart bread was moist throughout and super flavourful. The ube croissant was crispy, with creamy filling, and an amazing sweet crust. Coffees are also great, but the pastries are the true reason for coming!\nAlso, they have a few nice tables outside, lovely for sunny days.",
+          "Sitting here at Coffee Berry in San Francisco and just had to share how great this place is. The service is absolutely perfect \u2013 so attentive and friendly. And the pastries are top-notch! A truly excellent experience."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Delah Coffee",
+        "rating": 4.7,
+        "review_count": 943,
+        "address": "370 4th St, San Francisco, CA 94107, USA",
+        "categories": [
+          "cafe",
+          "point_of_interest",
+          "establishment",
+          "food",
+          "store"
+        ],
+        "url": "https://maps.google.com/?cid=10682847123881919373",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpdNMnqohIpdx8FXAFZPVc1HFS_Zal0BdqWKYNUKUdurfTbnT5PCItKHkqklbhdEC92wywkSd7Otu91Rd4x3jdPTJ7F_qIddjz32FuOx1JK4u-VzFomi8ISFfAI3BID1Hl-h5WYaxEiOrW7b5ifWVG5GNl6t-ilx1WKgCVywXffWG3X4whCYKzGHmJXfCZ4Yev9LAPzVZ50vzXRHEafOfXE0B3Z4yDyLxhe45IsmN6-psT2L7zyUoDH-K4XfhQTpoCjD6_f0VjGqhpHx0fUDD8wCjhWJAeUy6bxvjw2GUqE71Q&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Chris J",
+            "rating": 5,
+            "text": "We are very lucky to have 2 count them 2 Yemeni coffee shops in this neighborhood. I refuse to pick favorites because they are both 5 star shops. Come to Delah for the amazing coffee, but stay for the pastries and attention to detail. Lots of seats and tables people working everywhere but also lively tables. If you have questions in the menu they are super helpful don't hesitate to ask.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Anthony LoFrisco Jr",
+            "rating": 5,
+            "text": "This gem in the rough serves super tasty, Middle Eastern coffee, with or without an array of spices. A wide range of unique pastries tasted fresh and homemade. Service was super helpful and patient.The place was abuzz with positive energy from people of all walks of life. It's everything a cafe should be.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Michael Nader Musleh",
+            "rating": 5,
+            "text": "Cardamom with coffee.  What a nice comforting flavor, pistachio latte was a real treat.  Music was beautiful and service was intuitive and pleasant.  Great experience.  We also had the zatar bread. Felt like we where in a different world. Thank you.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Chloe Chan",
+            "rating": 5,
+            "text": "Cozy, decently lively place to chat and get work done. It was pretty crowded, and not many accessible outlets, but the service was very friendly!\n\nDidn't expect the chai to be completely unsweetened, very good and spiced otherwise. Bee bites are always a classic choice at Delah cafes :)",
+            "time": "2 months ago"
+          },
+          {
+            "author": "D G",
+            "rating": 5,
+            "text": "Although they were busy, after spending half the day at another cafe, this place was amazing.  I loved the music. I loved that the crowd was diverse.. people from all ethnicities.  The food had flavor. I felt welcomed.  I happened to be a black female but this place is for anyone who loves excellent coffee and wants to enjoy middle eastern and turkish style foods for a very reasonable price.  This place was like oxygen I needed after feeling so unwelcome at another cafe during the same day.",
+            "time": "a month ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 4,
+          "service": 3,
+          "ambiance": 1,
+          "price": 1
+        },
+        "score": 5.7,
+        "testimonials": [
+          "We are very lucky to have 2 count them 2 Yemeni coffee shops in this neighborhood. I refuse to pick favorites because they are both 5 star shops. Come to Delah for the amazing coffee, but stay for the pastries and attention to detail. Lots of seats and tables people working everywhere but also lively tables. If you have questions in the menu they are super helpful don't hesitate to ask.",
+          "This gem in the rough serves super tasty, Middle Eastern coffee, with or without an array of spices. A wide range of unique pastries tasted fresh and homemade. Service was super helpful and patient.The place was abuzz with positive energy from people of all walks of life. It's everything a cafe should be.",
+          "Cardamom with coffee.  What a nice comforting flavor, pistachio latte was a real treat.  Music was beautiful and service was intuitive and pleasant.  Great experience.  We also had the zatar bread. Felt like we where in a different world. Thank you."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Cafe de Casa",
+        "rating": 4.7,
+        "review_count": 1567,
+        "address": "685 Beach St, San Francisco, CA 94133, USA",
+        "categories": [
+          "store",
+          "cafe",
+          "food",
+          "establishment",
+          "restaurant",
+          "point_of_interest"
+        ],
+        "url": "https://maps.google.com/?cid=12086907588489085060",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpcwp0kqdXrOcd_vGEBDIAx7KnhkaKNbYLldbtQtPJpZmOz-R3gxWv9rc4dnlbmWp_HLspxZgFQ01sUurNNFRQ32aAf4aCuw_7JKBrtdXMaBL4bJb5hscPCgXnAGX31fUu1z_asPd1zoCJEAL8U6NOysTjbzdkG3EkzBN8maXHsAtC_l3ewMtDN51tO7zuPaSXpb3SxkEHjp--hf9SNZi5UqI-duzW6NkrrRkx4rc3lyA0P-3ES6_SJDPwBIY4I4aAedRcYljQCF38QyiZKz1f--JcnlddGYtl-ycytKL3aCIw&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Richard Outhwaite Kentish-Beard",
+            "rating": 5,
+            "text": "Read a few reviews on google and absolutely agreed. Went in for lunch with friends; all 3 of us had the Milanese Sandwich which was delicious. Nice crispy fries too. Also enjoyed an Espresso, not the greatest but very drinkable and served in super cute cups. Definitely worth a visit.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Stephen Fang",
+            "rating": 3,
+            "text": "The cheese bread sandwiches were interesting, a good chew and a good size but a little disappointing in flavor combinations. The ham and cheese (bland), parm and fig (too sweet), and avocado + egg + bacon (bland) were good, but a bit pricey for what you get. I also got the tapioca crepe with eggs and it just tasted like a lackluster omelette. I appreciate the culinary innovation, but wouldn't come back regularly. Worth a try, but not a repeat.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Mr. Bravo",
+            "rating": 5,
+            "text": "This place is so is extremely convenient. They have great pastries sandwiches desserts the best coffee I had in San Francisco and amazing juice. I can\u2019t wait to come back here or go to another location.",
+            "time": "3 weeks ago"
+          },
+          {
+            "author": "H Reilly",
+            "rating": 5,
+            "text": "This has become one of my favorite coffee spots in SF! Staff is friendly and was more than happy to answer any questions about the menu. The Coco bread is to die for!!!! Plenty of breakfast & lunch options to choose from. Non dairy and vegetarian options available.",
+            "time": "4 months ago"
+          },
+          {
+            "author": "David Hughes",
+            "rating": 5,
+            "text": "We had our visit to Cafe de Casa in October 2024 and what a delight it was, staff were very very friendly and happy to help, their rolls were absolutely delicious and we came back 3 times in the few days we were in San Francisco!\n\nTheir decor and space is beautifully put together and spotless.\n\nHoping to be back again soon!",
+            "time": "a month ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 3,
+          "price": 2,
+          "service": 2,
+          "ambiance": 1
+        },
+        "score": 5.7,
+        "testimonials": [
+          "Read a few reviews on google and absolutely agreed. Went in for lunch with friends; all 3 of us had the Milanese Sandwich which was delicious. Nice crispy fries too. Also enjoyed an Espresso, not the greatest but very drinkable and served in super cute cups. Definitely worth a visit.",
+          "The cheese bread sandwiches were interesting, a good chew and a good size but a little disappointing in flavor combinations. The ham and cheese (bland), parm and fig (too sweet), and avocado + egg + bacon (bland) were good, but a bit pricey for what you get. I also got the tapioca crepe with eggs and it just tasted like a lackluster omelette. I appreciate the culinary innovation, but wouldn't come back regularly. Worth a try, but not a repeat.",
+          "This place is so is extremely convenient. They have great pastries sandwiches desserts the best coffee I had in San Francisco and amazing juice. I can\u2019t wait to come back here or go to another location."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Kopiku Indonesian Coffee",
+        "rating": 4.9,
+        "review_count": 294,
+        "address": "1443 Lombard St, San Francisco, CA 94123, USA",
+        "categories": [
+          "establishment",
+          "point_of_interest",
+          "food",
+          "cafe",
+          "store"
+        ],
+        "url": "https://maps.google.com/?cid=8307048657854802260",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpeKL2SCTvLaiSL4gy4Cz36ubMFs_ChIXHxnziRPsTOnVHqhG-fnazTNiMmaa7e9V4DW0hHEvo1RyZYVBR9lvqa0G91EUkmkGhhFFe7jEo6LSrXisyDebdVnuwQVHUXNKF5oCtSvPMaAGXUUqA5KfNkJnWELG59M9xqyrqOitzS0FcOVuQI25vkyMM8HudXXTpWZ-DsrOA88Y3ipPA2Bk5ZWv4yhBq78j-FDM_q7wqMjecz2l2BDKSSMyco5tCe8vmyo6XRB2xZac5Pt72NYOkelNjRcb5yzBaxIHQKABcsolB5w0WBp-J9AyEN9Ryst7ZpOhdG7zilQHDK6KseY73trCIH-3m9vo0BZq9Sw6tV2OaPLPKnuzrVa5GdP4KMab4o9pqHBG_k3CSAgqLMV2Vg1T5nvibo9H1625DABebWsW1MY&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Will",
+            "rating": 5,
+            "text": "Stopped by this cozy Indonesian coffee shop and had a great time. The vibe is super chill \u2014 warm, welcoming, and a perfect spot to hang out. We ordered the Kopi Mocha, Arem, and Butterfly Pea Latte. The Kopi Mocha was definitely on the sweeter side, but still had a solid coffee flavor underneath. The Arem was a great little snack \u2014 soft, a bit chewy, and packed with traditional flavor. The Butterfly Pea Latte looked amazing (that blue color is wild) and tasted light and refreshing, not too sweet. The staff were super friendly, the other customers were cool, and the whole place just had a really good energy.\nWould definitely recommend \u2014 5/5.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Ivan Sobolev",
+            "rating": 5,
+            "text": "Charming spot offering specialty coffee and Indonesian breakfast snacks.\n\nThere\u2019s both indoor and outdoor bench seating, and it\u2019s dog-friendly too.\n\nNo batch brew here\u2014just pour-overs and espresso drinks(+tea), so settle in and enjoy the vibe while your drink is made to order",
+            "time": "a month ago"
+          },
+          {
+            "author": "Taniya",
+            "rating": 5,
+            "text": "Great Pandan coffee in San Francisco \ud83c\udf43\nIt's green, flavorful and very different than any other coffee you've had.\nThis coffee shop also serves some other coffees although this is their best seller. They also have some delicious (indo) bites and I loved everything about the place \ud83e\udef6\ud83c\udffb\nSave this for your next trip to Lombard st :)",
+            "time": "3 months ago"
+          },
+          {
+            "author": "S Sum",
+            "rating": 5,
+            "text": "amazing coffee and customer service in the coziest, aesthetic shop\nI've never tried pandan in drinks before so I got the pandan kopi (iced) and it was absolutely delicious. the staff are the best part of the experience, you get greeted w a smile as soon as you walk in and they're ready to answer any questions you might have. another customer forgot to specify that she wanted her coffee hot and the barista remade it at no charge even though the iced version was already made which I found super sweet.",
+            "time": "3 weeks ago"
+          },
+          {
+            "author": "Sergio Prado",
+            "rating": 5,
+            "text": "This place rules. They're serious about single origin beans for pourovers, make excellent lattes (pandan latte was A+), the food is great, the staff is super friendly, and they have an outrageously adorable dog. Definitely coming back soon.",
+            "time": "2 months ago"
+          }
+        ],
+        "themes_summary": {
+          "service": 4,
+          "taste": 3,
+          "ambiance": 2
+        },
+        "score": 5.65,
+        "testimonials": [
+          "Stopped by this cozy Indonesian coffee shop and had a great time. The vibe is super chill \u2014 warm, welcoming, and a perfect spot to hang out. We ordered the Kopi Mocha, Arem, and Butterfly Pea Latte. The Kopi Mocha was definitely on the sweeter side, but still had a solid coffee flavor underneath. The Arem was a great little snack \u2014 soft, a bit chewy, and packed with traditional flavor. The Butterfly Pea Latte looked amazing (that blue color is wild) and tasted light and refreshing, not too sweet. The staff were super friendly, the other customers were cool, and the whole place just had a really good energy.\nWould definitely recommend \u2014 5/5.",
+          "Charming spot offering specialty coffee and Indonesian breakfast snacks.\n\nThere\u2019s both indoor and outdoor bench seating, and it\u2019s dog-friendly too.\n\nNo batch brew here\u2014just pour-overs and espresso drinks(+tea), so settle in and enjoy the vibe while your drink is made to order",
+          "Great Pandan coffee in San Francisco \ud83c\udf43\nIt's green, flavorful and very different than any other coffee you've had.\nThis coffee shop also serves some other coffees although this is their best seller. They also have some delicious (indo) bites and I loved everything about the place \ud83e\udef6\ud83c\udffb\nSave this for your next trip to Lombard st :)"
+        ]
+      },
+      {
+        "id": null,
+        "name": "The Buena Vista",
+        "rating": 4.6,
+        "review_count": 7582,
+        "address": "2765 Hyde St, San Francisco, CA 94109, USA",
+        "categories": [
+          "food",
+          "restaurant",
+          "bar",
+          "establishment",
+          "point_of_interest"
+        ],
+        "url": "https://maps.google.com/?cid=14927879775871877059",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpd9_m5UeNjvjXOhOiBkK5m8q2uZ9AHbM3N2OoMsMSeNWxvdivnkPo_1m-o74-H0vJJ1TiFqyFsrDNJ39ftwSM14EgTwEGgGj7BI3PYwL3DIuw1o093CgI9BHvC4s-MspszDP5DCVuRuzMDP4yBY0X4V-gCYtr3TmN6Tf9qWMlzUTGPID3tCjLpKHbejhBsaquMUXsHHslaMTozxSncwiFdgwAbUmzd8Rk23kwHgBlkbb12NU-uKEzThHQ_sJi1hhgzb8dAoWmV1UOuwv0yMJ7zjZ-vJQQc4xJ8DCdZvW47iIQ&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "jack wong",
+            "rating": 5,
+            "text": "Food was great! We got the crab omelette and the clam chowder. Perfect meal for a cold morning. The Irish whiskey makes it a whole lot better! They do pour a decent amount of whiskey in there. We got there about 9:45am on a Sunday and we didn\u2019t have to wait at all.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Ivan Zarate",
+            "rating": 4,
+            "text": "The Irish Coffee is excellent, highly recommended. If you're just here for a drink, you'll easily find a place to sit. However, if you plan to eat, be prepared to wait.\n\nThe food is good, classic American cuisine, though nothing special. What really stands out is the service: the staff are very friendly and will make sure you're well taken care of.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Jordan Diaz",
+            "rating": 5,
+            "text": "My supervisor recommended i stop by and try the Irish Coffee and it was amazing. Bold and not overly sweet, it was just right.\n\nIt was packed, but service was still friendly and fast. The food came out quickly and was delicious. I had the corned beef hash with poached eggs and it was perfect. The sourdough toast was the best.\n\nI stop by if you get the chance, it's worth it.",
+            "time": "3 weeks ago"
+          },
+          {
+            "author": "Michael Guynn",
+            "rating": 5,
+            "text": "I have been looking forward to trying an Irish Coffee at the Buena Vista for years.\nIt's just coffee, sugar, cream, and whiskey. It really shouldn't be anything special. But I guess after you make 10,000 of them you really do perfect it, because it was a damn fine cup of coffee.\n\nThe servers were so nice. The bartenders make a spectacle out of making rows of Irish coffees. It's nice to see an establishment be so proud of something - still - and keep tradition alive and not just coast on a name.\n\nStop in for a cup, and check out the gift shop next door.\n\nP.S. the non-alcoholic version is $4.75 and is also absolutely delectable...",
+            "time": "3 weeks ago"
+          },
+          {
+            "author": "Stephanie Davis",
+            "rating": 5,
+            "text": "Love this place! The food is delicious, the Irish coffee is perfect, the history is neat and makes for a great dining experience. I could watch them make Irish coffees all day.\nFor food, we tired the clam chowder bread bowl and the crab cakes entree. Both delicious! The crab cakes were a very generous portion and the veggies were good but nothing out of this world.\nThey have Tullamore Dew mini bottles and Irish coffee to-go.",
+            "time": "a month ago"
+          }
+        ],
+        "themes_summary": {
+          "service": 2,
+          "taste": 2,
+          "price": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "Food was great! We got the crab omelette and the clam chowder. Perfect meal for a cold morning. The Irish whiskey makes it a whole lot better! They do pour a decent amount of whiskey in there. We got there about 9:45am on a Sunday and we didn\u2019t have to wait at all.",
+          "The Irish Coffee is excellent, highly recommended. If you're just here for a drink, you'll easily find a place to sit. However, if you plan to eat, be prepared to wait.\n\nThe food is good, classic American cuisine, though nothing special. What really stands out is the service: the staff are very friendly and will make sure you're well taken care of.",
+          "My supervisor recommended i stop by and try the Irish Coffee and it was amazing. Bold and not overly sweet, it was just right.\n\nIt was packed, but service was still friendly and fast. The food came out quickly and was delicious. I had the corned beef hash with poached eggs and it was perfect. The sourdough toast was the best.\n\nI stop by if you get the chance, it's worth it."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Simple Pleasures Cafe",
+        "rating": 4.6,
+        "review_count": 532,
+        "address": "3434 Balboa St, San Francisco, CA 94121, USA",
+        "categories": [
+          "food",
+          "establishment",
+          "cafe",
+          "point_of_interest"
+        ],
+        "url": "https://maps.google.com/?cid=13828349225651807365",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpfH4PX0_FEVt-mZOoif1cMBf8T3JYv02nZYtcsQbvZFYfhxVUdRaAJYARK0Nb6L1EJTazz9u1smnU9mKbS1ctMJcWOFtHD7eujSyHAgm4oSiHatO9JtksJL5NXO2TdarLvzVL5rqSWGBReXwTiAueDKRbBgyDFGw3MZPx5tDESjJeaiuoOgNnGmovFXu19VIBW3lW1yEozht6HnLnbTte4ThqqcTSco7SEOetepXAE9bnJpgXd3gLmLPrK20qt3wLs7JdCIq7Ah1isGX11SfnkaL3POJtFWDNXdbg3WADaRV8gD3YKQWQtlxlP9unMXbBspypnSNROTTzx97bmUG3-laftAsQkXhH0_-1UM0g7JO5krlT7nYp_eOoDCU42vMzHhihknIfSOfiXUQnswpWM26alB9X7UhSdrv1xgqzb83J9TgtoMLyyGRqnuGwyl&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Q A",
+            "rating": 1,
+            "text": "You can tell this is a community gathering place. Very laid back and people knew each other.\n\nWe were not content with our order. ,we wanted two single orders of espresso and getting one shot divided into two demitasses was not cool.\nFirst cup had the froth and filled 3/4 th of the way. Second cup had no froth and filled 1/4 of the way. Plus it was cold.\n\nVery disappointed.\n\nIf you are familiar with how espresso should be served and want a hot shot of it, this is not the place.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Ryan Rovira-Lanzendorf",
+            "rating": 5,
+            "text": "Simple Pleasures is a mainstay in the Outer Richmond. The roast their own coffee, their vanilla iced lattes are my personal favorite, baked goods are so good, the space is great so you can chill or work, they have an outdoor parklette, and they serve beer later in the day. I love this place.",
+            "time": "3 years ago"
+          },
+          {
+            "author": "Megan Ellis",
+            "rating": 5,
+            "text": "Simple Pleasures is the best\u2014 always has been, always will be. An Outer Rich force of nature. Excellent espresso drinks & a great London Fog, phew. Beers. Baked goods, phenomenal. Everything a person could need. Best place to sit and chat. We love you, Simple Pleasures!",
+            "time": "5 months ago"
+          },
+          {
+            "author": "Jason Branch",
+            "rating": 5,
+            "text": "Great coffee \u2615\ufe0f and food is delicious. I was here every morning and afternoon during my stay in San Francisco and would recommend to anyone looking for great coffee, food and a really chill atmosphere to relax and or meet some really cool locals to learn some history about SF, Thanks Mike and Jon \ud83d\ude0a",
+            "time": "10 months ago"
+          },
+          {
+            "author": "Jonathon Paul",
+            "rating": 4,
+            "text": "Good coffee & excellent breakfast cookies (Egyptian shortbread is out of this world as is the almond cake from Dianda\u2019s). Fresh bagels from House of Bagels but I didn't see any plant based cream cheese. The chai is A++ as is the service. Love their dining room; a nice throwback, friendly neighborhood cafe.",
+            "time": "6 months ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 1,
+          "ambiance": 1,
+          "service": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "You can tell this is a community gathering place. Very laid back and people knew each other.\n\nWe were not content with our order. ,we wanted two single orders of espresso and getting one shot divided into two demitasses was not cool.\nFirst cup had the froth and filled 3/4 th of the way. Second cup had no froth and filled 1/4 of the way. Plus it was cold.\n\nVery disappointed.\n\nIf you are familiar with how espresso should be served and want a hot shot of it, this is not the place.",
+          "Simple Pleasures is a mainstay in the Outer Richmond. The roast their own coffee, their vanilla iced lattes are my personal favorite, baked goods are so good, the space is great so you can chill or work, they have an outdoor parklette, and they serve beer later in the day. I love this place.",
+          "Simple Pleasures is the best\u2014 always has been, always will be. An Outer Rich force of nature. Excellent espresso drinks & a great London Fog, phew. Beers. Baked goods, phenomenal. Everything a person could need. Best place to sit and chat. We love you, Simple Pleasures!"
+        ]
+      },
+      {
+        "id": null,
+        "name": "Pinhole Coffee",
+        "rating": 4.6,
+        "review_count": 586,
+        "address": "231 Cortland Ave, San Francisco, CA 94110, USA",
+        "categories": [
+          "store",
+          "food",
+          "cafe",
+          "point_of_interest",
+          "establishment"
+        ],
+        "url": "https://maps.google.com/?cid=17325400895479612969",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpe6XnXarucihzEi-jRY5-h_JV25Qjp13ff1vW2oP0G8iqTMjmG5AUgIZJcS_3MIJkkj0f8kRTZQmzLJM3sxEhCUtnfMpKb4l_cG7zw8GEmhF6jOwlITLYSp98wyrFo6PrhmX8rv9yvA9EUZ1z8NLqCTHlkR8t5YAuwMOkRokkYAlPDRh79BC2P3zIthXiWM8F1cb98qnrk-ULGTf9uLlWnyVc93d2_FP0b3nqLS7R5JCz3zQnbXHafe5cUmKT103whzB1v4htcFYucll2FTPtCyVLgp7mzAO9ueXIJuOoXojg&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "oona titan",
+            "rating": 5,
+            "text": "Fantastic inclusive coffee shop. I always stop here when I\u2019m in San Francisco visiting from wherever whether it be west coast or east coast. Honestly as a fat chai latte stinge, this spot is one of the best chais I have had in California. The shop is cute and wonderfully setup with tree trunk tables and an open space for great conversation with friends, lovers, family, etc. Love the political stance, a good coffee shop should be unashamed to stand up for those who are unrepresented. The employees have always made me feel good and are efficient, fast but very friendly. Not an ideal space for working in all day but perfect for a morning coffee. The neighborhood is super dog friendly (although leave your dog outside on the doggy hitch posts lol). Love the everything cream cheese croissant. Thanks Pinhole, I visit you every time I\u2019m in town.",
+            "time": "4 months ago"
+          },
+          {
+            "author": "Evren Simsek",
+            "rating": 2,
+            "text": "I was about to become a regular at Pinhole Coffee and then had a bad incident yesterday so unfortunately it turned me against the coffee shop. I will not be returning to Pinhole even though i love their atmosphere and the arts and the coffee is fairly good.\n\nI walked from 16th & Valencia in the Mission all the way to Pinhole in Bernal Heights to get my long walk in and to get coffee cause I\u2019m a recent fan and love their coffee & vibes. I ordered my usual - oat milk latte which costs $6.75 and $7.25 with the small tip I added and their cup size is smaller compared to some other coffee shops with similar vibes in the Mission. They were swamped when i arrived around 10-10.30am on Sunday and i waited in line and once my coffee was ready to pick up it wasn\u2019t filled all the way so I asked them if they could add more coffee and they said no and said it\u2019d be $2 for another shot of coffee.\n\nThen i protested cause let\u2019s be real who wants to pay now $9.25 for a fairly small latte to be able to get an extra shot?! Sure we live in one of the most expensive cities in the country and pretty much the world but this is not a coffee shop in a swanky resort in Vegas or Arizona. I understand the small businesses in SF are struggling and need to keep their costs in check but STOP passing the burden to the end customer. I REFUSE to pay $9.25 for my smallest in town oat milk latte.\n\nSo unfortunately, I will not be returning to Pinhole and I will go to Progressive Grounds which is a Bernal Heights original/ old school coffee shop. Let\u2019s support more small businesses that are not ig-famous and spoiled but old school SF and trying to survive and even then offer superb customer service!\n\nNote: Photo is after i bought the latte but haven\u2019t drank it yet for 3-5 min and the ice already melted quite a bit.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Kozmo Flores",
+            "rating": 5,
+            "text": "my favorite coffee shop in san francisco. the pastries are delicious, love the peanut butter cookie & mochi pastry. i enjoyed the expresso here & americano. \u2615\ufe0f staff is friendly. aesthetically unique, love the wooden furniture & the art work.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "MBC",
+            "rating": 5,
+            "text": "I\u2019ve been to many coffee shops in the Bay Area and this one is our favorite.   Really great  staff that guarantee you a good morning.  Their Mochas and lattes are our favorite and is consistently done the way we like it.   A unique shop that embodies everything I love about San Francisco",
+            "time": "8 months ago"
+          },
+          {
+            "author": "Fergie Leung",
+            "rating": 5,
+            "text": "Great coffee great service no WiFi so you can be present",
+            "time": "2 months ago"
+          }
+        ],
+        "themes_summary": {
+          "service": 5,
+          "price": 2,
+          "ambiance": 1,
+          "taste": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "Fantastic inclusive coffee shop. I always stop here when I\u2019m in San Francisco visiting from wherever whether it be west coast or east coast. Honestly as a fat chai latte stinge, this spot is one of the best chais I have had in California. The shop is cute and wonderfully setup with tree trunk tables and an open space for great conversation with friends, lovers, family, etc. Love the political stance, a good coffee shop should be unashamed to stand up for those who are unrepresented. The employees have always made me feel good and are efficient, fast but very friendly. Not an ideal space for working in all day but perfect for a morning coffee. The neighborhood is super dog friendly (although leave your dog outside on the doggy hitch posts lol). Love the everything cream cheese croissant. Thanks Pinhole, I visit you every time I\u2019m in town.",
+          "I was about to become a regular at Pinhole Coffee and then had a bad incident yesterday so unfortunately it turned me against the coffee shop. I will not be returning to Pinhole even though i love their atmosphere and the arts and the coffee is fairly good.\n\nI walked from 16th & Valencia in the Mission all the way to Pinhole in Bernal Heights to get my long walk in and to get coffee cause I\u2019m a recent fan and love their coffee & vibes. I ordered my usual - oat milk latte which costs $6.75 and $7.25 with the small tip I added and their cup size is smaller compared to some other coffee shops with similar vibes in the Mission. They were swamped when i arrived around 10-10.30am on Sunday and i waited in line and once my coffee was ready to pick up it wasn\u2019t filled all the way so I asked them if they could add more coffee and they said no and said it\u2019d be $2 for another shot of coffee.\n\nThen i protested cause let\u2019s be real who wants to pay now $9.25 for a fairly small latte to be able to get an extra shot?! Sure we live in one of the most expensive cities in the country and pretty much the world but this is not a coffee shop in a swanky resort in Vegas or Arizona. I understand the small businesses in SF are struggling and need to keep their costs in check but STOP passing the burden to the end customer. I REFUSE to pay $9.25 for my smallest in town oat milk latte.\n\nSo unfortunately, I will not be returning to Pinhole and I will go to Progressive Grounds which is a Bernal Heights original/ old school coffee shop. Let\u2019s support more small businesses that are not ig-famous and spoiled but old school SF and trying to survive and even then offer superb customer service!\n\nNote: Photo is after i bought the latte but haven\u2019t drank it yet for 3-5 min and the ice already melted quite a bit.",
+          "my favorite coffee shop in san francisco. the pastries are delicious, love the peanut butter cookie & mochi pastry. i enjoyed the expresso here & americano. \u2615\ufe0f staff is friendly. aesthetically unique, love the wooden furniture & the art work."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Farley's Coffeehouse",
+        "rating": 4.6,
+        "review_count": 625,
+        "address": "1315 18th St, San Francisco, CA 94107, USA",
+        "categories": [
+          "food",
+          "point_of_interest",
+          "cafe",
+          "store",
+          "establishment"
+        ],
+        "url": "https://maps.google.com/?cid=8434344108903483793",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpfQ-VQj2Zpo-3ifCwlVJ2_DwpUIaR6Q6FZTmWWVSCBHaZNsADrutZ6UR36RukTxaf6CBwytmond0zOHHSIEala0gALQ00adi4tpRDBesJ5HxZG-Lx8E_CsEKsWzDHumjksYTiv64EORJLHbK-1mw84RXDF-60T_I8AdWWVfV4KtbY2ShwNElv_hGkoRekA-IHGf_fWQmtuFdkLJ-ESqylJlrMX7Ifk1UXmj2rKxRBE07oMmijOMnxyAz09Y1dMhCnRJdemssIoTrtWauh139IvSrOCjMy5berPFLwv3WG02Og&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Robert Simone",
+            "rating": 5,
+            "text": "We are from out of town and our family who live in Portrero Hill recommended Farley's Coffeehouse.  The coffee is just as we ordered it, just perfect!  The pastries are delicious!  Friendly atmosphere and I love the dogs that are allowed in the coffeehouse, just like being at home. It is our favorite coffeehouse in Portrero Hill!",
+            "time": "3 weeks ago"
+          },
+          {
+            "author": "john truitt",
+            "rating": 5,
+            "text": "Farley\u2019s is awesome! The coffee great, the croissants are fantastic, and the whole vibe is perfect. I\u2019d absolutely stop by anytime I\u2019m nearby. It was packed even in the middle of the afternoon, which pretty much says it all.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Sam K",
+            "rating": 5,
+            "text": "This place has a character . It\u2019s busy but service is quick and amazing . Coffee is great and plenty of indoor and outdoor seatings with clean restroom.",
+            "time": "a month ago"
+          },
+          {
+            "author": "P",
+            "rating": 5,
+            "text": "I think this is a great neighborhood coffee place. The atmosphere is beautiful, you can see people from the area coming and enjoying their time. The service was friendly, helpful and fast. they offered a variety of drinks and pastries but you can also find souvenirs, magazines, tea, coffee, merchandise and more. The place is very spacious and has a few tables inside and an outdoor area. We order a golden iced kate and one iced chai latte. The drinks were flavorful without being overwhelming.All the right flavors were there, the pastries were also good. The price is on the higher end but I would love to come back since the vibe and product received are worth it.",
+            "time": "2 years ago"
+          },
+          {
+            "author": "Tammy Farris",
+            "rating": 5,
+            "text": "Amazing atmosphere! Local art on the walls, lots of seating. The baristas were extremely helpful and suggested a truly delish maple latte.\nA downside is the bathroom that isn't easy access, the building looks very old so that makes sense but A disappointment regardless. there is outside seating and seems like a great place to meet for coffee as well as get a thoughtful little gift. They had SO MANY cool options for making coffee at home, which they also sell beans (that are collaboratively roasted) by the pound! Highly recommend.\n*3/2024\nFarley's always delivers a wonderful experience, honey almond milk latte is my new favorite \u2728",
+            "time": "a year ago"
+          }
+        ],
+        "themes_summary": {
+          "ambiance": 4,
+          "service": 3,
+          "taste": 2,
+          "price": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "We are from out of town and our family who live in Portrero Hill recommended Farley's Coffeehouse.  The coffee is just as we ordered it, just perfect!  The pastries are delicious!  Friendly atmosphere and I love the dogs that are allowed in the coffeehouse, just like being at home. It is our favorite coffeehouse in Portrero Hill!",
+          "Farley\u2019s is awesome! The coffee great, the croissants are fantastic, and the whole vibe is perfect. I\u2019d absolutely stop by anytime I\u2019m nearby. It was packed even in the middle of the afternoon, which pretty much says it all.",
+          "This place has a character . It\u2019s busy but service is quick and amazing . Coffee is great and plenty of indoor and outdoor seatings with clean restroom."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Blue Bottle Coffee",
+        "rating": 4.6,
+        "review_count": 863,
+        "address": "315 Linden St, San Francisco, CA 94102, USA",
+        "categories": [
+          "point_of_interest",
+          "establishment",
+          "food",
+          "store",
+          "cafe"
+        ],
+        "url": "https://maps.google.com/?cid=13757888117856636050",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpdY66GGY7v8WaolTHZRfJMtO4awioziFaeqm44MvbmvQT6Q7f1kEa-KcpFnalm617SoHp5wveQSrS8eowhGvtM-im6lNITTnSSMQT6-CAKxcQlHkoSaX-2RTymIQAXCh0a7vF9CmTC7Mf5kdscROPZTzTXoypZ2QksxcV0VPYaDQKBZ8KjHmgtb2cI1m7WkVJCLrLAiitLlj_uvgNwScOjMY7C8MtpI3T9LaeruFqkbgJ_rHnWi6rqlpB0-6B0rURuNf4y0NnbbD_ALGwnBSVwMzlylwlpKEx7cbwhUroddRLNXhpVKbQ4cylCBNe6pCbVE3nZ2_fX5z4z2mjPGbRm9_zMmn3zTqWhWxROIiIXEJwwfhNqgxfKEMtlClndGNqBnvKF1Ax-onJ18ClDvLXz76RoR3GaKRH8dfSul8L9q4A&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Estela Lee",
+            "rating": 5,
+            "text": "There\u2019s something special about visiting the original Blue Bottle kiosk in Hayes Valley. It\u2019s small, simple, and tucked away\u2014but that\u2019s part of its charm. The coffee is excellent, just as you\u2019d expect, and knowing this is where it all began makes every sip feel a little more meaningful. A must-visit spot for coffee lovers and fans of quiet San Francisco corners.",
+            "time": "2 weeks ago"
+          },
+          {
+            "author": "Wahyu A Harun",
+            "rating": 5,
+            "text": "The first Blue Bottle outlet. Unique environtment. Clean and art alley. The coffee are stunning. They dont have sitting arrangement inside, but outside is soooo funky. You should come and visit.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Junshik Ham",
+            "rating": 5,
+            "text": "[4.5 / 5.0]\n\nNested in a tiny street in Hayes Valley, this blue bottle is truly something special.\n\nOpen-garage style interior with no actual seats, but it offers a truly unique blue bottle experience.\n\nWould recommend for both locals and tourists.",
+            "time": "5 months ago"
+          },
+          {
+            "author": "Christianne Kratka",
+            "rating": 5,
+            "text": "This little blue bottle kiosk is the BEST place to enjoy your coffee.  First of all the  service and baristas are all kind and professional!  They all make an effort to learn your name and drink.  Secondly the coffee is excellent!! They make a great espresso with adequate weight of grounds so it tastes full bodied.  They are alway always friendly.  Thanks for showcasing a wonderful place for coffee in SF!! \u2764\ufe0f",
+            "time": "a month ago"
+          },
+          {
+            "author": "Barath T",
+            "rating": 5,
+            "text": "Wonderful taste for coffee, unique taste and smell for ones that are very used to starbucks, a much better alternative to regulars., doesn't have a proper place to dine in but there are a couple of benches outside., its in a very smaller street so park on the near by roadside (have decent paid parking spots).",
+            "time": "a year ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 2,
+          "service": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "There\u2019s something special about visiting the original Blue Bottle kiosk in Hayes Valley. It\u2019s small, simple, and tucked away\u2014but that\u2019s part of its charm. The coffee is excellent, just as you\u2019d expect, and knowing this is where it all began makes every sip feel a little more meaningful. A must-visit spot for coffee lovers and fans of quiet San Francisco corners.",
+          "The first Blue Bottle outlet. Unique environtment. Clean and art alley. The coffee are stunning. They dont have sitting arrangement inside, but outside is soooo funky. You should come and visit.",
+          "[4.5 / 5.0]\n\nNested in a tiny street in Hayes Valley, this blue bottle is truly something special.\n\nOpen-garage style interior with no actual seats, but it offers a truly unique blue bottle experience.\n\nWould recommend for both locals and tourists."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "pizza",
+    "top_10": [
+      {
+        "id": null,
+        "name": "Pie Punks",
+        "rating": 4.8,
+        "review_count": 534,
+        "address": "145 2nd St, San Francisco, CA 94105, USA",
+        "categories": [
+          "restaurant",
+          "establishment",
+          "food",
+          "point_of_interest"
+        ],
+        "url": "https://maps.google.com/?cid=990038218951216639",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpe2m9tI2anKwrCcvJ5v0Vub0e-ywcetdsME8j8pmV6TjXf1dfGV1HL6Dmj5mcpy1_XelWjGdKRjkFO1y7EgNQVZbdyGrRTITjATbNr11wSDCDOJgeJvKHXkUnUoqYXEb4-O1k4iypoDUD2SCgTw6DSZQCENamHQdlxjVJrLfLgxiPFmWtHdt2TdJc14DDPnU11Ugcp6cJf6VCzn4J44CSR_ZMMcvbdThac8aOKXoi04qLdGdgxFzkPRhJSr_LsyCbQKQc5NTgGndJtjq9VOYxj3x9FAniTIq09E_M4XqhCvRQ&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Ivan Baez",
+            "rating": 4,
+            "text": "I was looking to try a new pizza spot in the city, and Pie Punks was close to my hotel\u2014so we decided to give it a shot, and I\u2019m glad we did. The atmosphere has a fun mix of pop culture and vintage vibes, which I really enjoyed. The energy inside the restaurant was great.\n\nWe sat at the bar top and were helped right away. To start, we ordered some cheese curds, and then shared two different slices of pizza to try a bit of everything. The cheese curds were amazing\u2014honestly, they were my favorite part of the meal. The pizza was okay\u2014not bad, but nothing too special.\n\nI\u2019d definitely come back, especially since it\u2019s close to where I usually stay when I\u2019m in the city. The vibes are on point, and it's a cool spot to hang out and grab a bite.",
+            "time": "a week ago"
+          },
+          {
+            "author": "Phuoc Ly",
+            "rating": 5,
+            "text": "OMG \u2013 this pizza spot is incredible! The vibe is on point, and the 90s hip hop soundtrack is everything. We tried the crispy broccolini, Detroit pepperoni, and thin crust pepperoni \u2013 all amazing. The Detroit-style pie had those crispy edges and was packed with flavor, and the broccolini made the perfect side. I\u2019d order that Detroit again in a heartbeat! We\u2019re in town for a conference and seriously wish we had found this place sooner\u2014we would\u2019ve come back for round two. Do yourself a favor and support this local gem. You won\u2019t regret it! #supportlocal",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Zac Richins",
+            "rating": 4,
+            "text": "We came here for dinner after a conference at the Moscone center. It\u2019s less than a 10 min walk. The indoor seating was full so we ate outside.\n\nI ordered the Detroit style chopped cheese pizza and my friend ordered the round pepperoni. The chopped cheese was delicious. It was melt cheese, ground beef, ketchup, lettuce, pickle and tomato and was so good. The crust was thick but light and fluffy. I really liked it.\n\nI tried the pepperoni too and enjoyed it, but not as much as the Detroit style.\n\nThe service was friendly though they never refilled our waters.\n\nI\u2019d definitely come back. Very good pizza.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Mateo",
+            "rating": 5,
+            "text": "Came for dinner and ordered had the Grandma with a side cheese curds - very good.\n\nThey offer a deep dish, medium crust and a thin crust. Would have loved to try the thin crust pizza but the Grandma was more than enough for two.\n\nI was also happy that they had a variety of beers and had Miller Lite available.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "rostik malishevskiy",
+            "rating": 5,
+            "text": "Pie Punks \u2013 A Hidden Gem Worth Discovering\n\nWhen I first pulled up, the neighborhood seemed quiet and unremarkable for a Saturday night. I almost reconsidered, but decided to go in anyway \u2013 and boy, was that the right call!\n\nThe pizza here is fantastic \u2013 crispy, flavorful, and available in every style imaginable. Thin crust, square-cut, deep-dish? Take a slice or go all in. Your call.\n\nBut the real star? The vibe.\nRetro TVs streaming fresh content (Apple TV, I\u2019m guessing? I need this setup at home!), vinyl spinning Notorious B.I.G., pizza in hand, and Top Gun playing in the background? Sign me up.\n\nI usually keep spots like this to myself, but Pie Punks is too good not to share.\n\n- Pizza: Killer, no matter your preference\n- Price: More than fair \u2013 I\u2019d pay extra just for the atmosphere\n- Vibe: 10/10 \u2013 a perfect mix of nostalgia and cool\n\nDon\u2019t sleep on this place. Just go.",
+            "time": "3 months ago"
+          }
+        ],
+        "themes_summary": {
+          "ambiance": 3,
+          "taste": 3,
+          "service": 1,
+          "price": 1
+        },
+        "score": 5.8,
+        "testimonials": [
+          "I was looking to try a new pizza spot in the city, and Pie Punks was close to my hotel\u2014so we decided to give it a shot, and I\u2019m glad we did. The atmosphere has a fun mix of pop culture and vintage vibes, which I really enjoyed. The energy inside the restaurant was great.\n\nWe sat at the bar top and were helped right away. To start, we ordered some cheese curds, and then shared two different slices of pizza to try a bit of everything. The cheese curds were amazing\u2014honestly, they were my favorite part of the meal. The pizza was okay\u2014not bad, but nothing too special.\n\nI\u2019d definitely come back, especially since it\u2019s close to where I usually stay when I\u2019m in the city. The vibes are on point, and it's a cool spot to hang out and grab a bite.",
+          "OMG \u2013 this pizza spot is incredible! The vibe is on point, and the 90s hip hop soundtrack is everything. We tried the crispy broccolini, Detroit pepperoni, and thin crust pepperoni \u2013 all amazing. The Detroit-style pie had those crispy edges and was packed with flavor, and the broccolini made the perfect side. I\u2019d order that Detroit again in a heartbeat! We\u2019re in town for a conference and seriously wish we had found this place sooner\u2014we would\u2019ve come back for round two. Do yourself a favor and support this local gem. You won\u2019t regret it! #supportlocal",
+          "We came here for dinner after a conference at the Moscone center. It\u2019s less than a 10 min walk. The indoor seating was full so we ate outside.\n\nI ordered the Detroit style chopped cheese pizza and my friend ordered the round pepperoni. The chopped cheese was delicious. It was melt cheese, ground beef, ketchup, lettuce, pickle and tomato and was so good. The crust was thick but light and fluffy. I really liked it.\n\nI tried the pepperoni too and enjoyed it, but not as much as the Detroit style.\n\nThe service was friendly though they never refilled our waters.\n\nI\u2019d definitely come back. Very good pizza."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Golden Boy Pizza",
+        "rating": 4.7,
+        "review_count": 4588,
+        "address": "542 Green St, San Francisco, CA 94133, USA",
+        "categories": [
+          "restaurant",
+          "point_of_interest",
+          "establishment",
+          "food"
+        ],
+        "url": "https://maps.google.com/?cid=16218573224995018158",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpe5pxf99A284MnnAWCJQ4zg1qUplLwHe_aXdn9hgLCsqXdiS8qpzS_EjpaU7TwiV1Vb-J1vuQCnHyX3v7SpZ87tVbJHDAgD4Xhb5e0Lgtzs_XvHzkoKy11k44zD7neG5J1ZUfO35ozT8860-cPo0i5xMONUECzJ-ZIeofPyecke0W7x7XUHLAXkW3xM4o5cwt-gUsrjafjq90PwuOAq1BczPCG-DL9A0eir_kpVWOIFC4EogQ6i8OE-D3FR7OI6T_nvggK5ecH99LXRhptaG6w9vppK3_fRjT0dPPgPlcZayb7PbvUL-8qOHbsUJYbqBKe6RBdHHCTlwFViYktF2Kwfh6wQlX4ICuY32KrhgLiBuHBhmoDYmWPiwKdSkxyeQx2MExCWIhApDLWR8H6pGPILN7giJysCqOi7zmF-142TDOpk&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Veronika Fox",
+            "rating": 5,
+            "text": "Famous pizza place in the heart of SF won\u2019t disappoint! Get ready to stay in line for a bit but it moves fast and trust me, it\u2019s worth the wait! $4 avg price for a slice of pizza? Unheard of these days!\n\nThe square was good size and delish.",
+            "time": "in the last week"
+          },
+          {
+            "author": "Shi Grissom",
+            "rating": 5,
+            "text": "I first saw this place on tiktok. Thought about it, but I never come to SF to even imagine trying it. Well, a fate brought me right around the corner and figured it was time. When we saw the long line, we knew it would be amazing. It did take a minute to get to order, but only because the folks in front were ordering pies (genius). When it was our turn, we ordered four slices, cheese, pepperoni, combo, and sausage.\nThe pepperoni has a hint of spicy that set it off completely. The cheese was cheesy and delicious. The sausage was tasty, but that COMBO ONE... by far the best one! It had a hint of sweet, spicy, and crunchy. Next time I am in SF, I will definitely be going back. It's worth the wait.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Jasmine Chung",
+            "rating": 4,
+            "text": "For square pie, this place is solid. Their line can get long, though, so go early, place the order beforehand, or be prepared to wait. Their infamous Clam & Garlic was quite good! Not too clam-y and mainly garlic-y. Their other flavored pies are freshly made, not super but kind of dough-y, and delicious! It'd be a hit at any parties.",
+            "time": "in the last week"
+          },
+          {
+            "author": "Amino",
+            "rating": 5,
+            "text": "One of the most memorable pizza spots in San Francisco.\nTried the pesto and the clam & garlic slices \u2014 both were packed with flavor and had that perfect focaccia-style crust. Quick service, great vibe, and unforgettable taste. I\u2019ll definitely be back!",
+            "time": "3 weeks ago"
+          },
+          {
+            "author": "Netta Nicole",
+            "rating": 5,
+            "text": "We ordered the large combo via UberEats delivery late night. Extremely good pizza and very generous portions. It's in a league of its  own.  Perfect balance of crust and toppings, and it smelled divine! We ate from it almost 2 days and still had leftovers. I would definitely recommend it and order again.",
+            "time": "4 months ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 3,
+          "price": 2,
+          "service": 1,
+          "ambiance": 1
+        },
+        "score": 5.7,
+        "testimonials": [
+          "Famous pizza place in the heart of SF won\u2019t disappoint! Get ready to stay in line for a bit but it moves fast and trust me, it\u2019s worth the wait! $4 avg price for a slice of pizza? Unheard of these days!\n\nThe square was good size and delish.",
+          "I first saw this place on tiktok. Thought about it, but I never come to SF to even imagine trying it. Well, a fate brought me right around the corner and figured it was time. When we saw the long line, we knew it would be amazing. It did take a minute to get to order, but only because the folks in front were ordering pies (genius). When it was our turn, we ordered four slices, cheese, pepperoni, combo, and sausage.\nThe pepperoni has a hint of spicy that set it off completely. The cheese was cheesy and delicious. The sausage was tasty, but that COMBO ONE... by far the best one! It had a hint of sweet, spicy, and crunchy. Next time I am in SF, I will definitely be going back. It's worth the wait.",
+          "For square pie, this place is solid. Their line can get long, though, so go early, place the order beforehand, or be prepared to wait. Their infamous Clam & Garlic was quite good! Not too clam-y and mainly garlic-y. Their other flavored pies are freshly made, not super but kind of dough-y, and delicious! It'd be a hit at any parties."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Outta Sight Pizza",
+        "rating": 4.7,
+        "review_count": 536,
+        "address": "422 Larkin St, San Francisco, CA 94102, USA",
+        "categories": [
+          "point_of_interest",
+          "establishment",
+          "food",
+          "restaurant"
+        ],
+        "url": "https://maps.google.com/?cid=16208596979648080959",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpdXUQVbLF7EviSEu8FlgHNsYijKaosOnSQDT0UNNnFh8BCUpZww4sQTkSoqGDyE4zXjeTPRi1EJHL8Yc4cP_Tp3eJhQS770zitaItaqK9E7uHeUDvLza1rP66Rhp-f3SSiwg8j8YliqPEV-UhT8krAlYdpt-RvtPkh3r2yl0ZyEF2gar35vy0lM_z6W4qcPiuJ6bwqx2Tp2q3HFyqJZ4gDD9Zd-cI7NI4WlkQtoMFb_2q6F3xUuLAyS_LdHILsw_TWXuyYhLnXHNkyOC24ssHKr4sitCnxnn6HNo05NtoA1nw&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Rhett Burden",
+            "rating": 5,
+            "text": "I recently visited Outta Sight Pizza in San Francisco, and it truly lives up to the hype. From the moment I walked in, I was greeted by the smell of fresh pizza and a visually striking interior. The experience was overwhelmingly positive, combining delicious food, quality ingredients, and a funky artistic decor that made the visit memorable. Yes, the price tag was a bit high (around $60 for our meal), but I left feeling it was absolutely worth it for the quality and overall experience. Here\u2019s a breakdown of my visit:\n- Pepperoni Pizza (Slice): Incredibly delicious, with a perfect thin crust that had a nice crunch on the outside and a chewy center. The pepperoni was savory and crispy around the edges, and you could taste the quality of the ingredients \u2013 from the tangy tomato sauce to the gooey, rich cheese. Each bite was bursting with flavor, and the slice was generous in size.\n- Meatball Sub: A hearty sandwich overflowing with tender, flavorful meatballs and melted cheese. The bread was toasted just right \u2013 crunchy on the outside but soft inside, soaking up the savory marinara sauce. It\u2019s the kind of comfort food that hits the spot; rich in flavor and clearly made with love and good ingredients.\nBoth items were freshly made to order and served hot. We could immediately tell the difference that quality ingredients make \u2013 nothing tasted processed or bland. For example, the tomato sauce on the pizza and sub had a homemade taste with herbs and natural sweetness, and the meats were lean and well-seasoned.",
+            "time": "4 months ago"
+          },
+          {
+            "author": "Eric Long",
+            "rating": 5,
+            "text": "Pizza here is awesome! They have a variety to choose from with some very creative options. Their staff is great. There might be a little wait for your pizza but it is definitely worth it. Give them a try.",
+            "time": "2 weeks ago"
+          },
+          {
+            "author": "Ray Kang",
+            "rating": 4,
+            "text": "Solid NY style slice. Slices are on the small side but they\u2019re thin, crispy, and have good structure. Zero flop, crust is chewy, sauce is good - not too sweet, perfectly tangy. Pepperoni is top notch. Jerk chicken is interesting - kinda sweet and spicy.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Monica Hoang",
+            "rating": 5,
+            "text": "Did someone say PECKING DUCK pizza!? No this is not a joke \ud83e\udd86\ud83c\udf55\n\n@thatsouttasight has brought this unique twist and it\u2019s honestly so good! They also have other amazing combos and authentic New York style pizzas right here in San Francisco. Service was nice and it\u2019s a small quick grab and go place. As most places in the city haha there\u2019s a parking garage about 2 blocks down thankfully!",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Tanvi Soans",
+            "rating": 5,
+            "text": "Really great pizza. I prefer New York/ New Haven style pizzas. And this was that exactly. I got a couple of slices to go, all came with fresh basil and Parmesan on top as well. Will probably be making this my pizza spot.",
+            "time": "a month ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 2,
+          "price": 2,
+          "service": 2,
+          "ambiance": 1
+        },
+        "score": 5.7,
+        "testimonials": [
+          "I recently visited Outta Sight Pizza in San Francisco, and it truly lives up to the hype. From the moment I walked in, I was greeted by the smell of fresh pizza and a visually striking interior. The experience was overwhelmingly positive, combining delicious food, quality ingredients, and a funky artistic decor that made the visit memorable. Yes, the price tag was a bit high (around $60 for our meal), but I left feeling it was absolutely worth it for the quality and overall experience. Here\u2019s a breakdown of my visit:\n- Pepperoni Pizza (Slice): Incredibly delicious, with a perfect thin crust that had a nice crunch on the outside and a chewy center. The pepperoni was savory and crispy around the edges, and you could taste the quality of the ingredients \u2013 from the tangy tomato sauce to the gooey, rich cheese. Each bite was bursting with flavor, and the slice was generous in size.\n- Meatball Sub: A hearty sandwich overflowing with tender, flavorful meatballs and melted cheese. The bread was toasted just right \u2013 crunchy on the outside but soft inside, soaking up the savory marinara sauce. It\u2019s the kind of comfort food that hits the spot; rich in flavor and clearly made with love and good ingredients.\nBoth items were freshly made to order and served hot. We could immediately tell the difference that quality ingredients make \u2013 nothing tasted processed or bland. For example, the tomato sauce on the pizza and sub had a homemade taste with herbs and natural sweetness, and the meats were lean and well-seasoned.",
+          "Pizza here is awesome! They have a variety to choose from with some very creative options. Their staff is great. There might be a little wait for your pizza but it is definitely worth it. Give them a try.",
+          "Solid NY style slice. Slices are on the small side but they\u2019re thin, crispy, and have good structure. Zero flop, crust is chewy, sauce is good - not too sweet, perfectly tangy. Pepperoni is top notch. Jerk chicken is interesting - kinda sweet and spicy."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Gusto Pinsa Romana",
+        "rating": 4.7,
+        "review_count": 723,
+        "address": "1000 Bush St, San Francisco, CA 94109, USA",
+        "categories": [
+          "food",
+          "establishment",
+          "point_of_interest",
+          "restaurant"
+        ],
+        "url": "https://maps.google.com/?cid=9947123982067719360",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpfinE6i5NxeiHAX85WbfGdT0aTr4YhQibH-G1CQxYuTbsjUqDwtWyNOC_1xHWAPthaQFKugbqYyw49fZK2piGH8w55UNCEc4zYHjkC3jpG5VYvxrDL2_X0BgvzccKvphQlIQc__ka05BUaXukK9p5HkNTR-U0oGqtuy9bX2k41dFVEYwVrSHl867TEErY3qM_qTWyOAqQYCod9vN5niPzbNJ1UdQKS7hQJzrrBKsZHcX7uEoiRN8olrIfmw2Bsxsdhn_m2-OyBgCGKwTvkxlxAF1AULY8hIopJYp1hHSQx22saFq6EZQtn4JZ1UZUmoOTlVDLz2vJ35pEyLhfl0duWB0ZNmuVSEg8i574Hu8iL-7EuscVbeYaXPWfhIF2LN3xxS9RNTkEgWJtB8iTvoLlebwpBgwBpW3AmDFqkOHtbDrJs&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Tarane Ardalan",
+            "rating": 5,
+            "text": "Absolutely loved this spot! We started with the anchovies Caesar, and it was one of the best I\u2019ve ever had\u2014fresh, flavorful, and not too heavy. Then we had the Diavola pinsa, which was amazing\u2026crispy edges, a little kick of heat, and so satisfying.\n\nFor dessert, we shared the cannoli and tiramisu\u2014both were incredible!! The cannoli was perfectly crunchy and not too sweet, and the tiramisu was rich, creamy, and just melts in your mouth!\n\nOn top of all that, everyone working there was genuinely kind and welcoming! You could feel the care in both the food and the service. We left so happy, and already planning to come back!",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Evette M",
+            "rating": 5,
+            "text": "This is amazing pizza! The best sourdough crust is crispy, soft & delicious, they also offer vegan/dairy free options! which is hard to find. Love this place.",
+            "time": "a week ago"
+          },
+          {
+            "author": "Sarah Perez",
+            "rating": 5,
+            "text": "I don\u2019t say this lightly but this is the best pizza I\u2019ve ever had. I had to leave a review before I left the table. It\u2019s a hole in the wall pizza shop with the best casual, modern yet cozy vibes. We will be coming back tomorrow!",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Avery Kirk",
+            "rating": 5,
+            "text": "Absolutely fantastic spot! It's a little hole-in-the-wall type place, but the food is great and the people are very friendly. Pizza by the slice is available, but if you want the true experience, sit down and order o e of their specialties. You won't be disappointed!",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Arin Vaillancourt",
+            "rating": 2,
+            "text": "Can\u2019t recommend their slices. Bland and flavorless. Undercooked and floppy. Sizable slices but 2 for 13.56$ I\u2019d have had a better experience with Trader Joe\u2019s frozen pizza.",
+            "time": "a month ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 3,
+          "service": 2,
+          "ambiance": 1
+        },
+        "score": 5.7,
+        "testimonials": [
+          "Absolutely loved this spot! We started with the anchovies Caesar, and it was one of the best I\u2019ve ever had\u2014fresh, flavorful, and not too heavy. Then we had the Diavola pinsa, which was amazing\u2026crispy edges, a little kick of heat, and so satisfying.\n\nFor dessert, we shared the cannoli and tiramisu\u2014both were incredible!! The cannoli was perfectly crunchy and not too sweet, and the tiramisu was rich, creamy, and just melts in your mouth!\n\nOn top of all that, everyone working there was genuinely kind and welcoming! You could feel the care in both the food and the service. We left so happy, and already planning to come back!",
+          "This is amazing pizza! The best sourdough crust is crispy, soft & delicious, they also offer vegan/dairy free options! which is hard to find. Love this place.",
+          "I don\u2019t say this lightly but this is the best pizza I\u2019ve ever had. I had to leave a review before I left the table. It\u2019s a hole in the wall pizza shop with the best casual, modern yet cozy vibes. We will be coming back tomorrow!"
+        ]
+      },
+      {
+        "id": null,
+        "name": "Piccolo Forno",
+        "rating": 4.7,
+        "review_count": 1842,
+        "address": "725 Columbus Ave, San Francisco, CA 94133, USA",
+        "categories": [
+          "establishment",
+          "food",
+          "restaurant",
+          "point_of_interest"
+        ],
+        "url": "https://maps.google.com/?cid=7123610778461487082",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpdK-vdzwKZZhlk-FzDOmUeq3050Bwyepo4QDrw8UKp5EtDNxGNWTmTVhzjWOzFyGNm95KjmXVrONgZ3LndKMmbPk8dJTdnXBK5UkmMmHqmtA4rpdpXe2QIDEcqV0B739Qjw-3nzfJaYAJv0BboQ6unyVZOvO89G8l36RzdL_1Aa-PLn9rUql2h1M_qmPQDPiLudK_Xwe5VO_QVg97S2pxWtRXvUfiBaxFFPzcgp4B6SjMmgyUHlCfh7_mIzy4Z6gAHkp596tE3SUarrKzjxxfwGi-62-Ek4-q-ZLY374LdQ74F0q-ZdBFchAK4gxtixwQnVK6e2XTQaRWD5udUPtNNwFqSYY3TuQBP_KMbdmFjjGgOTZHrIOfvAOlRGmkVQT5mhG0eZpkBmZFF7AA4kQIALa-rxmHNejcw-c3Dpp8aeyG9P&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "YAYA FOODIE",
+            "rating": 2,
+            "text": "Underwhelming flavors, not a fan.\n\nService: 10/10 fast and super polite and friendly\n\nFood: taste wasn\u2019t it, entry bread w vinegar had no flavor. The pastas all lacked flavor except the gnocchi one. Tiramisu was nice and fresh we liked it a lot. Pizzas weren\u2019t a favorite.\n\nOverall: wouldn\u2019t come here again, do to the food taste. Otherwise service is so nice.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Gary Gardner",
+            "rating": 5,
+            "text": "Wow, wow, wow. This is some delicious, fresh Italian. I have had the opportunity to eat here on two different occasions while visiting San Francisco. The first time was with my family and the second with employees. The owner is incredibly friendly and accommodating and yes, he\u2019s an authentic Italian. The lasagna will melt in your mouth and the desserts (especially the panna cotta) is to die for!!! I will be back on my next visit to the beautiful city.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Melanie Alfonso",
+            "rating": 5,
+            "text": "Walked in for a last minute dinner and they were able to sit us within 20 minutes despite being really busy. Felt at home from the minute we walked in. Servers were hilarious and helpful. Delicious pasta the amatriciana stole the show. Highly recommend",
+            "time": "2 weeks ago"
+          },
+          {
+            "author": "Denise Keefe",
+            "rating": 5,
+            "text": "This place is great for a fun group. The staff is outgoing, attentive, and professional. The food is delicious and has large portions. It is priced very reasonably. It is not a quiet date night type place, but it is just perfect for a happy vibe. Definitely recommend!",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Pasha Gleyzer",
+            "rating": 5,
+            "text": "Oh wow.  Definitely, the best carbonara in the city.  Everything in it: spaghetti, guanciale, pecorino romana, everything is of the highest quality, expertly cooked.  Al dente, guanciale is crispy and juicy, served very hot. Margherita pizza is also very good.  The arugula salad was the freshest.  The salmon was also delicious; with garlic that did not overpower it.  After all that, Giuseppe, the owner, gave us tiramisu on the house.  It was soft as a cloud, not very sweet: delicioso.  I will be back for bucatini ala amatriciana.  The place is full of characters both who serve you, and the regulars.  On a Wednesday at 1:30pm, you can get a table easily.",
+            "time": "3 months ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 5,
+          "service": 3,
+          "price": 1,
+          "ambiance": 1
+        },
+        "score": 5.7,
+        "testimonials": [
+          "Underwhelming flavors, not a fan.\n\nService: 10/10 fast and super polite and friendly\n\nFood: taste wasn\u2019t it, entry bread w vinegar had no flavor. The pastas all lacked flavor except the gnocchi one. Tiramisu was nice and fresh we liked it a lot. Pizzas weren\u2019t a favorite.\n\nOverall: wouldn\u2019t come here again, do to the food taste. Otherwise service is so nice.",
+          "Wow, wow, wow. This is some delicious, fresh Italian. I have had the opportunity to eat here on two different occasions while visiting San Francisco. The first time was with my family and the second with employees. The owner is incredibly friendly and accommodating and yes, he\u2019s an authentic Italian. The lasagna will melt in your mouth and the desserts (especially the panna cotta) is to die for!!! I will be back on my next visit to the beautiful city.",
+          "Walked in for a last minute dinner and they were able to sit us within 20 minutes despite being really busy. Felt at home from the minute we walked in. Servers were hilarious and helpful. Delicious pasta the amatriciana stole the show. Highly recommend"
+        ]
+      },
+      {
+        "id": null,
+        "name": "Arizmendi Bakery",
+        "rating": 4.7,
+        "review_count": 1852,
+        "address": "1331 9th Ave, San Francisco, CA 94122, USA",
+        "categories": [
+          "point_of_interest",
+          "store",
+          "cafe",
+          "bakery",
+          "restaurant",
+          "establishment",
+          "food"
+        ],
+        "url": "https://maps.google.com/?cid=13622220163385564142",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpcyc0ADWCrvrC01kkaqPiArGi4GSsCO9Mp1kVKak7jtzlYaaUgw_Lqmde4UiY1iYkscX-etUKyOWyVI0zQcZtNaR2gwKMCo3Ib441O3iwn_kq_tmlVvZzFq8ISpdACtB1qlqs9Fw0KG8PqyaC0nOeihQjBLFonWJdoxJteHr-ylK-mDqqb2vSR3Vi-xcOxJo7taE0hb1DsZIkBZZsAPc7XSXoRCylOIgHnr9JxLsWhiICl3UrdqD7FxRoQ5Xc-rJLlb4A-sw5U_sAUSVCuSsQX4LuEKh0EZOKlQZm_daEDG7A&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Alex DeMartino",
+            "rating": 4,
+            "text": "We got the pumpkin muffins, the sourdough croissant, a pecan roll and a daily special pizza. The muffin was the only thing that was worth the wait in line. It was soft and sweet with little bits of sugar on top. The croissant had that bad sour chemical taste. The pecan roll had raises in it which threw off the taste and texture of what would have been a very tasty roll. The pizza was better than Costco but not more than double the price good.",
+            "time": "2 weeks ago"
+          },
+          {
+            "author": "Kristin Bass",
+            "rating": 5,
+            "text": "Arizmendi Bakery is a must-visit gem in San Francisco's Inner Sunset neighborhood near Golden Gate Park. I highly recommend it for locals and tourists alike.\n\nThe sign outside brought me in. For those of you who've seen Inside Out, do you remember the scene about broccoli pizza? Arizmendi inspired it. I came in for the pizza by the slice, but left with more goodies from their extensive and delicious bakery shelves. The breadsticks in particular are not to be missed. As for the pizza, you can get a palm-sized hot slice for $3.50. That's an excellent value for something so tasty. It was enough for a light lunch, but I could have easily bought two without breaking the bank. There's a parklet outside and some other benches to sit and eat. Golden Gate Park is about a 10-15 minute walk away if you'd like another option for a great picnic.\n\nArizmendi is a worker-owned cooperative (co-op), which also makes them stand out. You see it in the care that the worker-owners take in their goods, and in the assistance the front-of-house staff offer their customers. I'm very happy to support this unique and important business model.\n\nI can't wait to come back to Arizmendi Bakery the next time I'm on my way to the  Japanese Tea Garden, Botanical Garden, DeYoung Art Museum, the Cal Academy of Science, or anything else in the nearby area. Save a couple of broccoli slices for me \ud83d\ude0b",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Mat Lit",
+            "rating": 5,
+            "text": "I really like the corn cherry scones and bran muffins. Pizza is best when it\u2019s very fresh, so eat there or get a half bake and warm it at home. The cookies are quite chewy\u2014would prefer them slightly more tender but they are still fine. I also enjoyed a honey wheat bun here. Chocolate cake is decadent.\n\nBottom line is that this is a fine bakery that really knows how to put out good products.",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Dan H",
+            "rating": 5,
+            "text": "Went with my daughter, this place is fantastic. Wonderful baked goods. Got strawberry blackberry scones and bialys. So delicious with their coffee. And some chocolate cherry sourdough bread to take home. The atmosphere is really nice too, very friendly, non commercial coop. Like hanging out with your next door neighbors\u2764\ufe0f",
+            "time": "a week ago"
+          },
+          {
+            "author": "Guillermo",
+            "rating": 5,
+            "text": "Great local bakery, line moves fast. They have  awesome pizza slices. Great little affordable lunch place if you are visiting.",
+            "time": "a month ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 3,
+          "price": 3,
+          "service": 2,
+          "ambiance": 1
+        },
+        "score": 5.7,
+        "testimonials": [
+          "We got the pumpkin muffins, the sourdough croissant, a pecan roll and a daily special pizza. The muffin was the only thing that was worth the wait in line. It was soft and sweet with little bits of sugar on top. The croissant had that bad sour chemical taste. The pecan roll had raises in it which threw off the taste and texture of what would have been a very tasty roll. The pizza was better than Costco but not more than double the price good.",
+          "Arizmendi Bakery is a must-visit gem in San Francisco's Inner Sunset neighborhood near Golden Gate Park. I highly recommend it for locals and tourists alike.\n\nThe sign outside brought me in. For those of you who've seen Inside Out, do you remember the scene about broccoli pizza? Arizmendi inspired it. I came in for the pizza by the slice, but left with more goodies from their extensive and delicious bakery shelves. The breadsticks in particular are not to be missed. As for the pizza, you can get a palm-sized hot slice for $3.50. That's an excellent value for something so tasty. It was enough for a light lunch, but I could have easily bought two without breaking the bank. There's a parklet outside and some other benches to sit and eat. Golden Gate Park is about a 10-15 minute walk away if you'd like another option for a great picnic.\n\nArizmendi is a worker-owned cooperative (co-op), which also makes them stand out. You see it in the care that the worker-owners take in their goods, and in the assistance the front-of-house staff offer their customers. I'm very happy to support this unique and important business model.\n\nI can't wait to come back to Arizmendi Bakery the next time I'm on my way to the  Japanese Tea Garden, Botanical Garden, DeYoung Art Museum, the Cal Academy of Science, or anything else in the nearby area. Save a couple of broccoli slices for me \ud83d\ude0b",
+          "I really like the corn cherry scones and bran muffins. Pizza is best when it\u2019s very fresh, so eat there or get a half bake and warm it at home. The cookies are quite chewy\u2014would prefer them slightly more tender but they are still fine. I also enjoyed a honey wheat bun here. Chocolate cake is decadent.\n\nBottom line is that this is a fine bakery that really knows how to put out good products."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Pizzetta 211",
+        "rating": 4.6,
+        "review_count": 986,
+        "address": "211 23rd Ave, San Francisco, CA 94121, USA",
+        "categories": [
+          "point_of_interest",
+          "food",
+          "establishment",
+          "restaurant"
+        ],
+        "url": "https://maps.google.com/?cid=797538431435835784",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpfxHkGHSqVi5wqlUqKoxJ6L0nx_ByrBKSWmfLix7H0Gg796pmiRilzk_fSv4V0yfscRvrsZlzdDlAGmt1ra9dsubhB7SE-BAbBBzRDqmQvqjf8mVOHx6SQfN_nj42QxwyJzHBty3D-lKe-YWSgb9KCzVAEX6Q1EK7d8BD5etnPhlSd6P-xo-u6YT55VTznBonx6Ute4LOWKvEHK1KXUwS4G39ZA4gTZUCIBXRa7nP-bQvGo9jHPyY8DOXpx6zrKxjM6kO7H9ErrC9g9a_sIi1-BI3zmp8u-NKT0eyHvcNUWKuofNl1EPfswth8lPlLjtbu-A4vWU72ALCnxGs4l94NxxTK4udhTikTvNRcgA5mAbQOWPOoKH-cenXkYahi8qvbG23r1bq8RE5EPS84rWbizDSgX90YBBA8vEDihBTrfa6Y&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Asher Williamson",
+            "rating": 5,
+            "text": "I can't hate this place. This is where my girlfriend and I had our first date two years ago. The pizza hits the spot and the ambiance in the small restaurant is so cozy. With just 6 tables, this small joint has a rotating menu with unique pizzas that will surprise you and keep you wanting more. Pro Tip: bring loved ones 9/10",
+            "time": "2 months ago"
+          },
+          {
+            "author": "Kate Gibson",
+            "rating": 5,
+            "text": "Great place in the Bay Area and well worth a visit. Great patio for outdoor seating and a small but cosy indoor seating area.\n\nThe pizzas were so good. We got the braised artichoke, pesto, walnut and feta, and the lamb sausage with harissa and smoked mozzarella. Both 10/10.\n\nExcellent food, service and atmosphere. Highly recommend!",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Helen Zhu",
+            "rating": 5,
+            "text": "Excellent experience at this pizza place! Their pizzas are made so delicately and you can tell they put a lot of effort into their food. The dough is super soft, thin and crunchy. Toppings are well balanced, each bite explodes with favour!\n\nThe cheese plate was a good starter, was quite filling! Would love to come back to try their other pizzas! Their menu changes weekly so there\u2019s always something new to look forward to!",
+            "time": "5 months ago"
+          },
+          {
+            "author": "Gav",
+            "rating": 5,
+            "text": "Awesome community spot with a beautiful patio and lovely but cozy interior seating area. Seasonal/periodically changing menu with thoughtful and unconventional options. Pizza/pizzettes were so good they caught me off guard- like damn great. Highly recommend!",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Marta Calvet",
+            "rating": 3,
+            "text": "The food is good but it\u2019s not worth the popularity. You have to wait in line, and they are true on estimating the timing. However, the person in charge of distributing the people seems to enjoy making people wait standing up. Our table was ready 10 minutes before they let us seat, same happened with other customers, tables clean and ready for minutes before they allow the people waiting to seat.\nThe pizza was ok, a little bit expensive for the size and the ingredients. The eggplant one (picture) was the best of the four we tried, the rest were a little dry to eat.\nNot a bad experience but I won\u2019t come back.",
+            "time": "12 months ago"
+          }
+        ],
+        "themes_summary": {
+          "ambiance": 3,
+          "price": 2,
+          "service": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "I can't hate this place. This is where my girlfriend and I had our first date two years ago. The pizza hits the spot and the ambiance in the small restaurant is so cozy. With just 6 tables, this small joint has a rotating menu with unique pizzas that will surprise you and keep you wanting more. Pro Tip: bring loved ones 9/10",
+          "Great place in the Bay Area and well worth a visit. Great patio for outdoor seating and a small but cosy indoor seating area.\n\nThe pizzas were so good. We got the braised artichoke, pesto, walnut and feta, and the lamb sausage with harissa and smoked mozzarella. Both 10/10.\n\nExcellent food, service and atmosphere. Highly recommend!",
+          "Excellent experience at this pizza place! Their pizzas are made so delicately and you can tell they put a lot of effort into their food. The dough is super soft, thin and crunchy. Toppings are well balanced, each bite explodes with favour!\n\nThe cheese plate was a good starter, was quite filling! Would love to come back to try their other pizzas! Their menu changes weekly so there\u2019s always something new to look forward to!"
+        ]
+      },
+      {
+        "id": null,
+        "name": "Long Bridge Pizza Company",
+        "rating": 4.6,
+        "review_count": 1111,
+        "address": "2347 3rd St, San Francisco, CA 94107, USA",
+        "categories": [
+          "food",
+          "establishment",
+          "point_of_interest",
+          "restaurant"
+        ],
+        "url": "https://maps.google.com/?cid=12914241654456479691",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpc_qBCAUSNZc4GL9Sh8RQmx_D_ivbADKCis4nPgKO9HCaycVfyrFKHEgRyqY-RYg7IZ8kQdDJVFh5gNaq3tp4Zr2JgTYvHGhl0g7POJm2NHeW9gkV0HiXsnEgQakfrmkc6zPxmE_l8oUOfpv-_tfDLMdKw6Rgqc20w5icYKt9Hm2aMDM4zpPao7mmW4SS5vLZzEWwjvfII0u6K3IsOc8F1BSbFrDPgWApWCSNwjM7koxjzAyCyq_UshDBXZFSm7qktXg5mH-MGtRUWvg4BUZnwInVw3nIsVNfXTOlnxEd-h0yjSa-wFReaeXYEqB2Ah1ZP_OrrUUbMYcD1wnd9Fe1Cow75g2TnDs1l03qdnHc7qkRkagkwxsEZ5evXDzW48ueCL7AoBGR9puQ5HPtcdgibZE8vvuSh8yrOEiLAKjqTxcnfJ&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Akshay Jagadeesh",
+            "rating": 5,
+            "text": "Really tasty sourdough style pizza but very expensive. We ordered a large pesto pizza, add jalape\u00f1os, and our total after tax and tip came out to $50. On top of that they charged $3 for a side of hot sauce. Prjce aside, it is very good pizza - blistered crackly crust and super tasty sauce.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Leah",
+            "rating": 5,
+            "text": "Wow. I\u2019ve only tried two pizza flavors here and just wow. Pesto is fresh with flavorful olive oil, and the hot honey is just sweet spicy complex tomato pepper goodness. I\u2019m salivating writing about it.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "\ud55c\uc2b9\uc218",
+            "rating": 5,
+            "text": "The price is reasonable and the taste is really nice! I would like to recommend to drop by this pizza restaurant! The Korean staff is kind, too!",
+            "time": "a month ago"
+          },
+          {
+            "author": "Michael Kapash",
+            "rating": 5,
+            "text": "Outstanding Chicken Parm Sandwich (only available on Wednesdays) for lunch to-go today. Extra points for automatically putting the sauce on the side - was able to get it home still hot and crispy and then add as much sauce as I wanted. Maybe could have used a tiny bit more cheese - but all in all a great sandwich !",
+            "time": "5 months ago"
+          },
+          {
+            "author": "Daniele Merico",
+            "rating": 5,
+            "text": "I am Italian and I love the pizza at this place. The crust is a little ticker and crispier than traditional Italian pizza, but I like it that way. I usually go for sausage pizza. Draft beers also good! And I like the neighborhood, dog patch. Keep in mind the setting is very informal: you order your pizza and drink at the counter and then you sit yourself, but more glorified than a mere takeaway.",
+            "time": "2 months ago"
+          }
+        ],
+        "themes_summary": {
+          "price": 2,
+          "taste": 2,
+          "service": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "Really tasty sourdough style pizza but very expensive. We ordered a large pesto pizza, add jalape\u00f1os, and our total after tax and tip came out to $50. On top of that they charged $3 for a side of hot sauce. Prjce aside, it is very good pizza - blistered crackly crust and super tasty sauce.",
+          "Wow. I\u2019ve only tried two pizza flavors here and just wow. Pesto is fresh with flavorful olive oil, and the hot honey is just sweet spicy complex tomato pepper goodness. I\u2019m salivating writing about it.",
+          "The price is reasonable and the taste is really nice! I would like to recommend to drop by this pizza restaurant! The Korean staff is kind, too!"
+        ]
+      },
+      {
+        "id": null,
+        "name": "Il Casaro Pizzeria",
+        "rating": 4.6,
+        "review_count": 2259,
+        "address": "348 Columbus Ave, San Francisco, CA 94133, USA",
+        "categories": [
+          "point_of_interest",
+          "food",
+          "restaurant",
+          "establishment"
+        ],
+        "url": "https://maps.google.com/?cid=6781377139221339014",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpfe9yOGghbqtO071EB6LCsxQ0tDWBtoww919kTCD-Fvx3d4Sgii8gS0w2g03xYV2rjylr8ewQUUgbzwByBXLj_ylFXOs1SJTDuZZVwHFKwOs7IQBNZBxhe5TRrRvw39L0BFPtTARBiMxl1AG5cY8lRsHsdP8KIjQrji4abuvnpgtXK52RUn1KAPL8N8NMjNkw9ioUg6tS2JabF27Iu7Lribi-mAmIrNsmfnnIKcjodJFdT4luLGtrA3CfgeslWaf8bXPCxCTIZTOh3Al7sVNt3FXxpvopxM7b7SzP2d5aTE4u6i7R7CgBoIYLCPAEARh3Ot3FpH2lHa044OULl34v9ystb1PmQlhYR2w47jY_4DOFyPf0VDQpAKVjoZVAakFFHdpHhlW9-92FzgRZEeTg3zYSSOWB01VMRKdZMsPA4AAfTQ&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Liberty Avila",
+            "rating": 5,
+            "text": "Easily my favorite personal Pizza in SF! Been coming here since 2015 but always ordering the same thing, haha!\n\nThe dough is very light and fluff. Paired with their fresh chili (I forgot the name, but its good!) makes everything tastes better.",
+            "time": "2 weeks ago"
+          },
+          {
+            "author": "L McNulty",
+            "rating": 5,
+            "text": "We actually visited this Italian for three nights running in San Francisco because it is genuinely one of the best pizzas we\u2019ve had in our lives (we are Italian and live in London) and this was up there, truly. We also had the carbonara rigatoni which was just as delicious so recommend that as well! Fantastic wine & service. Would recommend to anyone visiting San Francisco and the little Italy area!",
+            "time": "a month ago"
+          },
+          {
+            "author": "Alberto Cua",
+            "rating": 5,
+            "text": "Service is a perfect. They were always present to check on us and the food was served fast.\n\nFood is fantastic.\nYou must get a pizza, choose any they\u2019re all good. And the carbonara. Its the best you\u2019ll ever have and it\u2019s the real carbonara. Pizza was perfect. Salad and the calamari was good too.All my Italian friends approve this place and so do I.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Giorgio Ricciardiello",
+            "rating": 2,
+            "text": "If you want a burn pizza, go for it. On a group of seven, we ordered 4 pizzas, and all of them had burn crust. The pizza tasted more at burn than actual pizza. The pistachio pizza barely has any topping. There are better options in the city than this. However, the doe was with good texture, and the prosciutto and parmegan are good.",
+            "time": "a month ago"
+          },
+          {
+            "author": "Ion Turcan",
+            "rating": 2,
+            "text": "Disappointed on my third visit to Il Casaro. I always come here for the Quattro Formaggi\u2014it\u2019s been my favorite. But today, it just wasn\u2019t the same. It honestly looked like they ran out of cheese. The rich, creamy flavor I expect from this pizza was missing.\n\nDon\u2019t get me wrong\u2014the dough was still excellent, light and well-made as always. But overall, the pizza felt incomplete. You can even see it in the picture. Really hoping this was just an off day, because I\u2019ve had much better experiences here before.",
+            "time": "a month ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 4,
+          "service": 2
+        },
+        "score": 5.6,
+        "testimonials": [
+          "Easily my favorite personal Pizza in SF! Been coming here since 2015 but always ordering the same thing, haha!\n\nThe dough is very light and fluff. Paired with their fresh chili (I forgot the name, but its good!) makes everything tastes better.",
+          "We actually visited this Italian for three nights running in San Francisco because it is genuinely one of the best pizzas we\u2019ve had in our lives (we are Italian and live in London) and this was up there, truly. We also had the carbonara rigatoni which was just as delicious so recommend that as well! Fantastic wine & service. Would recommend to anyone visiting San Francisco and the little Italy area!",
+          "Service is a perfect. They were always present to check on us and the food was served fast.\n\nFood is fantastic.\nYou must get a pizza, choose any they\u2019re all good. And the carbonara. Its the best you\u2019ll ever have and it\u2019s the real carbonara. Pizza was perfect. Salad and the calamari was good too.All my Italian friends approve this place and so do I."
+        ]
+      },
+      {
+        "id": null,
+        "name": "Cellarmaker House of Pizza - SF",
+        "rating": 4.6,
+        "review_count": 653,
+        "address": "3193 Mission St, San Francisco, CA 94110, USA",
+        "categories": [
+          "establishment",
+          "food",
+          "point_of_interest",
+          "restaurant"
+        ],
+        "url": "https://maps.google.com/?cid=17909878048335708996",
+        "photo_url": "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference=ATKogpcCl3Lu9ehy-NdvjgXIjPB6xRT_kefwHiLsOUNAao9wlrv-Wvwf-c7cNZOTkvvpJwBrGOds_NKk91myI46VhIVzVunt_21suwwn0hatl7qHWszaEWbTsIuVkLVEtZJzGh095Z-gelOOinfxkxYr0p_TzuUWxTrvc7raRtTLUHVUmnqh8S6Sn1YiBvrQjRe89kFMgSYfDHR5EMkWpAVF8OtUGfoDFSvmE94m0NjwwcrrZCTUrqwI9dPtur_3QGLJd5JSE8M3_INsGE-_YoFyx0bmskAhFNo5rY5OX7wRiu9Udu21d7mp4iApmivAysd1Yg_1jUBxe7b5eNQrBXeO7wBDCOSm5nar7KH7ctyE6ylY_916zkBNOd8rsj9GWzYrpKrcwlH_WuXKugY2nBwzIevfOdsL5DNuVlUTSuONITS2PKfq&key=AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU",
+        "reviews": [
+          {
+            "author": "Abigail Scott",
+            "rating": 5,
+            "text": "If pizza is your thing and Detroit style is your ultimate you MUST eat here. The pizza dough is light, fluffy and melts in your mouth. While the cheese is almost fried onto the sides making it chewy and crispy. The toppings a generous and stacked. We got seated right away at the bar with no reservations. Pizza came out quick and hot. This place ranks way above Square Pie Guys for me. Oh and the hot sauce was also fire - tangy, complimentary and spicy.",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Caprice DeAngelis",
+            "rating": 5,
+            "text": "I fell in love with this pizza! It was so fresh and tasted amazing. We got classic pepperoni Detroit style pizza and some cream sodas. It was absolutely delicious. I also fell in love with their house made hot sauce. It added to the flavor of the Pepperoni and just tied everything together. Absolutely hit the spot. We can't wait to come back!",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Gonzalo Romero",
+            "rating": 5,
+            "text": "Cellaramaker is a must-try for Detroit-style pizza lovers in Misi\u00f3n st!\n\nThe Detroit-style pizza is phenomenal. The crust is perfectly crispy and chewy, with a delicious caramelized cheese edge. The toppings are fresh and flavorful, and the sauce is the perfect balance of sweet and tangy. The craft beer selection is also excellent, with a wide variety of local and regional brews on tap.\n\nI highly recommend Cellarmaker to anyone looking for a great pizza and beer experience.\n\nOn top of pizza and beer, the crew is the best!\n\nThanks,\nGonzalo",
+            "time": "10 months ago"
+          },
+          {
+            "author": "Emiliano Garcia",
+            "rating": 5,
+            "text": "Phenomenal. It was our first time here and didn't really know what to expect. It was packed for a Thursday night so we sat outside and ordered a pizza and the Nashville spicy chicken sliders. Both were extremely fresh and had a great flavor. The pizza was my favorite. We got a basic pepperoni but it was the star of the night. The dough of this pizza is fantastic and paired with their house made hot sauce.... STELLER. We Will definitely be coming back to try different items and next time we will try one of the many a craft beers they offer. Thank you for the great service, the atmosphere, and mostly the great food!",
+            "time": "3 months ago"
+          },
+          {
+            "author": "Robert Piggott",
+            "rating": 5,
+            "text": "~This is such an amazing little Detroit Red Top style pizza joint w/ unique locally sourced fresh ingredients. The staff are attentive, accommodating & pleasant to interact w/. They really make you feel welcome like you are eating a pie @ a friend's place. There isn't a bad item on the menu. I always look forward to coming back!\u00a1!\ud83e\udd24\ud83d\ude0b~",
+            "time": "3 weeks ago"
+          }
+        ],
+        "themes_summary": {
+          "taste": 4,
+          "service": 2,
+          "ambiance": 1
+        },
+        "score": 5.6,
+        "testimonials": [
+          "If pizza is your thing and Detroit style is your ultimate you MUST eat here. The pizza dough is light, fluffy and melts in your mouth. While the cheese is almost fried onto the sides making it chewy and crispy. The toppings a generous and stacked. We got seated right away at the bar with no reservations. Pizza came out quick and hot. This place ranks way above Square Pie Guys for me. Oh and the hot sauce was also fire - tangy, complimentary and spicy.",
+          "I fell in love with this pizza! It was so fresh and tasted amazing. We got classic pepperoni Detroit style pizza and some cream sodas. It was absolutely delicious. I also fell in love with their house made hot sauce. It added to the flavor of the Pepperoni and just tied everything together. Absolutely hit the spot. We can't wait to come back!",
+          "Cellaramaker is a must-try for Detroit-style pizza lovers in Misi\u00f3n st!\n\nThe Detroit-style pizza is phenomenal. The crust is perfectly crispy and chewy, with a delicious caramelized cheese edge. The toppings are fresh and flavorful, and the sauce is the perfect balance of sweet and tangy. The craft beer selection is also excellent, with a wide variety of local and regional brews on tap.\n\nI highly recommend Cellarmaker to anyone looking for a great pizza and beer experience.\n\nOn top of pizza and beer, the crew is the best!\n\nThanks,\nGonzalo"
+        ]
+      }
+    ]
+  }
+]

@@ -11,7 +11,7 @@ function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    fetch("/top_places.json")
+    fetch("/top_places_photos_senti.json")
       .then((res) => res.json())
       .then((data) => setTopPlaces(data))
       .catch((err) => console.error("Failed to load data", err));
@@ -40,11 +40,15 @@ function App() {
 
   return (
     <div className="font-sans bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white transition-colors">
-      <Hero />
-      <CategorySelector data={topPlaces} onSelect={handleCategorySelect} />
+      <Hero data={topPlaces} onSelect={handleCategorySelect} />
+
       <div ref={resultsRef}>
         {selectedCategory && (
-          <ResultsSection category={selectedCategory} data={topPlaces} />
+          <ResultsSection
+            key={selectedCategory}
+            category={selectedCategory}
+            data={topPlaces}
+          />
         )}
       </div>
 

@@ -12,7 +12,7 @@ CATEGORIES = [
     "coffee", "pizza", "burger", "vegan", "bakery", "brunch", "sushi", "thai", "chinese", "indian", "mexican",
     "korean", "italian", "mediterranean", "seafood", "sandwiches", "ice cream", "bars", "bbq", "ramen"
 ]
-# CATEGORIES = ["coffee", "python"]
+# CATEGORIES = ["coffee", "pizza"]
 
 def process_category(category: str, max_places: int = 60) -> dict:
     print(f"📍 Processing category: {category}")
@@ -59,7 +59,7 @@ def main():
             print(f"❌ Error in category '{category}': {e}")
 
     # Save to JSON
-    with open(os.path.join(OUTPUT_DIR, "top_places.json"), "w") as f:
+    with open(os.path.join(OUTPUT_DIR, "top_places_photos_senti.json"), "w") as f:
         json.dump(results, f, indent=2)
 
     print("✅ Finished! Output saved to `output/top_places.json`")

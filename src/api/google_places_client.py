@@ -57,7 +57,7 @@ def get_place_details(place_id: str) -> Dict[str, Any]:
     """
     params = {
         "place_id": place_id,
-        "fields": "name,rating,user_ratings_total,formatted_address,review,types,url",
+        "fields": "name,rating,user_ratings_total,formatted_address,review,types,url,photos",
         "key": GOOGLE_API_KEY
     }
 
@@ -73,8 +73,19 @@ def get_place_details(place_id: str) -> Dict[str, Any]:
 
 def simplify_place(place: Dict[str, Any], reviews: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
-    Normalize the business + review data into our internal format.
+    Normalize the business + review data into our internal format, including photo URL if available.
     """
+    # Try to get first photo reference and build a URL
+    photos = place.get("photos", [])
+    photo_url = ""
+    if photos:
+        ref = photos[0].get("photo_reference")
+        if ref:
+            photo_url = (
+                f"https://maps.googleapis.com/maps/api/place/photo"
+                f"?maxwidth=800&photoreference={ref}&key={GOOGLE_API_KEY}"
+            )
+
     return {
         "id": place.get("place_id"),
         "name": place.get("name"),
@@ -83,6 +94,7 @@ def simplify_place(place: Dict[str, Any], reviews: List[Dict[str, Any]]) -> Dict
         "address": place.get("formatted_address"),
         "categories": place.get("types", []),
         "url": place.get("url", ""),
+        "photo_url": photo_url,  # ✅ include image
         "reviews": [
             {
                 "author": r.get("author_name"),
