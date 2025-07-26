@@ -1,9 +1,9 @@
 import os
 import json
-from src.api.google_places_client import search_places, get_place_details, simplify_place
-from src.analysis.sentiment import process_reviews, summarize_themes
-from src.ranker.ranker import rank_businesses
-from src.extractor.testimonial_extractor import select_testimonials
+from google_places_client import search_places, get_place_details, simplify_place
+from sentiment import process_reviews, summarize_themes
+from ranker import rank_businesses
+from testimonial_extractor import select_testimonials
 
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -12,6 +12,7 @@ CATEGORIES = [
     "coffee", "pizza", "burger", "vegan", "bakery", "brunch", "sushi", "thai", "chinese", "indian", "mexican",
     "korean", "italian", "mediterranean", "seafood", "sandwiches", "ice cream", "bars", "bbq", "ramen"
 ]
+# For testing purposes, work on a smaller set of categories to not run out of API quota
 # CATEGORIES = ["coffee", "pizza"]
 
 def process_category(category: str, max_places: int = 60) -> dict:
