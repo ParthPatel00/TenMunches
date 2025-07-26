@@ -48,7 +48,12 @@ const Hero = ({ data, onSelect }: Props) => {
       />
 
       {/* Overlay content */}
-      <div className="relative z-10 text-center px-4 max-w-3xl pt-20">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 text-center px-4 max-w-3xl pt-20"
+      >
         <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
           Discover SF’s Best Food & Drink Spots
         </h1>
@@ -56,7 +61,7 @@ const Hero = ({ data, onSelect }: Props) => {
           We analyzed thousands of reviews to find the top 10 places in 20 food
           and drink categories — all in San Francisco.
         </p>
-      </div>
+      </motion.div>
 
       {/* Categories inside hero */}
       <motion.div
