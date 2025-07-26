@@ -1,2 +1,0 @@
-Places API, API key = AIzaSyADgOuKORZA_EXSkMpP9E3KCO-XbrfMQSU
-Maps Javascript API key = AIzaSyBwbX8IrYso-2dUe336gGLRiQiSlzwxD3c
