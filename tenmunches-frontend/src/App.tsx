@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import Hero from "./components/Hero.tsx";
-import CategorySelector from "./components/CategorySelector.tsx";
 import ResultsSection from "./components/ResultSection.tsx";
 
 function App() {

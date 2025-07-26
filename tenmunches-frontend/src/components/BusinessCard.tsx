@@ -11,6 +11,7 @@ interface Props {
     themes_summary: Record<string, number | undefined>;
     testimonials: string[];
     photo_url?: string;
+    url?: string;
   };
   rank: number;
   reversed?: boolean;
@@ -24,11 +25,11 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
     ? business.testimonials
     : business.testimonials.slice(0, 1);
 
-  const topThemes = Object.entries(business.themes_summary || {})
-    .filter(([, value]) => typeof value === "number" && value > 0)
-    .sort((a, b) => (b[1] ?? 0) - (a[1] ?? 0))
-    .slice(0, 3)
-    .map(([theme]) => theme);
+  // const topThemes = Object.entries(business.themes_summary || {})
+  //   .filter(([, value]) => typeof value === "number" && value > 0)
+  //   .sort((a, b) => (b[1] ?? 0) - (a[1] ?? 0))
+  //   .slice(0, 3)
+  //   .map(([theme]) => theme);
 
   const fallback = "/placeholder.jpg"; // Add this image to public/
   const image =
@@ -68,7 +69,18 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
           </div>
         </div>
 
-        <p className="text-sm text-gray-500">{business.address}</p>
+        {business.url ? (
+          <a
+            href={business.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800 transition"
+          >
+            {business.address}
+          </a>
+        ) : (
+          business.address
+        )}
 
         <div className="space-y-2 mb-2">
           {visibleTestimonials.map((quote, i) => (
