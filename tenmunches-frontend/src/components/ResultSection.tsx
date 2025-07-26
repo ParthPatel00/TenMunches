@@ -1,4 +1,3 @@
-import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 import BusinessCard from "./BusinessCard";
 
 interface Props {
@@ -12,6 +11,7 @@ interface Props {
       review_count: number;
       themes_summary: Record<string, number | undefined>;
       testimonials: string[];
+      photo_url?: string;
     }[];
   }[];
 }
@@ -22,18 +22,21 @@ const ResultsSection = ({ category, data }: Props) => {
 
   return (
     <section className="bg-gray-100 dark:bg-gray-900 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-10 capitalize">
           Top 10 {category} Places in San Francisco
         </h2>
 
-        <MasonryInfiniteGrid className="gap-6" gap={16} align="center">
+        <div className="space-y-10">
           {businesses.map((biz, index) => (
-            <div key={index} className="w-full md:w-[300px]">
-              <BusinessCard business={biz} rank={index + 1} />
-            </div>
+            <BusinessCard
+              key={`${category}-${biz.name}`}
+              business={biz}
+              rank={index + 1}
+              reversed={index % 2 !== 0}
+            />
           ))}
-        </MasonryInfiniteGrid>
+        </div>
       </div>
     </section>
   );

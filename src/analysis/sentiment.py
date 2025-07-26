@@ -1,6 +1,7 @@
 from typing import List, Dict, Tuple
 from textblob import TextBlob
-
+import re
+from collections import Counter
 
 # Keywords per theme — extendable
 THEME_KEYWORDS = {
@@ -19,18 +20,24 @@ def analyze_sentiment(text: str) -> float:
     return blob.sentiment.polarity
 
 
+
+# Basic stopword list (can be extended)
+STOPWORDS = set([
+    "the", "and", "was", "for", "with", "this", "that", "you", "your", "are", "but", "not",
+    "have", "they", "had", "from", "has", "it's", "its", "our", "been", "very", "just", "too",
+    "all", "out", "get", "who", "she", "he", "them", "some", "it's", "what", "were", "also"
+])
+
 def extract_themes(text: str) -> List[str]:
     """
-    Return a list of themes mentioned in the review.
+    Fallback: Extract most common meaningful words from review.
     """
-    themes = set()
-    lowered = text.lower()
+    words = re.findall(r"\b[a-zA-Z]{4,}\b", text.lower())  # words with 4+ letters
+    filtered = [w for w in words if w not in STOPWORDS]
 
-    for theme, keywords in THEME_KEYWORDS.items():
-        if any(keyword in lowered for keyword in keywords):
-            themes.add(theme)
+    counter = Counter(filtered)
+    return [w for w, _ in counter.most_common(5)]
 
-    return list(themes)
 
 
 def process_reviews(reviews: List[Dict[str, str]]) -> List[Dict[str, any]]:
