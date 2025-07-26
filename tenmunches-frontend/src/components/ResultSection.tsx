@@ -21,7 +21,7 @@ const ResultsSection = ({ category, data }: Props) => {
   const businesses = result?.top_10 || [];
 
   return (
-    <section className="bg-gray-100 dark:bg-gray-900 py-12 px-4">
+    <section className="bg-gray-100 py-12 px-4">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-10 capitalize">
           Top 10 {category} Places in San Francisco
