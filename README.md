@@ -1,6 +1,6 @@
 # TenMunches 🍽️
 
-**Live Demo → **https://ten-munches.vercel.app/**
+**Live Demo → https://ten-munches.vercel.app/**
 
 ---
 
