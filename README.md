@@ -54,7 +54,7 @@ It uses AI-curated insights from real user reviews and web articles to surface w
 
 ## 💼 Created By
 
-**[Your Name]**  
+**[Parth Patel]**  
 Software Engineer • Data Curious • UI-Driven  
 [LinkedIn](https://www.linkedin.com/in/parth-patel-sjsu/) • [Portfolio](patelparth.me)
 
