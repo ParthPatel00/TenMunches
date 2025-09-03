@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@egjs/react-infinitegrid": "^4.12.0",
+    "@vercel/analytics": "^1.5.0",
     "framer-motion": "^12.23.9",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
