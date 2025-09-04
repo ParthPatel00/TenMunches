@@ -12,6 +12,7 @@ interface Props {
     testimonials: string[];
     photo_url?: string;
     url?: string;
+    categories?: string[]; // Added categories to the interface
   };
   rank: number;
   reversed?: boolean;
@@ -31,7 +32,50 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
   //   .slice(0, 3)
   //   .map(([theme]) => theme);
 
-  const fallback = "/placeholder.jpg"; // Add this image to public/
+  // Get category from the business data or use a default
+  const getCategoryFromBusiness = () => {
+    if (business.categories) {
+      if (
+        business.categories.includes("cafe") ||
+        business.categories.includes("coffee")
+      ) {
+        return "coffee";
+      }
+      if (
+        business.categories.includes("restaurant") ||
+        business.categories.includes("food")
+      ) {
+        return "restaurant";
+      }
+      if (
+        business.categories.includes("bar") ||
+        business.categories.includes("night_club")
+      ) {
+        return "bar";
+      }
+    }
+    return "default";
+  };
+
+  const category = getCategoryFromBusiness();
+
+  // Use different fallback images based on category
+  const getFallbackImage = (cat: string) => {
+    switch (cat) {
+      case "coffee":
+        return "/sf.jpg"; // Use SF image for coffee shops
+      case "restaurant":
+        return "/sf.jpg"; // Use SF image for restaurants
+      case "bar":
+        return "/sf.jpg"; // Use SF image for bars
+      default:
+        return "/sf.jpg"; // Default fallback
+    }
+  };
+
+  const fallback = getFallbackImage(category);
+
+  // Use the original photo_url if available, otherwise fallback
   const image =
     !imageError && business.photo_url ? business.photo_url : fallback;
 

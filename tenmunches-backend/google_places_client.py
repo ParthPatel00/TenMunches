@@ -12,41 +12,40 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
     raise ValueError("Missing GOOGLE_API_KEY in environment or .env file")
 
-TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json"
+# Updated to use the newer Places API endpoints
+TEXT_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
+DETAILS_URL = "https://places.googleapis.com/v1/places/"
 
 
 def search_places(query: str, location: str = "San Francisco", max_results: int = 60) -> List[Dict[str, Any]]:
     """
-    Search Google Places for businesses by text query.
+    Search Google Places for businesses by text query using the new Places API.
     Returns a list of simplified business objects.
     """
     places = []
-    params = {
-        "query": f"{query} in {location}",
-        "key": GOOGLE_API_KEY
+    
+    # Use the new Places API format
+    headers = {
+        "X-Goog-Api-Key": GOOGLE_API_KEY,
+        "X-Goog-FieldMask": "places.displayName,places.id,places.rating,places.userRatingCount,places.formattedAddress,places.types,places.photos"
+    }
+    
+    data = {
+        "textQuery": f"{query} in {location}",
+        "maxResultCount": max_results
     }
 
-    while len(places) < max_results and params:
-        response = requests.get(TEXT_SEARCH_URL, params=params)
-        data = response.json()
-
-        if "results" not in data:
-            print(f"[Error] Google API Error: {data}")
-            break
-
-        places.extend(data["results"])
-
-        next_page_token = data.get("next_page_token")
-        if not next_page_token:
-            break
-
-        # Google requires a short delay before next_page_token works
-        time.sleep(2)
-        params = {
-            "pagetoken": next_page_token,
-            "key": GOOGLE_API_KEY
-        }
+    try:
+        response = requests.post(TEXT_SEARCH_URL, headers=headers, json=data)
+        response.raise_for_status()
+        result = response.json()
+        
+        if "places" in result:
+            places = result["places"]
+            
+    except requests.exceptions.RequestException as e:
+        print(f"Error calling Places API: {e}")
+        return []
 
     return places[:max_results]
 
@@ -55,20 +54,18 @@ def get_place_details(place_id: str) -> Dict[str, Any]:
     """
     Get detailed info (including reviews) for a business using its place_id.
     """
-    params = {
-        "place_id": place_id,
-        "fields": "name,rating,user_ratings_total,formatted_address,review,types,url,photos",
-        "key": GOOGLE_API_KEY
+    headers = {
+        "X-Goog-Api-Key": GOOGLE_API_KEY,
+        "X-Goog-FieldMask": "displayName,rating,userRatingCount,formattedAddress,types,reviews,photos"
     }
 
-    response = requests.get(DETAILS_URL, params=params)
-    data = response.json()
-
-    if "result" not in data:
-        print(f"[Error] Failed to fetch details for place_id={place_id}")
+    try:
+        response = requests.get(f"{DETAILS_URL}{place_id}", headers=headers)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching place details: {e}")
         return {}
-
-    return data["result"]
 
 
 def simplify_place(place: Dict[str, Any], reviews: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -79,28 +76,27 @@ def simplify_place(place: Dict[str, Any], reviews: List[Dict[str, Any]]) -> Dict
     photos = place.get("photos", [])
     photo_url = ""
     if photos:
-        ref = photos[0].get("photo_reference")
-        if ref:
-            photo_url = (
-                f"https://maps.googleapis.com/maps/api/place/photo"
-                f"?maxwidth=800&photoreference={ref}&key={GOOGLE_API_KEY}"
-            )
+        photo = photos[0]
+        # For the new API, we need to use the photo name to build the URL
+        photo_name = photo.get("name", "")
+        if photo_name:
+            photo_url = f"https://places.googleapis.com/v1/{photo_name}/media?key={GOOGLE_API_KEY}&maxWidthPx=800"
 
     return {
-        "id": place.get("place_id"),
-        "name": place.get("name"),
+        "id": place.get("id"),
+        "name": place.get("displayName", {}).get("text", ""),
         "rating": place.get("rating"),
-        "review_count": place.get("user_ratings_total"),
-        "address": place.get("formatted_address"),
+        "review_count": place.get("userRatingCount"),
+        "address": place.get("formattedAddress"),
         "categories": place.get("types", []),
-        "url": place.get("url", ""),
-        "photo_url": photo_url,  # ✅ include image
+        "url": f"https://maps.google.com/?cid={place.get('id')}",
+        "photo_url": photo_url,
         "reviews": [
             {
-                "author": r.get("author_name"),
+                "author": r.get("author", {}).get("displayName", "") if r.get("author") else "Anonymous",
                 "rating": r.get("rating"),
-                "text": r.get("text"),
-                "time": r.get("relative_time_description")
+                "text": r.get("text", {}).get("text", "") if isinstance(r.get("text"), dict) else str(r.get("text", "")),
+                "time": r.get("relativePublishTimeDescription", "")
             }
             for r in reviews
         ]

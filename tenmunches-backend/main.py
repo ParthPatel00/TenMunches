@@ -22,13 +22,13 @@ def process_category(category: str, max_places: int = 60) -> dict:
     enriched_businesses = []
 
     for place in raw_places:
-        details = get_place_details(place["place_id"])
+        details = get_place_details(place["id"])
         if not details:
             continue
 
         reviews = details.get("reviews", [])
-        processed_reviews = process_reviews(reviews)
-        place_data = simplify_place(details, processed_reviews)
+        place_data = simplify_place(details, reviews)
+        processed_reviews = process_reviews(place_data.get("reviews", []))
 
         # Summarize themes for debugging or frontend use
         theme_summary = summarize_themes(processed_reviews)
