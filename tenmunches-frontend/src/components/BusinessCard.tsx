@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface Props {
   business: {
@@ -80,13 +79,10 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
     !imageError && business.photo_url ? business.photo_url : fallback;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+    <div
       className={`flex flex-col md:flex-row ${
         reversed ? "md:flex-row-reverse" : ""
-      } gap-6 items-center`}
+      } gap-6 items-center animate-in-fade-up`}
     >
       {/* Image container with blur + shadow */}
       <div className="relative w-full md:w-1/2 h-80 overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition">
@@ -95,6 +91,7 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
           alt={business.name}
           className="w-full h-full object-cover object-center rounded-xl"
           loading="lazy"
+          decoding="async"
           onError={() => setImageError(true)}
         />
         {/* Optional background blur layer (can be removed for performance) */}
@@ -146,7 +143,7 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
           </button>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

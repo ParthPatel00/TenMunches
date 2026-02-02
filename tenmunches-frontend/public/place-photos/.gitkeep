@@ -1,0 +1,2 @@
+# Place photos are downloaded here by the backend (main.py)
+# so images work even after the Google API key expires.

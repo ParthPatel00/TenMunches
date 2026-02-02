@@ -4,10 +4,14 @@ import time
 from typing import List, Dict, Any
 from dotenv import load_dotenv
 
-dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '.env')
-print(dotenv_path)
-load_dotenv()
+# Load .env from backend folder or parent TenMunches folder
+_backend_dir = os.path.dirname(os.path.abspath(__file__))
+_parent_dir = os.path.dirname(_backend_dir)
+load_dotenv(os.path.join(_backend_dir, ".env"))
+load_dotenv(os.path.join(_parent_dir, ".env"))
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+# Optional: if your API key has HTTP referrer restrictions, set this to a whitelisted URL (e.g. https://ten-munches.vercel.app/)
+GOOGLE_REFERER = os.getenv("GOOGLE_REFERER", "").strip()
 
 if not GOOGLE_API_KEY:
     raise ValueError("Missing GOOGLE_API_KEY in environment or .env file")
@@ -24,11 +28,13 @@ def search_places(query: str, location: str = "San Francisco", max_results: int 
     """
     places = []
     
-    # Use the new Places API format
+    # Use the new Places API format (Referer helps when key has HTTP referrer restrictions)
     headers = {
         "X-Goog-Api-Key": GOOGLE_API_KEY,
         "X-Goog-FieldMask": "places.displayName,places.id,places.rating,places.userRatingCount,places.formattedAddress,places.types,places.photos"
     }
+    if GOOGLE_REFERER:
+        headers["Referer"] = GOOGLE_REFERER
     
     data = {
         "textQuery": f"{query} in {location}",
@@ -37,7 +43,15 @@ def search_places(query: str, location: str = "San Francisco", max_results: int 
 
     try:
         response = requests.post(TEXT_SEARCH_URL, headers=headers, json=data)
-        response.raise_for_status()
+        if not response.ok:
+            body = response.text
+            try:
+                err = response.json()
+                body = err.get("error", {}).get("message", body) or body
+            except Exception:
+                pass
+            print(f"Error calling Places API: {response.status_code} - {body}")
+            return []
         result = response.json()
         
         if "places" in result:
@@ -45,6 +59,8 @@ def search_places(query: str, location: str = "San Francisco", max_results: int 
             
     except requests.exceptions.RequestException as e:
         print(f"Error calling Places API: {e}")
+        if hasattr(e, "response") and e.response is not None and e.response.text:
+            print(f"Response: {e.response.text[:500]}")
         return []
 
     return places[:max_results]
@@ -58,13 +74,25 @@ def get_place_details(place_id: str) -> Dict[str, Any]:
         "X-Goog-Api-Key": GOOGLE_API_KEY,
         "X-Goog-FieldMask": "displayName,rating,userRatingCount,formattedAddress,types,reviews,photos"
     }
+    if GOOGLE_REFERER:
+        headers["Referer"] = GOOGLE_REFERER
 
     try:
         response = requests.get(f"{DETAILS_URL}{place_id}", headers=headers)
-        response.raise_for_status()
+        if not response.ok:
+            body = response.text
+            try:
+                err = response.json()
+                body = err.get("error", {}).get("message", body) or body
+            except Exception:
+                pass
+            print(f"Error fetching place details: {response.status_code} - {body}")
+            return {}
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error fetching place details: {e}")
+        if hasattr(e, "response") and e.response is not None and e.response.text:
+            print(f"Response: {e.response.text[:500]}")
         return {}
 
 

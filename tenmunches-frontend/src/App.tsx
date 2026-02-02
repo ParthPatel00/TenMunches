@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
 import Hero from "./components/Hero.tsx";
 import ResultsSection from "./components/ResultSection.tsx";
@@ -18,18 +18,25 @@ function App() {
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
-
-    // Smooth scroll to results
-    setTimeout(() => {
-      resultsRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
   };
 
+  const scrollToResults = useCallback(() => {
+    requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth" });
+    });
+  }, []);
+
   useEffect(() => {
+    let ticking = false;
     const onScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setShowScrollTop(window.scrollY > 300);
+        ticking = false;
+      });
     };
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -47,6 +54,7 @@ function App() {
             key={selectedCategory}
             category={selectedCategory}
             data={topPlaces}
+            onMounted={scrollToResults}
           />
         )}
       </div>

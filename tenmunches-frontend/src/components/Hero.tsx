@@ -44,6 +44,7 @@ const Hero = ({ data, onSelect }: Props) => {
       <img
         src="/sf.jpg"
         alt="San Francisco"
+        fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover opacity-70"
       />
 
@@ -55,26 +56,24 @@ const Hero = ({ data, onSelect }: Props) => {
         variants={{
           hidden: {},
           visible: {
-            transition: {
-              staggerChildren: 0.15,
-            },
+            transition: { staggerChildren: 0.06 },
           },
         }}
       >
         <motion.h1
           className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
           Discover SF’s Best Food & Drink Spots
         </motion.h1>
 
         <motion.p
           className="text-2xl md:text-xl drop-shadow-md mb-8"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+          transition={{ delay: 0.1, duration: 0.35, ease: "easeOut" }}
         >
           Discover the top 10 places in 20 food and drink categories across San
           Francisco — curated from reviews, articles, and local buzz.
@@ -87,12 +86,12 @@ const Hero = ({ data, onSelect }: Props) => {
         initial="hidden"
         animate="visible"
         variants={{
-          hidden: { opacity: 0 }, // ✨ fade in the entire grid
+          hidden: { opacity: 0 },
           visible: {
             opacity: 1,
             transition: {
-              delay: 1.4, // ⏱ delay until heading + subtext land
-              staggerChildren: 0.05,
+              delay: 0.5,
+              staggerChildren: 0.03,
             },
           },
         }}
@@ -104,24 +103,14 @@ const Hero = ({ data, onSelect }: Props) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             variants={{
-              hidden: {
-                opacity: 0.001,
-                scale: 1,
-                y: 8,
-              },
+              hidden: { opacity: 0, y: 6 },
               visible: {
                 opacity: 1,
-                scale: 1,
                 y: 0,
-                transition: {
-                  opacity: { duration: 2.5 }, // ✅ fade speed
-                  scale: { duration: 1 },
-                  y: { duration: 0.5 },
-                  ease: "easeOut",
-                },
+                transition: { duration: 0.35, ease: "easeOut" },
               },
             }}
-            className="flex items-center gap-2 bg-white text-black px-5 py-2 rounded-full shadow hover:shadow-lg transition-all text-sm md:text-base backdrop-blur bg-opacity-80"
+            className="flex items-center gap-2 bg-white text-gray-900 px-5 py-2 rounded-full shadow hover:shadow-lg transition-all text-sm md:text-base backdrop-blur bg-opacity-90"
           >
             <span className="text-lg">{categoryIcons[category] || "🍽️"}</span>
             <span className="capitalize">{category}</span>

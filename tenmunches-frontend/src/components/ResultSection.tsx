@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import BusinessCard from "./BusinessCard";
 
 interface Props {
@@ -14,11 +15,17 @@ interface Props {
       photo_url?: string;
     }[];
   }[];
+  onMounted?: () => void;
 }
 
-const ResultsSection = ({ category, data }: Props) => {
+const ResultsSection = ({ category, data, onMounted }: Props) => {
   const result = data.find((c) => c.category === category);
   const businesses = result?.top_10 || [];
+
+  // Notify parent when content is in the DOM so scroll happens after full render
+  useEffect(() => {
+    onMounted?.();
+  }, [onMounted]);
 
   return (
     <section className="bg-gray-100 py-12 px-4">
@@ -30,7 +37,7 @@ const ResultsSection = ({ category, data }: Props) => {
         <div className="space-y-10">
           {businesses.map((biz, index) => (
             <BusinessCard
-              key={`${category}-${biz.name}`}
+              key={`${category}-${index}`}
               business={biz}
               rank={index + 1}
               reversed={index % 2 !== 0}

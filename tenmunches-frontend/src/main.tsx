@@ -4,9 +4,14 @@ import "./index.css";
 import App from "./App.tsx";
 import { inject } from "@vercel/analytics";
 
-inject();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
   </StrictMode>
 );
+// Defer analytics so it doesn't block first paint
+if (typeof requestIdleCallback !== "undefined") {
+  requestIdleCallback(() => inject(), { timeout: 2000 });
+} else {
+  setTimeout(() => inject(), 500);
+}
