@@ -204,6 +204,67 @@ This replaces the need for an always-on server with background scheduling — th
 
 ---
 
+## Architectural Tradeoffs
+
+Several architectures were evaluated before arriving at the current design. This section explains what was considered, what was chosen, and why.
+
+### 1. Static Pre-Rendering vs. Live API Server
+
+| Approach | Latency | Cost | Operational Burden |
+|---|---|---|---|
+| **Static JSON on CDN (chosen)** | <50ms (edge-served) | Free | None — no server to maintain |
+| FastAPI + in-memory cache | <5ms (cached), 30-50s (cold start) | Free tier sleeps | Must keep server alive |
+| Vercel Serverless Functions | 1-2s (cold start) | Free | Minimal |
+
+**Why static won:** The data only changes weekly. Querying a database on every page visit for data that updates once a week is unnecessary. Static pre-rendering delivers the data from Vercel's edge network at the same speed as HTML/CSS — with zero cold starts, zero compute cost, and nothing to keep alive.
+
+**What was tried:** A FastAPI server with APScheduler was deployed on Render's free tier. It worked well locally, but Render's free tier **sleeps after 15 minutes of inactivity**, causing 30-50 second cold starts for the first visitor. This defeated the goal of "lightning fast for every visitor." Vercel Serverless Functions were considered as a middle ground (1-2s cold starts), but even that latency was unacceptable compared to CDN-served static files.
+
+### 2. MongoDB as Source of Truth vs. Filesystem-Only
+
+| Approach | Durability | Queryability | CI Integration |
+|---|---|---|---|
+| **MongoDB Atlas (chosen)** | Managed, replicated | Full query support | GitHub Actions writes, export reads |
+| Commit JSON directly | Git history only | None | Simpler but brittle |
+
+**Why MongoDB:** The pipeline needs to upsert 20 category documents atomically, handle partial failures gracefully, and maintain a refresh log with timestamps. MongoDB provides this out of the box. The static JSON is an export — MongoDB is the canonical data store that the pipeline writes to and the export script reads from. This decouples the pipeline from the serving layer cleanly.
+
+**Alternative considered:** Generating the JSON directly in the pipeline and committing it without a database. This is simpler but loses durability (no backup if the pipeline fails mid-write), queryability (can't inspect individual categories), and auditability (no refresh logs).
+
+### 3. Cloudinary CDN vs. Self-Hosted Images
+
+| Approach | Optimization | Storage | URL Stability |
+|---|---|---|---|
+| **Cloudinary (chosen)** | Auto-format, auto-quality | Managed | Permanent CDN URLs |
+| Google Places photo URLs | None | None (hotlinked) | Requires API key, can expire |
+| Git LFS | None | Repo bloat | Coupled to repo |
+
+**Why Cloudinary:** Google Places photo URLs require an API key in the URL and can expire. Re-hosting on Cloudinary provides permanent CDN URLs with **automatic format negotiation** (WebP for Chrome, AVIF where supported, JPEG fallback) and perceptual quality optimization — all at the edge, with zero configuration. Deduplication by `place_id` ensures re-running the pipeline doesn't re-upload unchanged images.
+
+### 4. GitHub Actions Cron vs. In-Process Scheduler
+
+| Approach | Reliability | Cost | Requires Running Server? |
+|---|---|---|---|
+| **GitHub Actions cron (chosen)** | Runs on schedule regardless | Free | No |
+| APScheduler (in-process) | Only runs if server is awake | Free | Yes |
+| External cron service | Depends on provider | Varies | No |
+
+**Why GitHub Actions:** APScheduler runs inside the server process — if the server sleeps (Render free tier), restarts, or crashes, the scheduler misses its window. GitHub Actions runs on GitHub's infrastructure independently of the application. It's free for public repos, requires no additional service, and provides full logs and manual re-run capability via the GitHub UI.
+
+### 5. Eager Image Prefetch vs. Lazy Loading
+
+| Approach | First Category Click | Memory Usage | Bandwidth |
+|---|---|---|---|
+| **Eager prefetch (chosen)** | Instant | ~200 images cached | ~15-20 MB |
+| Lazy loading (on click) | 2-3s delay | Minimal | On-demand |
+| Intersection Observer | Fast for visible, slow for rest | Moderate | Progressive |
+
+**Why eager prefetch:** With only 200 images total (20 categories × 10 images) and Cloudinary's auto-optimization delivering them at ~80 KB each, the total prefetch cost is ~15-20 MB. This is acceptable for a desktop-first application. The prefetch runs during browser idle time via `requestIdleCallback`, so it doesn't block user interaction. The result is that every category click renders instantly — no loading spinners, no progressive image pop-in.
+
+**Tradeoff acknowledged:** On mobile networks, prefetching 200 images is expensive. A future optimization could detect connection speed via `navigator.connection` and fall back to lazy loading on slow networks.
+
+---
+
 ## Created By
 
 **Parth Patel**
