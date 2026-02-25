@@ -68,6 +68,7 @@ app.add_middleware(
         "http://localhost:3000",
         "https://ten-munches.vercel.app",
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",  # All Vercel preview deploys
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

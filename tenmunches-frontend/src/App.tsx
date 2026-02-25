@@ -57,8 +57,10 @@ function App() {
   const resultsRef = useRef<HTMLDivElement | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+  const apiBase = import.meta.env.VITE_API_URL || "";
+
   useEffect(() => {
-    fetch("/api/categories")
+    fetch(`${apiBase}/api/categories`)
       .then((res) => res.json())
       .then((data) => {
         setTopPlaces(data);
