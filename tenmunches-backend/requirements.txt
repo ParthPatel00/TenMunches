@@ -1,0 +1,9 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pymongo[srv]==4.8.0
+cloudinary==1.41.0
+textblob==0.18.0.post0
+APScheduler==3.10.4
+python-dotenv==1.0.1
+requests==2.32.3
+httpx==0.27.2

@@ -1,28 +1,33 @@
-from typing import List, Dict, Any
+"""
+Business ranking for TenMunches.
+
+Score = base rating + normalized sentiment + review volume bonus.
+"""
+
+from typing import Any
 
 
-def compute_business_score(biz: Dict[str, Any]) -> float:
+def compute_score(biz: dict[str, Any]) -> float:
     """
-    Compute a score for a business using:
-    - Yelp/Google rating (0–5)
-    - Number of reviews
-    - Avg sentiment from reviews (-1 to 1)
+    Compute a composite score for a business.
+
+    Components:
+      - base_rating (0–5 from Google)
+      - avg_sentiment (-1 to 1, normalized to 0–1)
+      - volume bonus (+0.25 for 100+ reviews, +0.5 for 500+)
     """
-    base_rating = biz.get("rating", 0)
-    num_reviews = biz.get("review_count", 0)
+    base_rating = biz.get("rating", 0) or 0
+    num_reviews = biz.get("review_count", 0) or 0
     reviews = biz.get("reviews", [])
 
-    if not reviews:
-        avg_sentiment = 0
-    else:
+    if reviews:
         sentiments = [r.get("sentiment", 0) for r in reviews]
         avg_sentiment = sum(sentiments) / len(sentiments)
+    else:
+        avg_sentiment = 0
 
-    # Weigh sentiment and base rating together
-    # Scale: 0–5 star rating + sentiment (normalized to 0–1)
     score = base_rating + (avg_sentiment + 1) / 2
 
-    # Slightly boost highly reviewed businesses
     if num_reviews > 500:
         score += 0.5
     elif num_reviews > 100:
@@ -31,12 +36,8 @@ def compute_business_score(biz: Dict[str, Any]) -> float:
     return round(score, 3)
 
 
-def rank_businesses(businesses: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """
-    Rank businesses by computed score.
-    """
+def rank_businesses(businesses: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Rank businesses by composite score, descending."""
     for biz in businesses:
-        biz["score"] = compute_business_score(biz)
-
-    sorted_biz = sorted(businesses, key=lambda b: b["score"], reverse=True)
-    return sorted_biz
+        biz["score"] = compute_score(biz)
+    return sorted(businesses, key=lambda b: b["score"], reverse=True)

@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 interface Props {
   data: { category: string }[];
   onSelect: (category: string) => void;
+  onHover?: (category: string) => void;
 }
 
-const Hero = ({ data, onSelect }: Props) => {
+const Hero = ({ data, onSelect, onHover }: Props) => {
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -100,6 +101,7 @@ const Hero = ({ data, onSelect }: Props) => {
           <motion.button
             key={category}
             onClick={() => onSelect(category)}
+            onPointerEnter={() => onHover?.(category)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             variants={{
