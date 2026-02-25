@@ -13,7 +13,7 @@ TenMunches surfaces the **top 10 places to eat and drink in San Francisco** acro
 3. **Read real insights** — curated testimonials extracted from reviews via NLP
 4. **Click through** — every place links directly to Google Maps
 
-All data refreshes automatically every week, so rankings and reviews stay current.
+All data refreshes automatically every week via GitHub Actions, so rankings and reviews stay current.
 
 ---
 
@@ -22,13 +22,11 @@ All data refreshes automatically every week, so rankings and reviews stay curren
 | Layer | Technology |
 |---|---|
 | **Frontend** | React 19, TypeScript, Vite, Tailwind CSS, Framer Motion |
-| **API Server** | Python, FastAPI, Uvicorn |
-| **Database** | MongoDB Atlas (document store) |
+| **Data Pipeline** | Python, TextBlob (NLP), Google Places API v1 |
+| **Database** | MongoDB Atlas (source of truth) |
 | **Image CDN** | Cloudinary (auto-format, auto-quality) |
-| **NLP Pipeline** | TextBlob (sentiment analysis + theme extraction) |
-| **Scheduler** | APScheduler (weekly background refresh) |
-| **Data Source** | Google Places API (New) v1 |
-| **Frontend Hosting** | Vercel |
+| **Hosting** | Vercel (static CDN — zero cold starts) |
+| **Automation** | GitHub Actions (weekly cron refresh) |
 
 ---
 
@@ -38,7 +36,7 @@ See **[SETUP.md](SETUP.md)** for full setup instructions including environment c
 
 ```bash
 # Quick start (after configuring .env)
-cd tenmunches-backend && source venv/bin/activate && uvicorn server:app --reload --port 8000
+cd tenmunches-backend && source venv/bin/activate && python export_data.py
 cd tenmunches-frontend && npm run dev
 ```
 
@@ -49,48 +47,65 @@ cd tenmunches-frontend && npm run dev
 ### High-Level Architecture
 
 ```
-┌─────────────────┐       ┌──────────────────────────────────────────────┐
-│                 │       │              Backend (FastAPI)               │
-│    Frontend     │       │                                              │
-│   React/Vite    │──────▶│  ┌──────────┐   ┌──────────┐   ┌─────────┐ │
-│                 │  HTTP │  │ API Layer │──▶│ Cache    │──▶│ MongoDB │ │
-│  (Vercel CDN)   │       │  │ /api/*    │   │ (in-mem) │   │ Atlas   │ │
-│                 │       │  └──────────┘   └──────────┘   └─────────┘ │
-└─────────────────┘       │                                              │
-                          │  ┌──────────────────────────────────────┐    │
-                          │  │     Background Refresh Pipeline      │    │
-                          │  │  APScheduler → Google Places API     │    │
-                          │  │  → NLP → Cloudinary → MongoDB        │    │
-                          │  └──────────────────────────────────────┘    │
-                          └──────────────────────────────────────────────┘
-                                        │               │
-                                        ▼               ▼
-                               ┌──────────────┐  ┌────────────┐
-                               │ Google Places │  │ Cloudinary │
-                               │   API (v1)    │  │    CDN     │
-                               └──────────────┘  └────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                    GitHub Actions (Weekly Cron)               │
+│                                                              │
+│  refresh.py → Google Places API → NLP → Cloudinary Upload    │
+│      ↓                                                       │
+│  export_data.py → MongoDB Query → categories.json → git push │
+└──────────────────────────────────────────────────────────────┘
+                              │
+                    (auto-deploy on push)
+                              ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     Vercel CDN (Edge Network)                │
+│                                                              │
+│  React App (HTML/JS/CSS)  +  /data/categories.json (446 KB) │
+│                                                              │
+│  Served from 70+ global edge nodes — <50ms worldwide        │
+└──────────────────────────────────────────────────────────────┘
+         │                                    │
+         ▼                                    ▼
+┌──────────────┐                    ┌────────────────┐
+│  Browser     │─── img src ───────▶│  Cloudinary    │
+│  (User)      │                    │  CDN (images)  │
+└──────────────┘                    └────────────────┘
 ```
+
+### Why Static Pre-Rendering?
+
+The data only changes weekly. There's no reason to query a database on every page visit. By pre-rendering the data to a static JSON file:
+
+- **Zero cold starts** — data is served from Vercel's CDN edge, same as HTML/CSS
+- **No server to maintain** — no backend process, no sleep/wake cycles, no scaling concerns
+- **Global edge delivery** — <50ms response times worldwide via Vercel's 70+ edge nodes
+- **Free** — no compute costs; Vercel serves static files for free
+
+This is the same architecture pattern used by companies like Netflix and Airbnb for content that doesn't change per-request — **static site generation (SSG)** with automated rebuilds.
 
 ### Data Flow
 
-The system operates in two distinct data paths:
+The system operates in two completely decoupled paths:
 
-**Write Path (Refresh Pipeline)** — runs every 7 days via APScheduler, or manually via `POST /api/refresh`:
+**Write Path (Weekly Refresh via GitHub Actions):**
 
-1. **Ingestion:** For each of the 20 food categories, the pipeline queries the Google Places API text search endpoint for businesses in San Francisco (up to 20 results per category).
-2. **Enrichment:** For each business, it fetches full details (reviews, photos, metadata) from the Places details endpoint.
-3. **NLP Processing:** Every review is processed through TextBlob for polarity-based sentiment scoring (-1 to +1) and keyword-based theme extraction (taste, price, ambiance, service).
-4. **Ranking:** Businesses are scored using a composite function: `score = base_rating + (normalized_sentiment) + review_volume_bonus`. The top 10 per category are retained.
-5. **Image Upload:** Each business's Google-hosted photo is uploaded to Cloudinary, which returns a permanent CDN URL with `f_auto,q_auto` transformations. Cloudinary deduplicates by `public_id` so re-uploads are skipped.
-6. **Testimonial Extraction:** Up to 3 testimonials are selected per business using a tiered priority: high-sentiment reviews with themes → medium-sentiment → any non-empty review.
-7. **Persistence:** Each category (with its top 10 businesses) is upserted as a single document in MongoDB. A refresh log entry is written with timestamp and status.
+1. **Trigger:** GitHub Actions cron fires every Monday at 6:00 AM UTC, or manually via the GitHub UI.
+2. **Ingestion:** For each of the 20 food categories, `refresh.py` queries Google Places API text search for businesses in San Francisco (up to 20 results per category).
+3. **Enrichment:** For each business, it fetches full details (reviews, photos, metadata) from the Places details endpoint.
+4. **NLP Processing:** Every review is processed through TextBlob for polarity-based sentiment scoring (-1 to +1) and keyword-based theme extraction (taste, price, ambiance, service).
+5. **Ranking:** Businesses are scored using a composite function: `score = base_rating + (normalized_sentiment) + review_volume_bonus`. The top 10 per category are retained.
+6. **Image Upload:** Each business's Google-hosted photo is uploaded to Cloudinary, which returns a permanent CDN URL with `f_auto,q_auto` transformations. Cloudinary deduplicates by `public_id` so re-uploads are skipped.
+7. **Testimonial Extraction:** Up to 3 testimonials are selected per business using a tiered priority: high-sentiment reviews with themes → medium-sentiment → any non-empty review.
+8. **Persistence:** Each category (with its top 10 businesses) is upserted into MongoDB Atlas.
+9. **Static Export:** `export_data.py` queries MongoDB and writes a compact JSON file (~446 KB) to `tenmunches-frontend/public/data/categories.json`.
+10. **Deploy:** The workflow commits and pushes the updated JSON file, triggering a Vercel rebuild automatically.
 
-**Read Path (API Serving)** — handles all frontend requests:
+**Read Path (User Request):**
 
-1. Frontend makes a single `GET /api/categories` request on page load.
-2. The FastAPI server checks an **in-memory TTL cache** (5-minute expiry). On cache hit, the response is returned immediately without touching the database.
-3. On cache miss, the server queries MongoDB for all 20 category documents and populates the cache.
-4. The response is a JSON array of `{ category, top_10: [...] }` objects — the same shape the frontend expects.
+1. User visits `ten-munches.vercel.app`
+2. Vercel CDN serves the React app and `categories.json` from the nearest edge node
+3. React renders category buttons; all images are prefetched via `requestIdleCallback`
+4. User clicks a category → data is already in memory, images already cached → **instant render**
 
 ### Database Schema (MongoDB)
 
@@ -132,20 +147,9 @@ Collection: refresh_log
 Sorted by timestamp descending for latest-refresh queries.
 ```
 
-MongoDB was chosen over a relational database for several reasons:
-- The data is **document-oriented** — each category is a self-contained unit with a nested array of businesses. This maps perfectly to MongoDB's document model without requiring joins.
-- The dataset is **small and read-heavy** (20 documents, queried frequently, written weekly). MongoDB's flexible schema makes upserts trivial.
-- **MongoDB Atlas free tier** provides 512 MB storage, which is more than sufficient for this use case.
-
-### Caching Strategy
-
-The API uses a **two-layer caching** approach:
-
-1. **Application-level cache (in-memory, TTL = 5 min):** A Python dictionary keyed by endpoint path. On every `GET /api/categories` request, the cache is checked first. This eliminates database round-trips for the vast majority of requests and brings response times to sub-millisecond.
-
-2. **Cloudinary CDN cache:** All images are served through Cloudinary's global CDN with `f_auto` (automatic format negotiation — WebP for Chrome, AVIF where supported, JPEG fallback) and `q_auto` (perceptual quality optimization). This offloads image bandwidth entirely from the backend.
-
-Cache invalidation is explicit: the cache is cleared when `POST /api/refresh` is called, ensuring fresh data is served immediately after a refresh.
+MongoDB serves as the **source of truth** for the data pipeline. It is not queried at runtime by end users — the static JSON export decouples the pipeline from serving. MongoDB was chosen over a relational database because:
+- The data is **document-oriented** — each category is a self-contained unit with a nested array of businesses, mapping perfectly to MongoDB's document model without joins.
+- The dataset is **small** (20 documents) and **write-infrequent** (weekly upserts).
 
 ### Image Pipeline
 
@@ -159,7 +163,16 @@ Google Places API  →  Cloudinary Upload API  →  Cloudinary CDN  →  Browser
 Key design decisions:
 - **Permanent URLs:** Google Places photo URLs require an API key and can expire. By re-hosting on Cloudinary, images persist indefinitely on permanent CDN URLs.
 - **Deduplication:** Each image uses the Google `place_id` as its Cloudinary `public_id`. Re-running the refresh pipeline skips already-uploaded images, reducing both API calls and upload time.
-- **Automatic optimization:** Cloudinary handles format negotiation and quality compression at the edge, delivering the smallest possible payload per browser.
+- **Automatic optimization:** Cloudinary handles format negotiation (WebP, AVIF, JPEG) and quality compression at the edge, delivering the smallest possible payload per browser.
+
+### Frontend Performance Optimizations
+
+Two-layer image prefetch ensures zero-delay category switching:
+
+1. **Background prefetch:** After the static JSON loads, `requestIdleCallback` silently preloads all 200 business images across all categories during browser idle time.
+2. **Hover prefetch:** When a user hovers over a category button, that category's 10 images are immediately queued (in case background hasn't reached them yet).
+
+By the time the user clicks, both the data and images are already in the browser cache.
 
 ### Ranking Algorithm
 
@@ -177,26 +190,17 @@ score = base_rating + (avg_sentiment + 1) / 2 + volume_bonus
 
 This produces a final score in the range **0.0–6.5**, where higher is better. The top 10 per category are retained after sorting.
 
-### Scheduling & Data Freshness
+### Data Freshness & Automation
 
-The refresh pipeline runs on a **7-day interval** using APScheduler's `BackgroundScheduler`:
+Data freshness is managed through **GitHub Actions scheduled workflows**:
 
-- The scheduler starts automatically when the FastAPI server boots (via the `lifespan` hook).
-- On first boot, if the database is empty, an initial refresh is triggered on a background thread so the server remains responsive.
-- Each refresh processes all 20 categories sequentially (~10–15 min total) and logs the result with timestamp and error count.
+- A cron job runs every Monday at 6:00 AM UTC
+- It executes the full pipeline (`refresh.py` → `export_data.py`)
+- The updated `categories.json` is committed and pushed
+- Vercel auto-deploys on push, making fresh data live within minutes
+- Manual refreshes can be triggered anytime from the GitHub Actions UI
 
-### API Design
-
-The API follows REST conventions with three read endpoints and one write endpoint:
-
-| Endpoint | Method | Latency | Description |
-|---|---|---|---|
-| `/api/health` | GET | <10ms | Health check, DB status, last refresh timestamp |
-| `/api/categories` | GET | <5ms (cached) | All 20 categories with top 10 businesses |
-| `/api/categories/{name}` | GET | <5ms (cached) | Single category by name |
-| `/api/refresh` | POST | ~10 min | Trigger full pipeline synchronously |
-
-CORS is configured to allow requests from the Vercel production domain and local development origins. The Vite dev server proxies `/api` to `localhost:8000` to avoid CORS issues during development.
+This replaces the need for an always-on server with background scheduling — the pipeline runs on GitHub's ephemeral runners (free for public repos) and only needs the ~15 minutes it takes to process all 20 categories.
 
 ---
 

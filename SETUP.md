@@ -10,7 +10,7 @@
 
 ---
 
-## 1. Clone & Configure Environment
+## 1. Configure Environment
 
 ```bash
 cp tenmunches-backend/.env.sample tenmunches-backend/.env
@@ -30,7 +30,7 @@ Edit `tenmunches-backend/.env` and fill in all values:
 
 ---
 
-## 2. Backend Setup
+## 2. Backend Setup (Data Pipeline)
 
 ```bash
 cd tenmunches-backend
@@ -39,32 +39,21 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Run tests (optional but recommended)
+### Run the data refresh (populates MongoDB + Cloudinary)
 
-```bash
-python -m pytest tests/test_pipeline.py -v
-```
-
-### Initial data refresh
-
-Populates MongoDB with all 20 categories (takes ~10–15 minutes):
+Takes ~10–15 minutes to process all 20 categories:
 
 ```bash
 python refresh.py
 ```
 
-### Start the API server
+### Export to static JSON (for frontend)
 
 ```bash
-uvicorn server:app --reload --port 8000
+python export_data.py
 ```
 
-The server will:
-- Serve data from MongoDB at `http://localhost:8000/api/categories`
-- Auto-refresh data every 7 days via background scheduler
-- Auto-populate the DB on first launch if it's empty
-
-**API Docs:** Visit `http://localhost:8000/docs` for interactive Swagger UI.
+This writes `tenmunches-frontend/public/data/categories.json` (~446 KB) from MongoDB.
 
 ---
 
@@ -76,40 +65,44 @@ npm install
 npm run dev
 ```
 
-Opens at `http://localhost:5173/`. The Vite dev server proxies `/api` requests to the backend at `localhost:8000`.
+Opens at `http://localhost:5173/`. The frontend loads data from the static JSON file — no backend server needed.
 
 ---
 
-## 4. API Endpoints
+## 4. GitHub Actions (Automated Weekly Refresh)
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/health` | Health check + last refresh timestamp |
-| `GET` | `/api/categories` | All 20 categories with top 10 places each |
-| `GET` | `/api/categories/{name}` | Single category (e.g. `/api/categories/coffee`) |
-| `POST` | `/api/refresh` | Manually trigger a full data refresh |
+The `.github/workflows/weekly-refresh.yml` runs every Monday at 6 AM UTC. To enable it:
+
+1. Go to your GitHub repo → **Settings** → **Secrets and variables** → **Actions**
+2. Add these **Repository Secrets**:
+
+| Secret | Value |
+|---|---|
+| `GOOGLE_API_KEY` | Your Google API key |
+| `MONGODB_URI` | Your MongoDB connection string |
+| `CLOUDINARY_CLOUD_NAME` | Your Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Your Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Your Cloudinary API secret |
+
+3. The workflow will auto-commit updated `categories.json`, which triggers a Vercel redeploy.
+
+You can also trigger it manually: **Actions** → **Weekly Data Refresh** → **Run workflow**.
 
 ---
 
 ## 5. Production Deployment
 
-1. Deploy the backend to **Render**, **Railway**, or **Fly.io** — set all env vars there
-2. Update the frontend to point to the deployed backend URL
-3. Deploy the frontend to **Vercel** (already configured)
+The frontend is deployed on **Vercel** — it auto-deploys on every push to `main`. No backend server is needed in production; the static JSON file is served from Vercel's global CDN.
 
 ---
 
 ## Architecture
 
 ```
-Frontend (React/Vite)  →  FastAPI Server  →  MongoDB Atlas
-                              ↕
-                         Cloudinary CDN
-                              ↕
-                       Google Places API
+GitHub Actions (weekly)  →  refresh.py  →  MongoDB Atlas
+                         →  export_data.py  →  categories.json  →  git push
+                                                                      ↓
+                                                              Vercel CDN (frontend)
+                                                                      ↓
+                                                              Browser ← Cloudinary CDN (images)
 ```
-
-- **MongoDB** stores category data (20 docs, one per category)
-- **Cloudinary** hosts all place photos with auto-format/quality CDN
-- **APScheduler** refreshes data every 7 days in the background
-- **In-memory cache** (5-min TTL) keeps API responses fast
