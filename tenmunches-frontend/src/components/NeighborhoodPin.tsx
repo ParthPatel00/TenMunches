@@ -5,6 +5,7 @@ interface PinProps {
     category: string;
     businessName: string;
     neighborhood: string;
+    rank: number;
     delay?: number;
     isActive?: boolean;
     onClick: (category: string, businessName: string) => void;
@@ -15,8 +16,7 @@ const NeighborhoodPin = ({
     icon,
     category,
     businessName,
-    neighborhood,
-    delay = 0,
+    rank,
     isActive = false,
     onClick,
     onHover,
@@ -32,124 +32,58 @@ const NeighborhoodPin = ({
         setIsHovered(false);
     }, []);
 
-    const pinScale = isHovered ? 1.2 : 1;
-
-    // The actual anchor point is at the bottom center of this component container.
+    // The entire pin container. We use absolute bottom-0 so MapLibre's `anchor="bottom"` works perfectly.
     return (
         <div
-            className="relative flex items-center justify-center cursor-pointer pointer-events-auto group"
+            className={`relative flex flex-col items-center justify-end cursor-pointer pointer-events-auto transition-all duration-300 ${isHovered || isActive ? "z-50" : "z-10"
+                }`}
             onClick={() => onClick(category, businessName)}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             style={{
-                zIndex: isActive || isHovered ? 50 : 10,
-                // Enlarge hit area slightly
-                width: "60px",
-                height: "60px",
+                // Increase hit area slightly
+                paddingBottom: "10px",
+                transform: `translateY(${isHovered ? "-8px" : "0px"}) scale(${isHovered ? 1.1 : 1})`,
             }}
         >
-            {/* Tooltip rendered as normal HTML (fixes clipping issues) */}
+            {/* Radar pulse rings under the active/hovered pin */}
             {(isHovered || isActive) && (
-                <div
-                    className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-[1px] pointer-events-none"
-                    style={{ zIndex: 100 }}
-                >
-                    <span className="bg-slate-900/95 backdrop-blur-md border border-sf-golden/40 rounded-lg px-3 py-1 text-sf-golden-light text-xs font-semibold font-sans whitespace-nowrap shadow-xl">
-                        {icon} {category}
-                    </span>
-                    <span className="text-[10px] text-white/50 font-sans tracking-widest uppercase">
-                        {neighborhood}
-                    </span>
+                <div className="absolute bottom-[2px] left-1/2 -translate-x-1/2 pointer-events-none">
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-sf-golden animate-ping opacity-50" />
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-sf-golden animate-ping opacity-30" style={{ animationDelay: '0.5s' }} />
                 </div>
             )}
 
-            {/* Pin SVG Graphics */}
-            <svg
-                width="80"
-                height="80"
-                viewBox="-40 -60 80 80"
-                style={{ overflow: "visible", position: "absolute", bottom: -10 }}
+            {/* The Pill / Pin Body */}
+            <div
+                className={`relative flex items-center justify-center rounded-full shadow-2xl shadow-black/50 transition-all duration-300 overflow-hidden border ${isHovered
+                    ? "bg-slate-900 border-sf-golden px-4 py-2 min-w-[max-content]"
+                    : isActive
+                        ? "bg-sf-golden bg-gradient-to-br from-sf-golden to-sf-golden-light border-white/40 w-9 h-9"
+                        : "bg-sf-golden/95 bg-gradient-to-br from-sf-golden/90 to-sf-golden-light/90 border-white/20 w-8 h-8"
+                    }`}
             >
-                <g>
-                    {/* Radar pulse rings */}
-                    {(isHovered || isActive) && (
-                        <>
-                            <circle cx="0" cy="0" r="8" fill="none" stroke="var(--sf-golden)" strokeWidth="1">
-                                <animate attributeName="r" from="6" to="30" dur="1.5s" repeatCount="indefinite" />
-                                <animate attributeName="opacity" from="0.7" to="0" dur="1.5s" repeatCount="indefinite" />
-                            </circle>
-                            <circle cx="0" cy="0" r="8" fill="none" stroke="var(--sf-golden)" strokeWidth="0.7">
-                                <animate attributeName="r" from="6" to="30" dur="1.5s" begin="0.5s" repeatCount="indefinite" />
-                                <animate attributeName="opacity" from="0.4" to="0" dur="1.5s" begin="0.5s" repeatCount="indefinite" />
-                            </circle>
-                        </>
-                    )}
+                {isHovered ? (
+                    <span className="text-white text-sm font-bold whitespace-nowrap flex items-center gap-2 drop-shadow-md">
+                        <span className="text-sf-golden-light">#{rank}</span>
+                        <span className="text-base shadow-sm">{icon}</span>
+                        <span>{businessName}</span>
+                    </span>
+                ) : (
+                    <span className={`drop-shadow-md ${isActive ? "text-base" : "text-sm"}`}>{icon}</span>
+                )}
+            </div>
 
-                    {/* Glow circle behind pin */}
-                    {(isHovered || isActive) && (
-                        <circle cx="0" cy="-10" r="18" fill="var(--sf-golden)" opacity="0.2">
-                            <animate attributeName="opacity" values="0.15;0.3;0.15" dur="2s" repeatCount="indefinite" />
-                        </circle>
-                    )}
+            {/* Triangle pointing down */}
+            <div
+                className={`absolute bottom-[6px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 rotate-45 transition-colors duration-300 border-r border-b z-[-1] ${isHovered || isActive
+                    ? "bg-slate-900 border-sf-golden"
+                    : "bg-sf-golden-light border-white/20"
+                    }`}
+            />
 
-                    {/* Pin shadow on ground */}
-                    <ellipse
-                        cx="0"
-                        cy="2"
-                        rx={isHovered ? 9 : 6}
-                        ry={isHovered ? 3 : 2}
-                        fill="rgba(0,0,0,0.5)"
-                    >
-                        <animate
-                            attributeName="rx"
-                            values={isHovered ? "9;10;9" : "6;7;6"}
-                            dur={`${3 + delay * 0.3}s`}
-                            repeatCount="indefinite"
-                        />
-                    </ellipse>
-
-                    {/* Pin body group with float animation */}
-                    <g>
-                        <animateTransform
-                            attributeName="transform"
-                            type="translate"
-                            values={`0,0; 0,-8; 0,0`}
-                            dur={`${2.5 + delay * 0.2}s`}
-                            repeatCount="indefinite"
-                        />
-
-                        {/* Teardrop pin marker. Scaled up by 1.5 compared to previous SVG map */}
-                        <g transform={`scale(${1.5 * pinScale})`} style={{ transformOrigin: "0px 0px", transition: "transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)" }}>
-                            <path
-                                d="M0 0 C-3 -3, -8 -8, -8 -13 C-8 -20, -3 -23, 0 -23 C3 -23, 8 -20, 8 -13 C8 -8, 3 -3, 0 0 Z"
-                                fill={isActive || isHovered ? "var(--sf-golden)" : "rgba(197, 148, 74, 0.95)"}
-                                stroke={isActive ? "var(--sf-golden-light)" : "rgba(255, 255, 255, 0.2)"}
-                                strokeWidth="0.8"
-                                style={{ transition: "fill 0.3s ease" }}
-                            />
-
-                            {/* White inner circle for icon background */}
-                            <circle
-                                cx="0"
-                                cy="-13"
-                                r="5.5"
-                                fill="rgba(15, 23, 42, 0.8)"
-                            />
-
-                            {/* Emoji icon */}
-                            <text
-                                x="0"
-                                y="-11.5"
-                                textAnchor="middle"
-                                dominantBaseline="central"
-                                fontSize="7.5"
-                            >
-                                {icon}
-                            </text>
-                        </g>
-                    </g>
-                </g>
-            </svg>
+            {/* Shadow on the ground */}
+            <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-1.5 bg-black/60 rounded-[100%] blur-[2px] transition-all duration-300 ${isHovered ? "scale-125 opacity-40" : "scale-100 opacity-60"}`} />
         </div>
     );
 };

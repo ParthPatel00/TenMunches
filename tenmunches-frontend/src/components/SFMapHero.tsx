@@ -1,21 +1,13 @@
 import { useEffect, useRef, useMemo } from "react";
 import gsap from "gsap";
-import Map, { Marker, NavigationControl } from "react-map-gl/maplibre";
+import Map, { Marker } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import NeighborhoodPin from "./NeighborhoodPin";
 
 // ---------------------------------------------------------------------------
-// Data: SF Neighborhood real GPS coordinates & category mappings
+// Data: Category mappings
 // ---------------------------------------------------------------------------
-
-interface NeighborhoodData {
-    id: string;
-    name: string;
-    longitude: number;
-    latitude: number;
-    categories: string[];
-}
 
 const categoryIcons: Record<string, string> = {
     coffee: "☕", pizza: "🍕", burger: "🍔", vegan: "🥗", bakery: "🥐",
@@ -25,56 +17,7 @@ const categoryIcons: Record<string, string> = {
     bars: "🍻", bbq: "🍖", ramen: "🍥",
 };
 
-// Real GPS coordinates for SF neighborhoods
-const neighborhoods: NeighborhoodData[] = [
-    { id: "north-beach", name: "North Beach", longitude: -122.4086, latitude: 37.8011, categories: ["pizza", "italian"] },
-    { id: "chinatown", name: "Chinatown", longitude: -122.4072, latitude: 37.7941, categories: ["chinese"] },
-    { id: "fidi", name: "FiDi", longitude: -122.4000, latitude: 37.7936, categories: ["sandwiches", "sushi"] },
-    { id: "soma", name: "SoMa", longitude: -122.4004, latitude: 37.7808, categories: ["coffee", "bbq", "thai", "ramen"] },
-    { id: "marina", name: "Marina", longitude: -122.4356, latitude: 37.8037, categories: ["brunch", "mediterranean", "juice"] },
-    { id: "japantown", name: "Japantown", longitude: -122.4332, latitude: 37.7853, categories: ["sushi", "ramen"] },
-    { id: "hayes-valley", name: "Hayes Valley", longitude: -122.4245, latitude: 37.7758, categories: ["coffee", "icecream", "mediterranean"] },
-    { id: "mission", name: "Mission", longitude: -122.4170, latitude: 37.7599, categories: ["mexican", "burger", "bars", "icecream", "coffee"] },
-    { id: "castro", name: "Castro", longitude: -122.4347, latitude: 37.7609, categories: ["vegan", "juice", "pizza"] },
-    { id: "haight", name: "Haight", longitude: -122.4485, latitude: 37.7700, categories: ["burger", "icecream"] },
-    { id: "richmond", name: "Richmond", longitude: -122.4789, latitude: 37.7791, categories: ["chinese", "korean", "sushi"] },
-    { id: "sunset", name: "Sunset", longitude: -122.4862, latitude: 37.7525, categories: ["bakery", "thai", "korean", "seafood"] },
-    { id: "fishermans-wharf", name: "Wharf", longitude: -122.4177, latitude: 37.8080, categories: ["seafood"] },
-    { id: "tenderloin", name: "Tenderloin", longitude: -122.4137, latitude: 37.7833, categories: ["thai", "indian", "ramen"] },
-];
-
-// Map each category to its primary neighborhood pin location
-interface PinData {
-    category: string;
-    icon: string;
-    longitude: number;
-    latitude: number;
-    neighborhood: string;
-}
-
-function buildPinData(): PinData[] {
-    const placed = new Set<string>();
-    const pins: PinData[] = [];
-
-    for (const hood of neighborhoods) {
-        for (const cat of hood.categories) {
-            if (!placed.has(cat)) {
-                placed.add(cat);
-                // Slightly jitter the pins so they don't perfectly overlap in the same neighborhood
-                const jitterLng = (Math.random() - 0.5) * 0.006;
-                const jitterLat = (Math.random() - 0.5) * 0.005;
-                pins.push({
-                    category: cat,
-                    icon: categoryIcons[cat] || "🍽️",
-                    longitude: hood.longitude + jitterLng,
-                    latitude: hood.latitude + jitterLat,
-                    neighborhood: hood.name,
-                });
-            }
-        }
-    }
-    return pins;
-}
+// ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
 // Props
@@ -112,7 +55,7 @@ const SFMapHero = ({
         data.forEach((categoryBlock) => {
             const cat = categoryBlock.category;
             const icon = categoryIcons[cat] || "🍽️";
-            categoryBlock.top_10?.forEach((biz: any) => {
+            categoryBlock.top_10?.forEach((biz: any, index: number) => {
                 if (biz.latitude && biz.longitude) {
                     // Jitter coords slightly for clustered businesses
                     const jitterLng = (Math.random() - 0.5) * 0.001;
@@ -121,6 +64,7 @@ const SFMapHero = ({
                         ...biz,
                         category: cat,
                         icon,
+                        rank: index + 1,
                         longitude: biz.longitude + jitterLng,
                         latitude: biz.latitude + jitterLat,
                         // Provide a fallback neighborhood text since we don't have strictly mapped neighborhoods for each
@@ -275,21 +219,18 @@ const SFMapHero = ({
                         }}
                         mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
                         interactive={true}
-                        scrollZoom={false} // Disable scroll zoom so user doesn't get stuck while scrolling page
+                        scrollZoom={true} // Enabled scroll zoom based on feedback
                         dragPan={true}
                         dragRotate={true}
                         style={{ width: "100%", height: "100%", borderRadius: "1.5rem" }}
                     >
-                        <NavigationControl position="bottom-right" showCompass={false} />
 
                         {/* Render our custom NeighborhoodPins purely using Map Markers */}
                         {pins.map((pin, i) => {
                             const isBusinessSelected = selectedBusinessName === pin.name;
                             const isCategorySelected = selectedCategory === pin.category;
                             const isActive = isBusinessSelected || (isCategorySelected && !selectedBusinessName);
-                            // Only show pins that match the selected category if one is active, to reduce clutter.
-                            // If no category is selected, show all 200.
-                            if (selectedCategory && selectedCategory !== pin.category) return null;
+                            // Removed pin decluttering - always show all 200 pins!
 
                             return (
                                 <Marker
@@ -304,7 +245,7 @@ const SFMapHero = ({
                                         category={pin.category}
                                         businessName={pin.name}
                                         neighborhood={pin.neighborhood}
-                                        delay={(i % 10) * 0.1}
+                                        rank={pin.rank}
                                         isActive={isActive}
                                         onClick={onBusinessSelect}
                                         onHover={onBusinessHover}

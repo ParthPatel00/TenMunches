@@ -36,14 +36,19 @@ const ResultsSection = ({ category, data, selectedBusinessName, onMounted }: Pro
       setTimeout(() => {
         const cardElement = document.getElementById(`biz-${selectedBusinessName.replace(/\\s+/g, '-')}`);
         if (cardElement) {
-          cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Calculate absolute geometric position to avoid ScrollTrigger/Lenis pin issues
+          const rect = cardElement.getBoundingClientRect();
+          const absoluteTop = window.scrollY + rect.top - 100; // 100px offset for navbar
+
+          window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
+
           // Highlight effect
           cardElement.classList.add('ring-4', 'ring-sf-golden', 'scale-[1.02]', 'z-50', 'transition-all', 'duration-500');
           setTimeout(() => {
             cardElement.classList.remove('ring-4', 'ring-sf-golden', 'scale-[1.02]', 'z-50');
           }, 2000);
         }
-      }, 100);
+      }, 800);
     }
   }, [onMounted, selectedBusinessName, category]);
 
