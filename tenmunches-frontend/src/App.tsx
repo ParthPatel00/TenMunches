@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
-import Hero from "./components/Hero.tsx";
-import ResultsSection from "./components/ResultSection.tsx";
+import Hero from "./components/Hero";
+import CategoryShowcase from "./components/CategoryShowcase";
+import ResultsSection from "./components/ResultSection";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import CustomCursor from "./components/CustomCursor";
 
 // ---------------------------------------------------------------------------
 // Image prefetch helpers
 // ---------------------------------------------------------------------------
 
-/** Set of category names whose images we've already prefetched. */
 const _prefetched = new Set<string>();
 
-/** Prefetch all images for a given category by creating hidden Image objects. */
-function prefetchCategoryImages(
-  category: string,
-  data: any[]
-): void {
+function prefetchCategoryImages(category: string, data: any[]): void {
   if (_prefetched.has(category)) return;
   _prefetched.add(category);
 
@@ -30,14 +29,12 @@ function prefetchCategoryImages(
   }
 }
 
-/** Prefetch images for ALL categories during idle time. */
 function prefetchAllImages(data: any[]): void {
   let idx = 0;
   const step = () => {
     if (idx >= data.length) return;
     prefetchCategoryImages(data[idx].category, data);
     idx++;
-    // Spread prefetch across idle frames so it doesn't block interaction
     if (typeof requestIdleCallback !== "undefined") {
       requestIdleCallback(step, { timeout: 3000 });
     } else {
@@ -55,6 +52,7 @@ function App() {
   const [topPlaces, setTopPlaces] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
+  const categoriesRef = useRef<HTMLDivElement | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -62,23 +60,27 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setTopPlaces(data);
-        // Start background prefetch of all images once data is loaded
         prefetchAllImages(data);
       })
       .catch((err) => console.error("Failed to load data", err));
   }, []);
 
+  const categories = topPlaces.map((d) => d.category);
+
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
   };
 
-  /** On hover: immediately prefetch that category's images (instant on click). */
   const handleCategoryHover = useCallback(
     (category: string) => {
       prefetchCategoryImages(category, topPlaces);
     },
     [topPlaces]
   );
+
+  const scrollToCategories = useCallback(() => {
+    categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const scrollToResults = useCallback(() => {
     requestAnimationFrame(() => {
@@ -92,7 +94,7 @@ function App() {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        setShowScrollTop(window.scrollY > 300);
+        setShowScrollTop(window.scrollY > 600);
         ticking = false;
       });
     };
@@ -105,13 +107,30 @@ function App() {
   };
 
   return (
-    <div className="font-sans bg-gray-50 text-gray-900 transition-colors">
-      <Hero
-        data={topPlaces}
-        onSelect={handleCategorySelect}
-        onHover={handleCategoryHover}
-      />
+    <div className="relative min-h-screen bg-sf-bay-deep text-sf-cream overflow-hidden">
+      {/* Grain texture overlay */}
+      <div className="grain-overlay" />
 
+      {/* Custom cursor (desktop only) */}
+      <CustomCursor />
+
+      {/* Navigation */}
+      <Navbar />
+
+      {/* Hero Section */}
+      <Hero onScrollToCategories={scrollToCategories} />
+
+      {/* Category Showcase */}
+      <div ref={categoriesRef}>
+        <CategoryShowcase
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelect={handleCategorySelect}
+          onHover={handleCategoryHover}
+        />
+      </div>
+
+      {/* Results Section */}
       <div ref={resultsRef}>
         {selectedCategory && (
           <ResultsSection
@@ -123,14 +142,19 @@ function App() {
         )}
       </div>
 
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-5 right-5 z-50 bg-black text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition"
-        >
-          <ArrowUp />
-        </button>
-      )}
+      {/* Footer */}
+      <Footer />
+
+      {/* Scroll to top button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full glass-light flex items-center justify-center text-sf-golden-light hover:text-sf-cream hover:bg-sf-golden/30 transition-all duration-500 interactive shadow-lg shadow-black/30 ${showScrollTop
+            ? "translate-y-0 opacity-100"
+            : "translate-y-16 opacity-0 pointer-events-none"
+          }`}
+      >
+        <ArrowUp size={20} />
+      </button>
     </div>
   );
 }

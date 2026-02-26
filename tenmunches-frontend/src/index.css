@@ -2,18 +2,393 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .animate-in-fade-up {
-    animation: fadeUp 0.3s ease-out forwards;
+/* ============================================================
+   TenMunches — San Francisco Design System
+   ============================================================ */
+
+/* ---- CSS Custom Properties ---- */
+:root {
+  /* SF Color Palette */
+  --sf-fog: rgba(220, 225, 230, 0.15);
+  --sf-golden: #C5944A;
+  --sf-golden-light: #E8B04B;
+  --sf-sunset-orange: #F97316;
+  --sf-sunset-pink: #EC4899;
+  --sf-bay: #1E3A5F;
+  --sf-bay-deep: #0F172A;
+  --sf-cream: #FFF8F0;
+  --sf-terracotta: #C75B39;
+
+  /* Gradients */
+  --gradient-golden: linear-gradient(135deg, var(--sf-golden), var(--sf-golden-light));
+  --gradient-sunset: linear-gradient(135deg, var(--sf-sunset-orange), var(--sf-sunset-pink));
+  --gradient-bay: linear-gradient(180deg, var(--sf-bay), var(--sf-bay-deep));
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+
+  /* Spacing */
+  --section-padding: clamp(4rem, 8vw, 8rem);
+
+  /* Transitions */
+  --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ---- Base Reset & Defaults ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  /* Lenis handles smooth scrolling */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--sf-cream);
+  background: var(--sf-bay-deep);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: rgba(197, 148, 74, 0.3);
+  color: var(--sf-cream);
+}
+
+/* ---- Custom Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sf-bay-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--sf-golden), var(--sf-terracotta));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sf-golden-light);
+}
+
+/* ---- Typography ---- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ---- Utility: Glassmorphism ---- */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ---- Utility: Text Gradient ---- */
+.text-gradient-golden {
+  background: var(--gradient-golden);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-sunset {
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Utility: Gradient Border ---- */
+.gradient-border {
+  position: relative;
+  border: none;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--sf-golden), transparent 40%, var(--sf-golden-light));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* ---- Grain Texture Overlay ---- */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* ---- Fog Drift Animation ---- */
+.fog-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.fog-layer::before,
+.fog-layer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(220, 225, 230, 0.06) 20%,
+      rgba(220, 225, 230, 0.12) 40%,
+      rgba(220, 225, 230, 0.06) 60%,
+      transparent 80%);
+  animation: fogDrift 30s linear infinite;
+}
+
+.fog-layer::after {
+  animation-delay: -15s;
+  opacity: 0.5;
+}
+
+@keyframes fogDrift {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0%);
   }
 }
-@keyframes fadeUp {
-  from {
+
+/* ---- Golden Particles ---- */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, var(--sf-golden-light), transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleRise 8s ease-out infinite;
+}
+
+@keyframes particleRise {
+  0% {
+    transform: translateY(0) scale(0);
     opacity: 0;
-    transform: translateY(16px);
   }
-  to {
-    opacity: 1;
+
+  10% {
+    opacity: 0.8;
+  }
+
+  90% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateY(-100vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ---- Custom Cursor ---- */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--sf-golden-light);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10001;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--transition-smooth),
+    height 0.3s var(--transition-smooth),
+    background 0.3s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(197, 148, 74, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s var(--transition-smooth),
+    height 0.4s var(--transition-smooth),
+    border-color 0.3s ease;
+}
+
+.cursor-hover .cursor-dot {
+  width: 16px;
+  height: 16px;
+  background: var(--sf-golden);
+}
+
+.cursor-hover .cursor-ring {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(197, 148, 74, 0.6);
+}
+
+/* ---- Section Divider: Golden Gate Bridge SVG ---- */
+.bridge-divider {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bridge-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--sf-golden), transparent);
+}
+
+/* ---- Scroll Cue ---- */
+.scroll-cue {
+  animation: scrollCueFloat 2s ease-in-out infinite;
+}
+
+@keyframes scrollCueFloat {
+
+  0%,
+  100% {
     transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(12px);
+    opacity: 0.4;
+  }
+}
+
+/* ---- Glow Effect ---- */
+.glow-golden {
+  box-shadow: 0 0 20px rgba(197, 148, 74, 0.3),
+    0 0 60px rgba(197, 148, 74, 0.1);
+}
+
+.glow-golden-strong {
+  box-shadow: 0 0 30px rgba(197, 148, 74, 0.5),
+    0 0 80px rgba(197, 148, 74, 0.2);
+}
+
+/* ---- Card Hover Lift ---- */
+.card-lift {
+  transition: transform 0.6s var(--transition-smooth),
+    box-shadow 0.6s var(--transition-smooth);
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(197, 148, 74, 0.15);
+}
+
+/* ---- Image Reveal ---- */
+.img-zoom-container {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.img-zoom-container img {
+  transition: transform 0.8s var(--transition-smooth);
+}
+
+.img-zoom-container:hover img {
+  transform: scale(1.08);
+}
+
+/* ---- Reduce Motion ---- */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fog-layer::before,
+  .fog-layer::after {
+    animation: none;
+  }
+
+  .particle {
+    display: none;
+  }
+}
+
+/* ---- Responsive section padding ---- */
+.section-padding {
+  padding: var(--section-padding) clamp(1rem, 4vw, 4rem);
+}
+
+/* ---- Hide cursor on touch devices ---- */
+@media (hover: none) and (pointer: coarse) {
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
   }
 }
