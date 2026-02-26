@@ -102,6 +102,7 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
 
   return (
     <div
+      id={`biz-${business.name.replace(/\\s+/g, '-')}`}
       ref={cardRef}
       className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"
         } gap-6 md:gap-10 items-stretch glass rounded-3xl overflow-hidden card-lift group`}

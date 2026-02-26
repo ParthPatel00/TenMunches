@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
-import Hero from "./components/Hero";
-import CategoryShowcase from "./components/CategoryShowcase";
+import SFMapHero from "./components/SFMapHero";
+import FoodJourney from "./components/FoodJourney";
+import GoldenGateBridge3D from "./components/GoldenGateBridge3D";
 import ResultsSection from "./components/ResultSection";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -51,8 +52,9 @@ function prefetchAllImages(data: any[]): void {
 function App() {
   const [topPlaces, setTopPlaces] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedBusinessName, setSelectedBusinessName] = useState<string | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
-  const categoriesRef = useRef<HTMLDivElement | null>(null);
+  const journeyRef = useRef<HTMLDivElement | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -69,6 +71,12 @@ function App() {
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
+    setSelectedBusinessName(null);
+  };
+
+  const handleBusinessSelect = (category: string, businessName: string) => {
+    setSelectedCategory(category);
+    setSelectedBusinessName(businessName);
   };
 
   const handleCategoryHover = useCallback(
@@ -78,15 +86,19 @@ function App() {
     [topPlaces]
   );
 
-  const scrollToCategories = useCallback(() => {
-    categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollToJourney = useCallback(() => {
+    journeyRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
   const scrollToResults = useCallback(() => {
     requestAnimationFrame(() => {
-      resultsRef.current?.scrollIntoView({ behavior: "smooth" });
+      // The ResultsSection will handle the fine-grained scroll if selectedBusinessName is set
+      // So we only scroll to the section container here if selectedBusinessName is null
+      if (!selectedBusinessName) {
+        resultsRef.current?.scrollIntoView({ behavior: "smooth" });
+      }
     });
-  }, []);
+  }, [selectedBusinessName]);
 
   useEffect(() => {
     let ticking = false;
@@ -117,13 +129,24 @@ function App() {
       {/* Navigation */}
       <Navbar />
 
-      {/* Hero Section */}
-      <Hero onScrollToCategories={scrollToCategories} />
+      {/* Hero — Interactive SF Map */}
+      <SFMapHero
+        data={topPlaces}
+        onBusinessSelect={handleBusinessSelect}
+        onBusinessHover={handleCategoryHover}
+        selectedCategory={selectedCategory}
+        selectedBusinessName={selectedBusinessName}
+        onScrollToCategories={scrollToJourney}
+      />
 
-      {/* Category Showcase */}
-      <div ref={categoriesRef}>
-        <CategoryShowcase
+      {/* 3D Golden Gate Bridge Divider */}
+      <GoldenGateBridge3D />
+
+      {/* Food Journey — Horizontal Scroll Categories */}
+      <div ref={journeyRef}>
+        <FoodJourney
           categories={categories}
+          data={topPlaces}
           selectedCategory={selectedCategory}
           onSelect={handleCategorySelect}
           onHover={handleCategoryHover}
@@ -137,6 +160,7 @@ function App() {
             key={selectedCategory}
             category={selectedCategory}
             data={topPlaces}
+            selectedBusinessName={selectedBusinessName}
             onMounted={scrollToResults}
           />
         )}
@@ -149,8 +173,8 @@ function App() {
       <button
         onClick={scrollToTop}
         className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full glass-light flex items-center justify-center text-sf-golden-light hover:text-sf-cream hover:bg-sf-golden/30 transition-all duration-500 interactive shadow-lg shadow-black/30 ${showScrollTop
-            ? "translate-y-0 opacity-100"
-            : "translate-y-16 opacity-0 pointer-events-none"
+          ? "translate-y-0 opacity-100"
+          : "translate-y-16 opacity-0 pointer-events-none"
           }`}
       >
         <ArrowUp size={20} />

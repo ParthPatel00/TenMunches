@@ -34,6 +34,11 @@ export default {
         'fade-up': 'fadeUp 0.6s ease-out forwards',
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'text-reveal': 'textReveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards',
+        'pin-float': 'pinFloat 3s ease-in-out infinite',
+        'radar-pulse': 'radarPulse 2s ease-out infinite',
+        'bridge-breathe': 'bridgeBreathe 8s ease-in-out infinite',
+        'water-shimmer': 'waterShimmer 6s ease-in-out infinite',
+        'ambient-pulse': 'ambientPulse 6s ease-in-out infinite',
       },
       keyframes: {
         fogDrift: {

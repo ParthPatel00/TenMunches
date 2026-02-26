@@ -17,10 +17,11 @@ interface Props {
       url?: string;
     }[];
   }[];
+  selectedBusinessName?: string | null;
   onMounted?: () => void;
 }
 
-const ResultsSection = ({ category, data, onMounted }: Props) => {
+const ResultsSection = ({ category, data, selectedBusinessName, onMounted }: Props) => {
   const result = data.find((c) => c.category === category);
   const businesses = result?.top_10 || [];
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,23 @@ const ResultsSection = ({ category, data, onMounted }: Props) => {
 
   useEffect(() => {
     onMounted?.();
-  }, [onMounted]);
+
+    // Deep link scroll logic
+    if (selectedBusinessName) {
+      // Small timeout to allow the DOM elements to render before measuring
+      setTimeout(() => {
+        const cardElement = document.getElementById(`biz-${selectedBusinessName.replace(/\\s+/g, '-')}`);
+        if (cardElement) {
+          cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Highlight effect
+          cardElement.classList.add('ring-4', 'ring-sf-golden', 'scale-[1.02]', 'z-50', 'transition-all', 'duration-500');
+          setTimeout(() => {
+            cardElement.classList.remove('ring-4', 'ring-sf-golden', 'scale-[1.02]', 'z-50');
+          }, 2000);
+        }
+      }, 100);
+    }
+  }, [onMounted, selectedBusinessName, category]);
 
   // Animate title on mount
   useEffect(() => {
