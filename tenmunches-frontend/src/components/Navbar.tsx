@@ -39,8 +39,8 @@ const Navbar = () => {
         >
             <div
                 className={`mx-auto transition-all duration-500 ${isScrolled
-                        ? "mt-4 mx-4 md:mx-8 rounded-2xl glass-light shadow-lg shadow-black/20"
-                        : "bg-transparent"
+                    ? "mt-4 mx-4 md:mx-8 rounded-2xl glass-light shadow-lg shadow-black/20"
+                    : "bg-transparent"
                     }`}
             >
                 <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
@@ -61,26 +61,18 @@ const Navbar = () => {
 
                     {/* Nav Links */}
                     <div className="hidden md:flex items-center gap-8">
-                        <a
-                            href="#categories"
+                        <button
+                            onClick={() => (window as any).lenis?.scrollTo(".journey-track", { offset: -100, duration: 1.5 })}
                             className="text-sm font-medium text-gray-300 hover:text-sf-golden-light transition-colors duration-300 interactive"
                         >
                             Categories
-                        </a>
-                        <a
-                            href="https://github.com/ParthPatel00/TenMunches"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm font-medium text-gray-300 hover:text-sf-golden-light transition-colors duration-300 interactive"
-                        >
-                            GitHub
-                        </a>
-                        <a
-                            href="#categories"
+                        </button>
+                        <button
+                            onClick={() => (window as any).lenis?.scrollTo(".journey-track", { offset: -100, duration: 1.5 })}
                             className="px-5 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-sf-golden to-sf-golden-light text-sf-bay-deep hover:shadow-lg hover:shadow-sf-golden/30 transition-all duration-300 interactive"
                         >
                             Explore
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

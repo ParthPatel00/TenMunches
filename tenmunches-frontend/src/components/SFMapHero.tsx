@@ -1,4 +1,5 @@
 import { useEffect, useRef, useMemo, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import Map, { Marker } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
@@ -24,7 +25,9 @@ const categoryIcons: Record<string, string> = {
 // ---------------------------------------------------------------------------
 
 interface Props {
+    categories: string[];
     data: any[];
+    onCategorySelect: (category: string | null) => void;
     onBusinessSelect: (category: string, businessName: string) => void;
     onBusinessHover?: (category: string) => void;
     selectedCategory: string | null;
@@ -37,7 +40,9 @@ interface Props {
 // ---------------------------------------------------------------------------
 
 const SFMapHero = ({
+    categories,
     data,
+    onCategorySelect,
     onBusinessSelect,
     onBusinessHover,
     selectedCategory,
@@ -45,6 +50,7 @@ const SFMapHero = ({
     onScrollToCategories,
 }: Props) => {
     const [hoveredBusinessName, setHoveredBusinessName] = useState<string | null>(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const heroRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -210,6 +216,48 @@ const SFMapHero = ({
                     {/* Subtle vignette over the map to blend it into the dark theme */}
                     <div className="absolute inset-0 z-[2] pointer-events-none shadow-[inset_0_0_80px_rgba(15,23,42,0.8)] rounded-3xl" />
 
+                    {/* Category Filter Dropdown */}
+                    <div className="absolute top-4 right-4 z-[20]">
+                        <div className="relative">
+                            <button
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                className="px-4 py-2.5 rounded-xl glass-dark border border-white/10 shadow-xl text-sm font-medium flex items-center gap-2 hover:bg-white/5 transition-all outline-none"
+                            >
+                                {selectedCategory ? (
+                                    <>
+                                        <span className="text-base">{categoryIcons[selectedCategory]}</span>
+                                        <span className="capitalize text-white">{selectedCategory}</span>
+                                    </>
+                                ) : (
+                                    <span className="text-gray-200">All Categories</span>
+                                )}
+                                <ChevronDown size={16} className={`text-gray-400 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                            </button>
+
+                            {/* Dropdown Menu */}
+                            {isDropdownOpen && (
+                                <div className="absolute top-full right-0 mt-2 w-56 max-h-[300px] overflow-y-auto rounded-xl glass-dark border border-white/10 shadow-2xl p-2 flex flex-col gap-1 origin-top-right animate-in fade-in scale-in-95 duration-200 custom-scrollbar">
+                                    <button
+                                        onClick={() => { onCategorySelect(null); setIsDropdownOpen(false); }}
+                                        className={`text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${!selectedCategory ? 'bg-sf-golden/20 text-sf-golden-light' : 'hover:bg-white/5 text-gray-300'}`}
+                                    >
+                                        All Categories
+                                    </button>
+                                    {categories.map(cat => (
+                                        <button
+                                            key={cat}
+                                            onClick={() => { onCategorySelect(cat); setIsDropdownOpen(false); }}
+                                            className={`flex items-center gap-2.5 text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${selectedCategory === cat ? 'bg-sf-golden/20 text-sf-golden-light' : 'hover:bg-white/5 text-gray-300'}`}
+                                        >
+                                            <span className="text-base">{categoryIcons[cat]}</span>
+                                            <span className="capitalize">{cat}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
                     <Map
                         mapLib={maplibregl}
                         initialViewState={{
@@ -224,17 +272,19 @@ const SFMapHero = ({
                         scrollZoom={true} // Enabled scroll zoom based on feedback
                         dragPan={true}
                         dragRotate={true}
+                        attributionControl={false} // Removed MapLibre logo to match request
                         style={{ width: "100%", height: "100%", borderRadius: "1.5rem" }}
                     >
 
                         {/* Render our custom NeighborhoodPins purely using Map Markers */}
                         {pins.map((pin, i) => {
+                            // Filter logic: if a category is selected, ONLY show those pins!
+                            if (selectedCategory && selectedCategory !== pin.category) return null;
                             const isBusinessSelected = selectedBusinessName === pin.name;
                             const isCategorySelected = selectedCategory === pin.category;
                             const isHovered = hoveredBusinessName === pin.name;
                             const isActive = isBusinessSelected || (isCategorySelected && !selectedBusinessName);
                             // Set z-index dynamically explicitly. React-map-gl doesn't automatically pull hovered state up unless we do it, but we can rely on DOM order for now, and the active state for the truly active pin.
-                            // Removed pin decluttering - always show all 200 pins!
 
                             return (
                                 <Marker

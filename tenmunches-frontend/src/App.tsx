@@ -69,7 +69,7 @@ function App() {
 
   const categories = topPlaces.map((d) => d.category);
 
-  const handleCategorySelect = (category: string) => {
+  const handleCategorySelect = (category: string | null) => {
     setSelectedCategory(category);
     setSelectedBusinessName(null);
   };
@@ -87,7 +87,7 @@ function App() {
   );
 
   const scrollToJourney = useCallback(() => {
-    journeyRef.current?.scrollIntoView({ behavior: "smooth" });
+    (window as any).lenis?.scrollTo(".journey-track", { offset: -100, duration: 1.5 });
   }, []);
 
   const scrollToResults = useCallback(() => {
@@ -131,7 +131,9 @@ function App() {
 
       {/* Hero — Interactive SF Map */}
       <SFMapHero
+        categories={categories}
         data={topPlaces}
+        onCategorySelect={handleCategorySelect}
         onBusinessSelect={handleBusinessSelect}
         onBusinessHover={handleCategoryHover}
         selectedCategory={selectedCategory}
