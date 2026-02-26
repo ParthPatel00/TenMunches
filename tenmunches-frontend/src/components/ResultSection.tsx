@@ -36,11 +36,8 @@ const ResultsSection = ({ category, data, selectedBusinessName, onMounted }: Pro
       setTimeout(() => {
         const cardElement = document.getElementById(`biz-${selectedBusinessName.replace(/\\s+/g, '-')}`);
         if (cardElement) {
-          // Calculate absolute geometric position to avoid ScrollTrigger/Lenis pin issues
-          const rect = cardElement.getBoundingClientRect();
-          const absoluteTop = window.scrollY + rect.top - 100; // 100px offset for navbar
-
-          window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
+          // Use Lenis directly via window to avoid circular imports.
+          (window as any).lenis?.scrollTo(cardElement, { offset: -100, duration: 1.5 });
 
           // Highlight effect
           cardElement.classList.add('ring-4', 'ring-sf-golden', 'scale-[1.02]', 'z-50', 'transition-all', 'duration-500');

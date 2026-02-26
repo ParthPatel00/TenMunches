@@ -30,7 +30,8 @@ const NeighborhoodPin = ({
 
     const handleMouseLeave = useCallback(() => {
         setIsHovered(false);
-    }, []);
+        onHover?.("", ""); // Clear global hover state
+    }, [onHover]);
 
     // The entire pin container. We use absolute bottom-0 so MapLibre's `anchor="bottom"` works perfectly.
     return (

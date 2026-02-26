@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import gsap from "gsap";
 import Map, { Marker } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
@@ -44,6 +44,7 @@ const SFMapHero = ({
     selectedBusinessName,
     onScrollToCategories,
 }: Props) => {
+    const [hoveredBusinessName, setHoveredBusinessName] = useState<string | null>(null);
     const heroRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -204,6 +205,7 @@ const SFMapHero = ({
                 <div
                     className="actual-map-container w-full h-[55vh] max-h-[600px] min-h-[400px] mb-10 rounded-3xl overflow-hidden border border-white/5 relative shadow-2xl shadow-black/50"
                     style={{ opacity: 0 }}
+                    data-lenis-prevent="true"
                 >
                     {/* Subtle vignette over the map to blend it into the dark theme */}
                     <div className="absolute inset-0 z-[2] pointer-events-none shadow-[inset_0_0_80px_rgba(15,23,42,0.8)] rounded-3xl" />
@@ -229,7 +231,9 @@ const SFMapHero = ({
                         {pins.map((pin, i) => {
                             const isBusinessSelected = selectedBusinessName === pin.name;
                             const isCategorySelected = selectedCategory === pin.category;
+                            const isHovered = hoveredBusinessName === pin.name;
                             const isActive = isBusinessSelected || (isCategorySelected && !selectedBusinessName);
+                            // Set z-index dynamically explicitly. React-map-gl doesn't automatically pull hovered state up unless we do it, but we can rely on DOM order for now, and the active state for the truly active pin.
                             // Removed pin decluttering - always show all 200 pins!
 
                             return (
@@ -238,7 +242,7 @@ const SFMapHero = ({
                                     longitude={pin.longitude}
                                     latitude={pin.latitude}
                                     anchor="bottom"
-                                    style={{ zIndex: isActive ? 50 : 10 }}
+                                    style={{ zIndex: isActive || isHovered ? 100 : 10 }}
                                 >
                                     <NeighborhoodPin
                                         icon={pin.icon}
@@ -248,7 +252,10 @@ const SFMapHero = ({
                                         rank={pin.rank}
                                         isActive={isActive}
                                         onClick={onBusinessSelect}
-                                        onHover={onBusinessHover}
+                                        onHover={(cat, biz) => {
+                                            setHoveredBusinessName(biz);
+                                            onBusinessHover?.(cat);
+                                        }}
                                     />
                                 </Marker>
                             );

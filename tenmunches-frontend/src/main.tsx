@@ -16,6 +16,7 @@ const lenis = new Lenis({
   easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smoothWheel: true,
 });
+(window as any).lenis = lenis;
 
 // Connect Lenis to GSAP ScrollTrigger
 lenis.on("scroll", ScrollTrigger.update);
