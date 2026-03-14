@@ -57,6 +57,11 @@ const ResultsSection = ({ category, data, selectedBusinessName }: Props) => {
       const id = `biz-${selectedBusinessName.replace(/\s+/g, '-')}`;
       const cardElement = document.getElementById(id);
       if (cardElement) {
+        // lenis.resize() is required here for the same reason as in App.tsx:
+        // ResultSection may have just mounted (page grew), and lenis.limit is
+        // stale until its 250ms ResizeObserver debounce fires. Without this,
+        // scrollTo clamps the target and lands at the wrong card position.
+        (window as any).lenis?.resize();
         (window as any).lenis?.scrollTo(cardElement, { offset: -100, duration: 1.5 });
         highlightCard(cardElement);
       } else if (attempts++ < 10) {

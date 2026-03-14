@@ -58,6 +58,9 @@ function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   const resultsRef = useRef<HTMLDivElement | null>(null);
+  // Set to true synchronously when a map pin is clicked — tells the scroll
+  // effect to skip section-level scroll (ResultSection handles card-level scroll instead)
+  const isPinClickRef = useRef(false);
 
   useEffect(() => {
     fetch("/data/categories.json")
@@ -88,9 +91,10 @@ function App() {
     setMapPinCategory(category);
   }, []);
 
-  // ── A specific business pin was clicked on the map — scroll to results + deep-link ──
+  // ── A specific business pin was clicked on the map — open results + deep-link to card ──
+  // NOTE: does NOT change mapPinCategory — the filter dropdown stays as-is
   const handleBusinessSelect = useCallback((category: string, businessName: string) => {
-    setMapPinCategory(category);
+    isPinClickRef.current = true; // tell the scroll effect to stay out of the way
     setSelectedCategory(category);
     setSelectedBusinessName(businessName);
   }, []);
@@ -104,30 +108,29 @@ function App() {
     (window as any).lenis?.scrollTo(".journey-section", { offset: -100, duration: 1.5 });
   }, []);
 
-  // Scroll to results when category changes (not on business-pin deep-link — ResultsSection handles that)
+  // Scroll to the results section top when a category is selected from FoodJourney.
+  // Pin clicks are handled entirely by ResultSection (card-level scroll) — skip those.
   useEffect(() => {
-    if (!selectedCategory || selectedBusinessName) return;
+    if (!selectedCategory) return;
     const timer = setTimeout(() => {
+      // Pin click: ResultSection owns the scroll — bail out and reset the flag
+      if (isPinClickRef.current) {
+        isPinClickRef.current = false;
+        return;
+      }
+
       const el = resultsRef.current;
       const lenis = (window as any).lenis;
       if (!el || !lenis) return;
 
-      // ROOT CAUSE: Lenis's internal Dimensions class debounces its ResizeObserver
-      // callback by 250ms. ResultsSection mounts and makes the page much taller, but
-      // lenis.limit still reflects the OLD (shorter) page height until the debounce fires.
-      // lenis.scrollTo() clamps the target to that stale limit, landing the section near
-      // the viewport centre instead of near the top.
-      //
-      // FIX: call lenis.resize() which synchronously recalculates dimensions.scrollHeight
-      // and therefore lenis.limit — bypassing the 250ms debounce entirely.
+      // lenis.resize() synchronously recalculates lenis.limit, bypassing the 250ms
+      // ResizeObserver debounce in Lenis's Dimensions class — without this, scrollTo
+      // clamps to the old (pre-ResultsSection) page height and lands at the wrong position.
       lenis.resize();
-
-      // Now lenis.limit is correct; scrollTo will not clamp.
       lenis.scrollTo(el, { offset: -80, duration: 1.2 });
     }, 200);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCategory]); // selectedBusinessName intentionally excluded — pin clicks handled by ResultsSection
+  }, [selectedCategory]);
 
   // Show/hide scroll-to-top button — threshold = 80% of viewport height, responsive
   useEffect(() => {
