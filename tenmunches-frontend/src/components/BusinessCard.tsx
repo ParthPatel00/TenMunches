@@ -17,14 +17,13 @@ interface Props {
   };
   rank: number;
   reversed?: boolean;
-  index: number;
 }
 
 const BusinessCard = ({ business, rank, reversed = false }: Props) => {
+  // imageError: 0 = ok, 1 = primary failed (try fallback), 2 = fallback failed too
+  const [imageError, setImageError] = useState(0);
   const [showAll, setShowAll] = useState(false);
-  const [imageError, setImageError] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
 
   // Scroll-triggered entrance
   useEffect(() => {
@@ -52,23 +51,6 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
         );
       }
 
-      // Parallax on image
-      if (imageRef.current) {
-        gsap.fromTo(
-          imageRef.current.querySelector("img"),
-          { y: "-10%" },
-          {
-            y: "10%",
-            ease: "none",
-            scrollTrigger: {
-              trigger: imageRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          }
-        );
-      }
     }, cardRef);
 
     return () => ctx.revert();
@@ -79,7 +61,8 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
     : business.testimonials.slice(0, 1);
 
   const image =
-    !imageError && business.photo_url ? business.photo_url : "/sf.jpg";
+    imageError === 0 && business.photo_url ? business.photo_url :
+    imageError <= 1 ? "/sf.jpg" : null;
 
   // Animated star fill
   const renderStars = () => {
@@ -102,7 +85,7 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
 
   return (
     <div
-      id={`biz-${business.name.replace(/\\s+/g, '-')}`}
+      id={`biz-${business.name.replace(/\s+/g, '-')}`}
       ref={cardRef}
       className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"
         } gap-6 md:gap-10 items-stretch glass rounded-3xl overflow-hidden card-lift group`}
@@ -110,18 +93,24 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
     >
       {/* Image Section */}
       <div
-        ref={imageRef}
         className="relative w-full md:w-[45%] min-h-[280px] md:min-h-[380px] overflow-hidden"
       >
-        <img
-          src={image}
-          alt={business.name}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          style={{ height: "120%", top: "-10%" }}
-          loading="lazy"
-          decoding="async"
-          onError={() => setImageError(true)}
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={business.name}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+            onError={() => setImageError((e) => e + 1)}
+          />
+        ) : (
+          // Both sources failed — show a branded gradient placeholder
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(160deg, #1E3A5F 0%, #0F172A 100%)" }}
+          />
+        )}
 
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-sf-bay-deep/80 via-transparent to-sf-bay-deep/20 pointer-events-none" />
@@ -184,7 +173,7 @@ const BusinessCard = ({ business, rank, reversed = false }: Props) => {
                 <span className="text-sf-golden text-lg font-display mr-1">
                   "
                 </span>
-                {quote.length > 200 ? quote.slice(0, 200) + "…" : quote}
+                {quote}
                 <span className="text-sf-golden text-lg font-display ml-1">
                   "
                 </span>

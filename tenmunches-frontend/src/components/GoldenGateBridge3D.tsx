@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import gsap from "gsap";
 
 const GoldenGateBridge3D = () => {
@@ -17,7 +17,7 @@ const GoldenGateBridge3D = () => {
                         ease: "power3.out",
                         scrollTrigger: {
                             trigger: containerRef.current,
-                            start: "top 90%",
+                            start: "top 75%",
                             toggleActions: "play none none none",
                         },
                     }
@@ -41,21 +41,21 @@ const GoldenGateBridge3D = () => {
         return `M ${x1} ${y1} Q ${midX} ${midY} ${x2} ${y2}`;
     };
 
-    // Vertical suspender cables
-    const suspenders = [];
-    const towerLeftX = 35;
-    const towerRightX = 75;
-    const towerTopY = 15;
-    const roadY = 65;
-    const numSuspenders = 8;
+    // Bridge geometry constants (used both in useMemo and in SVG JSX)
+    const towerLeftX = 35, towerRightX = 75, towerTopY = 15, roadY = 65;
 
-    for (let i = 1; i < numSuspenders; i++) {
-        const t = i / numSuspenders;
-        const x = towerLeftX + (towerRightX - towerLeftX) * t;
-        // Parabola sag calculation
-        const cableY = towerTopY + 20 * 4 * t * (1 - t);
-        suspenders.push({ x, topY: towerTopY + cableY * 0.3, bottomY: roadY });
-    }
+    // Memoized suspender cables — pure geometry, never needs to recompute
+    const suspenders = useMemo(() => {
+        const result = [];
+        for (let i = 1; i < 8; i++) {
+            const t = i / 8;
+            const x = towerLeftX + (towerRightX - towerLeftX) * t;
+            const sag = 20 * 4 * t * (1 - t);
+            result.push({ x, topY: towerTopY + sag * 0.3, bottomY: roadY });
+        }
+        return result;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div

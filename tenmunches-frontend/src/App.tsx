@@ -22,10 +22,9 @@ function prefetchCategoryImages(category: string, data: any[]): void {
   if (!match) return;
 
   for (const biz of match.top_10 || []) {
-    const url = biz.photo_url;
-    if (url) {
+    if (biz.photo_url) {
       const img = new Image();
-      img.src = url;
+      img.src = biz.photo_url;
     }
   }
 }
@@ -51,62 +50,93 @@ function prefetchAllImages(data: any[]): void {
 
 function App() {
   const [topPlaces, setTopPlaces] = useState<any[]>([]);
+  const [dataError, setDataError] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // mapPinCategory is independent of selectedCategory — only the map filter dropdown changes it
+  const [mapPinCategory, setMapPinCategory] = useState<string | null>(null);
   const [selectedBusinessName, setSelectedBusinessName] = useState<string | null>(null);
-  const resultsRef = useRef<HTMLDivElement | null>(null);
-  const journeyRef = useRef<HTMLDivElement | null>(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const resultsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetch("/data/categories.json")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         setTopPlaces(data);
         prefetchAllImages(data);
       })
-      .catch((err) => console.error("Failed to load data", err));
+      .catch((err) => {
+        console.error("Failed to load data", err);
+        setDataError(true);
+      });
   }, []);
 
   const categories = topPlaces.map((d) => d.category);
 
-  const handleCategorySelect = (category: string | null) => {
+  // ── Category from carousel (should scroll to results) ──
+  const handleCategorySelect = useCallback((category: string | null) => {
     setSelectedCategory(category);
     setSelectedBusinessName(null);
-  };
+  }, []);
 
-  const handleBusinessSelect = (category: string, businessName: string) => {
+  // ── Category selected from the map filter dropdown (pins only — no scroll, no results change) ──
+  const handleMapFilterSelect = useCallback((category: string | null) => {
+    setMapPinCategory(category);
+  }, []);
+
+  // ── A specific business pin was clicked on the map — scroll to results + deep-link ──
+  const handleBusinessSelect = useCallback((category: string, businessName: string) => {
+    setMapPinCategory(category);
     setSelectedCategory(category);
     setSelectedBusinessName(businessName);
-  };
+  }, []);
 
   const handleCategoryHover = useCallback(
-    (category: string) => {
-      prefetchCategoryImages(category, topPlaces);
-    },
-    [topPlaces]
+    (category: string) => prefetchCategoryImages(category, topPlaces),
+    [topPlaces],
   );
 
   const scrollToJourney = useCallback(() => {
-    (window as any).lenis?.scrollTo(".journey-track", { offset: -100, duration: 1.5 });
+    (window as any).lenis?.scrollTo(".journey-section", { offset: -100, duration: 1.5 });
   }, []);
 
-  const scrollToResults = useCallback(() => {
-    requestAnimationFrame(() => {
-      // The ResultsSection will handle the fine-grained scroll if selectedBusinessName is set
-      // So we only scroll to the section container here if selectedBusinessName is null
-      if (!selectedBusinessName) {
-        resultsRef.current?.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  }, [selectedBusinessName]);
+  // Scroll to results when category changes (not on business-pin deep-link — ResultsSection handles that)
+  useEffect(() => {
+    if (!selectedCategory || selectedBusinessName) return;
+    const timer = setTimeout(() => {
+      const el = resultsRef.current;
+      const lenis = (window as any).lenis;
+      if (!el || !lenis) return;
 
+      // ROOT CAUSE: Lenis's internal Dimensions class debounces its ResizeObserver
+      // callback by 250ms. ResultsSection mounts and makes the page much taller, but
+      // lenis.limit still reflects the OLD (shorter) page height until the debounce fires.
+      // lenis.scrollTo() clamps the target to that stale limit, landing the section near
+      // the viewport centre instead of near the top.
+      //
+      // FIX: call lenis.resize() which synchronously recalculates dimensions.scrollHeight
+      // and therefore lenis.limit — bypassing the 250ms debounce entirely.
+      lenis.resize();
+
+      // Now lenis.limit is correct; scrollTo will not clamp.
+      lenis.scrollTo(el, { offset: -80, duration: 1.2 });
+    }, 200);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory]); // selectedBusinessName intentionally excluded — pin clicks handled by ResultsSection
+
+  // Show/hide scroll-to-top button — threshold = 80% of viewport height, responsive
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        setShowScrollTop(window.scrollY > 600);
+        setShowScrollTop(window.scrollY > window.innerHeight * 0.8);
         ticking = false;
       });
     };
@@ -114,46 +144,51 @@ function App() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  if (dataError) {
+    return (
+      <div className="min-h-screen bg-sf-bay-deep flex items-center justify-center text-sf-cream">
+        <div className="text-center px-6">
+          <p className="text-2xl font-display font-bold mb-3">Couldn't load restaurant data</p>
+          <p className="text-gray-400 mb-6">Check your connection and try again.</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-2.5 rounded-full text-sm font-semibold bg-gradient-to-r from-sf-golden to-sf-golden-light text-sf-bay-deep"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-sf-bay-deep text-sf-cream overflow-hidden">
-      {/* Grain texture overlay */}
       <div className="grain-overlay" />
-
-      {/* Custom cursor (desktop only) */}
       <CustomCursor />
-
-      {/* Navigation */}
       <Navbar />
 
       {/* Hero — Interactive SF Map */}
       <SFMapHero
         categories={categories}
         data={topPlaces}
-        onCategorySelect={handleCategorySelect}
+        onMapFilterSelect={handleMapFilterSelect}
         onBusinessSelect={handleBusinessSelect}
         onBusinessHover={handleCategoryHover}
-        selectedCategory={selectedCategory}
+        selectedCategory={mapPinCategory}
         selectedBusinessName={selectedBusinessName}
         onScrollToCategories={scrollToJourney}
       />
 
-      {/* 3D Golden Gate Bridge Divider */}
       <GoldenGateBridge3D />
 
       {/* Food Journey — Horizontal Scroll Categories */}
-      <div ref={journeyRef}>
-        <FoodJourney
-          categories={categories}
-          data={topPlaces}
-          selectedCategory={selectedCategory}
-          onSelect={handleCategorySelect}
-          onHover={handleCategoryHover}
-        />
-      </div>
+      <FoodJourney
+        categories={categories}
+        data={topPlaces}
+        selectedCategory={selectedCategory}
+        onSelect={handleCategorySelect}
+        onHover={handleCategoryHover}
+      />
 
       {/* Results Section */}
       <div ref={resultsRef}>
@@ -163,20 +198,18 @@ function App() {
             category={selectedCategory}
             data={topPlaces}
             selectedBusinessName={selectedBusinessName}
-            onMounted={scrollToResults}
           />
         )}
       </div>
 
-      {/* Footer */}
       <Footer />
 
-      {/* Scroll to top button */}
+      {/* Scroll to top */}
       <button
-        onClick={scrollToTop}
+        onClick={() => (window as any).lenis?.scrollTo(0, { duration: 1.2 })}
         className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full glass-light flex items-center justify-center text-sf-golden-light hover:text-sf-cream hover:bg-sf-golden/30 transition-all duration-500 interactive shadow-lg shadow-black/30 ${showScrollTop
           ? "translate-y-0 opacity-100"
-          : "translate-y-16 opacity-0 pointer-events-none"
+          : "translate-y-4 opacity-0 pointer-events-none"
           }`}
       >
         <ArrowUp size={20} />

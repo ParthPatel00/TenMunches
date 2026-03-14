@@ -12,9 +12,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Initialize Lenis smooth scroll
 const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  lerp: 0.1,
   smoothWheel: true,
+  wheelMultiplier: 1.0,
+  touchMultiplier: 2.0,
+  overscroll: false,
 });
 (window as any).lenis = lenis;
 

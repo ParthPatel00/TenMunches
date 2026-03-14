@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import BusinessCard from "./BusinessCard";
 
@@ -18,36 +18,59 @@ interface Props {
     }[];
   }[];
   selectedBusinessName?: string | null;
-  onMounted?: () => void;
 }
 
-const ResultsSection = ({ category, data, selectedBusinessName, onMounted }: Props) => {
+const ResultsSection = ({ category, data, selectedBusinessName }: Props) => {
   const result = data.find((c) => c.category === category);
   const businesses = result?.top_10 || [];
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const deepLinkTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const highlightCard = useCallback((el: HTMLElement) => {
+    // GSAP-driven highlight — no classList thrashing, no layout reflows
+    gsap.fromTo(
+      el,
+      { boxShadow: "0 0 0 3px var(--sf-golden), 0 0 40px rgba(197,148,74,0.35)" },
+      {
+        boxShadow: "0 0 0 0px rgba(197,148,74,0), 0 0 0px rgba(197,148,74,0)",
+        duration: 0.7,
+        delay: 1.8,
+        ease: "power2.inOut",
+        clearProps: "boxShadow",
+      }
+    );
+    gsap.fromTo(el, { scale: 1.02 }, {
+      scale: 1, duration: 0.5, delay: 2.1, ease: "power2.inOut", clearProps: "scale",
+    });
+  }, []);
 
   useEffect(() => {
-    onMounted?.();
+    if (!selectedBusinessName) return;
 
-    // Deep link scroll logic
-    if (selectedBusinessName) {
-      // Small timeout to allow the DOM elements to render before measuring
-      setTimeout(() => {
-        const cardElement = document.getElementById(`biz-${selectedBusinessName.replace(/\\s+/g, '-')}`);
-        if (cardElement) {
-          // Use Lenis directly via window to avoid circular imports.
-          (window as any).lenis?.scrollTo(cardElement, { offset: -100, duration: 1.5 });
+    // Cancel any in-flight deep-link from a previous rapid selection
+    if (deepLinkTimerRef.current) clearTimeout(deepLinkTimerRef.current);
 
-          // Highlight effect
-          cardElement.classList.add('ring-4', 'ring-sf-golden', 'scale-[1.02]', 'z-50', 'transition-all', 'duration-500');
-          setTimeout(() => {
-            cardElement.classList.remove('ring-4', 'ring-sf-golden', 'scale-[1.02]', 'z-50');
-          }, 2000);
-        }
-      }, 800);
-    }
-  }, [onMounted, selectedBusinessName, category]);
+    // Poll for the card element — handles slow renders on low-end devices
+    let attempts = 0;
+    const tryScroll = () => {
+      const id = `biz-${selectedBusinessName.replace(/\s+/g, '-')}`;
+      const cardElement = document.getElementById(id);
+      if (cardElement) {
+        (window as any).lenis?.scrollTo(cardElement, { offset: -100, duration: 1.5 });
+        highlightCard(cardElement);
+      } else if (attempts++ < 10) {
+        // Retry up to 10× at 100ms intervals (1s total) before giving up
+        deepLinkTimerRef.current = setTimeout(tryScroll, 100);
+      }
+    };
+
+    deepLinkTimerRef.current = setTimeout(tryScroll, 80);
+
+    return () => {
+      if (deepLinkTimerRef.current) clearTimeout(deepLinkTimerRef.current);
+    };
+  }, [selectedBusinessName, category, highlightCard]);
 
   // Animate title on mount
   useEffect(() => {
@@ -89,7 +112,6 @@ const ResultsSection = ({ category, data, selectedBusinessName, onMounted }: Pro
               business={biz}
               rank={index + 1}
               reversed={index % 2 !== 0}
-              index={index}
             />
           ))}
         </div>

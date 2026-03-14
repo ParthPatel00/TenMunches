@@ -1,7 +1,7 @@
-import { useEffect, useRef, useMemo, useState } from "react";
+import { useEffect, useRef, useMemo, useState, useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
-import Map, { Marker } from "react-map-gl/maplibre";
+import Map, { Marker, NavigationControl } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import NeighborhoodPin from "./NeighborhoodPin";
@@ -27,7 +27,7 @@ const categoryIcons: Record<string, string> = {
 interface Props {
     categories: string[];
     data: any[];
-    onCategorySelect: (category: string | null) => void;
+    onMapFilterSelect: (category: string | null) => void;
     onBusinessSelect: (category: string, businessName: string) => void;
     onBusinessHover?: (category: string) => void;
     selectedCategory: string | null;
@@ -42,15 +42,21 @@ interface Props {
 const SFMapHero = ({
     categories,
     data,
-    onCategorySelect,
+    onMapFilterSelect,
     onBusinessSelect,
     onBusinessHover,
     selectedCategory,
     selectedBusinessName,
     onScrollToCategories,
 }: Props) => {
-    const [hoveredBusinessName, setHoveredBusinessName] = useState<string | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const mapInstanceRef = useRef<maplibregl.Map | null>(null);
+
+    // Stable callback — prevents NeighborhoodPin memo from busting on every render
+    const handlePinHover = useCallback((cat: string) => {
+        onBusinessHover?.(cat);
+    }, [onBusinessHover]);
     const heroRef = useRef<HTMLDivElement>(null);
     const headlineRef = useRef<HTMLHeadingElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -96,6 +102,16 @@ const SFMapHero = ({
             })),
         []
     );
+
+    useEffect(() => {
+        const handleOutsideClick = (e: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+                setIsDropdownOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleOutsideClick);
+        return () => document.removeEventListener("mousedown", handleOutsideClick);
+    }, []);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -204,21 +220,20 @@ const SFMapHero = ({
                     className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl mx-auto mb-8 leading-relaxed font-light text-center"
                     style={{ opacity: 0 }}
                 >
-                    Tap a pin to discover top 10 spots in 20 food & drink categories
+                    Click a pin to discover top 10 spots in 20 food & drink categories
                 </p>
 
                 {/* Real Interactive Map (MapLibre + Carto) */}
                 <div
                     className="actual-map-container w-full h-[55vh] max-h-[600px] min-h-[400px] mb-10 rounded-3xl overflow-hidden border border-white/5 relative shadow-2xl shadow-black/50"
                     style={{ opacity: 0 }}
-                    data-lenis-prevent="true"
                 >
                     {/* Subtle vignette over the map to blend it into the dark theme */}
                     <div className="absolute inset-0 z-[2] pointer-events-none shadow-[inset_0_0_80px_rgba(15,23,42,0.8)] rounded-3xl" />
 
                     {/* Category Filter Dropdown */}
                     <div className="absolute top-4 right-4 z-[20]">
-                        <div className="relative">
+                        <div ref={dropdownRef} className="relative">
                             <button
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                 className="px-4 py-2.5 rounded-xl glass-dark border border-white/10 shadow-xl text-sm font-medium flex items-center gap-2 hover:bg-white/5 transition-all outline-none"
@@ -236,9 +251,9 @@ const SFMapHero = ({
 
                             {/* Dropdown Menu */}
                             {isDropdownOpen && (
-                                <div className="absolute top-full right-0 mt-2 w-56 max-h-[300px] overflow-y-auto rounded-xl glass-dark border border-white/10 shadow-2xl p-2 flex flex-col gap-1 origin-top-right animate-in fade-in scale-in-95 duration-200 custom-scrollbar">
+                                <div className="absolute top-full right-0 mt-2 w-56 max-h-[300px] overflow-y-auto rounded-xl glass-dark border border-white/10 shadow-2xl p-2 flex flex-col gap-1 origin-top-right custom-scrollbar" style={{ animation: "dropdownIn 0.18s cubic-bezier(0.22,1,0.36,1) both" }}>
                                     <button
-                                        onClick={() => { onCategorySelect(null); setIsDropdownOpen(false); }}
+                                        onClick={() => { onMapFilterSelect(null); setIsDropdownOpen(false); }}
                                         className={`text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${!selectedCategory ? 'bg-sf-golden/20 text-sf-golden-light' : 'hover:bg-white/5 text-gray-300'}`}
                                     >
                                         All Categories
@@ -246,7 +261,7 @@ const SFMapHero = ({
                                     {categories.map(cat => (
                                         <button
                                             key={cat}
-                                            onClick={() => { onCategorySelect(cat); setIsDropdownOpen(false); }}
+                                            onClick={() => { onMapFilterSelect(cat); setIsDropdownOpen(false); }}
                                             className={`flex items-center gap-2.5 text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${selectedCategory === cat ? 'bg-sf-golden/20 text-sf-golden-light' : 'hover:bg-white/5 text-gray-300'}`}
                                         >
                                             <span className="text-base">{categoryIcons[cat]}</span>
@@ -261,20 +276,42 @@ const SFMapHero = ({
                     <Map
                         mapLib={maplibregl}
                         initialViewState={{
-                            longitude: -122.44, // Centered in SF
+                            longitude: -122.44,
                             latitude: 37.765,
                             zoom: 11.8,
-                            pitch: 45, // Adding some tilt for a 3D feel
-                            bearing: -15, // Slight angle
+                            pitch: 45,
+                            bearing: -15,
                         }}
                         mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
                         interactive={true}
-                        scrollZoom={true} // Enabled scroll zoom based on feedback
+                        scrollZoom={false}
+                        boxZoom={false}
                         dragPan={true}
                         dragRotate={true}
-                        attributionControl={false} // Removed MapLibre logo to match request
+                        touchZoomRotate={true}
+                        touchPitch={true}
+                        doubleClickZoom={true}
+                        attributionControl={false}
                         style={{ width: "100%", height: "100%", borderRadius: "1.5rem" }}
+                        onLoad={(e) => {
+                            const map = e.target;
+                            mapInstanceRef.current = map;
+                            // Attach a capture-phase wheel listener on the map canvas.
+                            // ctrlKey=true = two-finger pinch on macOS trackpad → zoom map.
+                            // ctrlKey=false = regular scroll → let Lenis scroll the page.
+                            const canvas = map.getCanvas();
+                            canvas.addEventListener('wheel', (evt: WheelEvent) => {
+                                if (evt.ctrlKey) {
+                                    evt.preventDefault();
+                                    evt.stopPropagation();
+                                    const delta = evt.deltaY < 0 ? 0.4 : -0.4;
+                                    map.zoomTo(map.getZoom() + delta, { duration: 120 });
+                                }
+                                // non-pinch scroll falls through to Lenis / browser default
+                            }, { passive: false });
+                        }}
                     >
+                        <NavigationControl position="bottom-right" showZoom showCompass={false} />
 
                         {/* Render our custom NeighborhoodPins purely using Map Markers */}
                         {pins.map((pin, i) => {
@@ -282,9 +319,7 @@ const SFMapHero = ({
                             if (selectedCategory && selectedCategory !== pin.category) return null;
                             const isBusinessSelected = selectedBusinessName === pin.name;
                             const isCategorySelected = selectedCategory === pin.category;
-                            const isHovered = hoveredBusinessName === pin.name;
                             const isActive = isBusinessSelected || (isCategorySelected && !selectedBusinessName);
-                            // Set z-index dynamically explicitly. React-map-gl doesn't automatically pull hovered state up unless we do it, but we can rely on DOM order for now, and the active state for the truly active pin.
 
                             return (
                                 <Marker
@@ -292,7 +327,7 @@ const SFMapHero = ({
                                     longitude={pin.longitude}
                                     latitude={pin.latitude}
                                     anchor="bottom"
-                                    style={{ zIndex: isActive || isHovered ? 100 : 10 }}
+                                    style={{ zIndex: isActive ? 100 : 10 }}
                                 >
                                     <NeighborhoodPin
                                         icon={pin.icon}
@@ -302,10 +337,7 @@ const SFMapHero = ({
                                         rank={pin.rank}
                                         isActive={isActive}
                                         onClick={onBusinessSelect}
-                                        onHover={(cat, biz) => {
-                                            setHoveredBusinessName(biz);
-                                            onBusinessHover?.(cat);
-                                        }}
+                                        onHover={handlePinHover}
                                     />
                                 </Marker>
                             );

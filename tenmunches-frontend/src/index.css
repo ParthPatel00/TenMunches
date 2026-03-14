@@ -49,6 +49,8 @@ html {
   /* Lenis handles smooth scrolling */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent browser rubber-band/elastic scroll from fighting Lenis */
+  overscroll-behavior: none;
 }
 
 body {
@@ -58,6 +60,9 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  overscroll-behavior: none;
+  /* Reserves space for the scrollbar so layout never shifts when it appears */
+  scrollbar-gutter: stable;
 }
 
 ::selection {
@@ -187,6 +192,8 @@ h6 {
       rgba(220, 225, 230, 0.06) 60%,
       transparent 80%);
   animation: fogDrift 30s linear infinite;
+  will-change: transform;
+  contain: strict;
 }
 
 .fog-layer::after {
@@ -246,7 +253,8 @@ h6 {
   border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
-  transform: translate(-50%, -50%);
+  /* JS drives position via translate3d — no left/top changes = no layout */
+  will-change: transform;
   transition: width 0.3s var(--transition-smooth),
     height 0.3s var(--transition-smooth),
     background 0.3s ease;
@@ -263,7 +271,7 @@ h6 {
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
+  will-change: transform;
   transition: width 0.4s var(--transition-smooth),
     height 0.4s var(--transition-smooth),
     border-color 0.3s ease;
@@ -356,6 +364,18 @@ h6 {
 
 .img-zoom-container:hover img {
   transform: scale(1.08);
+}
+
+/* ---- Dropdown entrance ---- */
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* ---- Reduce Motion ---- */
@@ -529,69 +549,220 @@ h6 {
 }
 
 /* ============================================================
-   Food Journey — Horizontal Scroll
+   Food Journey — Portrait Card Grid
    ============================================================ */
 
 .journey-section {
   position: relative;
-  overflow: hidden;
 }
 
-.journey-track {
-  display: flex;
-  gap: 2rem;
-  will-change: transform;
-}
+/* ── Portrait Card ── */
 
-.journey-card {
-  flex-shrink: 0;
-  width: 85vw;
-  max-width: 500px;
-  height: 70vh;
-  max-height: 600px;
-  border-radius: 24px;
-  overflow: hidden;
+.portrait-card {
   position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 20px;
+  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.6s var(--transition-smooth),
-    box-shadow 0.6s var(--transition-smooth);
-  transform-style: preserve-3d;
+  isolation: isolate;
+  /* translateZ forces GPU layer — ensures border-radius clips the scaling bg correctly */
+  transform: translateZ(0);
+  border: 1.5px solid rgba(255, 255, 255, 0.06);
+  transition:
+    transform 0.5s var(--transition-smooth),
+    box-shadow 0.5s var(--transition-smooth),
+    border-color 0.35s ease;
 }
 
-.journey-card:hover {
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(197, 148, 74, 0.15);
+.portrait-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 0 0 1.5px rgba(197, 148, 74, 0.4),
+    0 0 32px rgba(197, 148, 74, 0.14);
+  border-color: rgba(197, 148, 74, 0.3);
 }
 
-.journey-card-bg {
+.portrait-card--selected {
+  border-color: var(--sf-golden) !important;
+  box-shadow:
+    0 0 0 2px var(--sf-golden),
+    0 0 40px rgba(197, 148, 74, 0.35),
+    0 20px 50px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Photo / gradient background */
+.portrait-card__bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: transform 0.8s var(--transition-smooth);
+  transition: transform 0.7s var(--transition-smooth);
+  will-change: transform;
 }
 
-.journey-card:hover .journey-card-bg {
-  transform: scale(1.08);
+.portrait-card:hover .portrait-card__bg {
+  transform: scale(1.1);
 }
 
-.journey-card-overlay {
+/* Gradient overlay — strong at bottom, transparent at top */
+.portrait-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg,
-      rgba(15, 23, 42, 0.95) 0%,
-      rgba(15, 23, 42, 0.4) 40%,
-      rgba(15, 23, 42, 0.1) 100%);
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.96) 0%,
+    rgba(15, 23, 42, 0.55) 35%,
+    rgba(15, 23, 42, 0.15) 65%,
+    transparent 100%
+  );
   z-index: 1;
+  transition: background 0.5s ease;
 }
 
-.journey-card-content {
+.portrait-card:hover .portrait-card__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.98) 0%,
+    rgba(15, 23, 42, 0.65) 40%,
+    rgba(15, 23, 42, 0.2) 70%,
+    transparent 100%
+  );
+}
+
+/* Watermark index — top right, very faint */
+.portrait-card__index {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.05);
+  user-select: none;
+  pointer-events: none;
+  transition: color 0.4s ease;
+}
+
+.portrait-card--selected .portrait-card__index {
+  color: rgba(197, 148, 74, 0.1);
+}
+
+/* Bottom content */
+.portrait-card__body {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 2rem;
+  padding: 1.1rem;
   z-index: 2;
+  transition: transform 0.4s var(--transition-smooth);
+}
+
+.portrait-card:hover .portrait-card__body {
+  transform: translateY(-4px);
+}
+
+/* Emoji icon */
+.portrait-card__icon {
+  display: block;
+  font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+  line-height: 1;
+  margin-bottom: 0.45rem;
+  transition: transform 0.4s var(--transition-bounce);
+}
+
+.portrait-card:hover .portrait-card__icon {
+  transform: scale(1.18) translateY(-2px);
+}
+
+/* Category name */
+.portrait-card__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  color: #fff;
+  text-transform: capitalize;
+  line-height: 1.2;
+  margin: 0 0 0.45rem;
+}
+
+/* Neighborhood pills */
+.portrait-card__hoods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.55rem;
+}
+
+.portrait-card__hood-pill {
+  font-size: 0.58rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* CTA — hidden, slides up on hover */
+.portrait-card__cta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--sf-golden-light);
+  transform: translateY(10px);
+  opacity: 0;
+  transition:
+    transform 0.38s var(--transition-smooth),
+    opacity 0.38s ease;
+  pointer-events: none;
+}
+
+.portrait-card:hover .portrait-card__cta,
+.portrait-card--selected .portrait-card__cta {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Selected dot — top left */
+.portrait-card__dot {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  z-index: 3;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sf-golden);
+}
+
+/* ── Touch devices: always show CTA ── */
+@media (hover: none) and (pointer: coarse) {
+  .portrait-card__cta {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+}
+
+/* ── Tiny phones ── */
+@media (max-width: 380px) {
+  .portrait-card {
+    border-radius: 14px;
+  }
+
+  .portrait-card__body {
+    padding: 0.8rem;
+  }
+
+  .portrait-card__hoods {
+    display: none;
+  }
 }
 
 /* ============================================================
@@ -736,4 +907,52 @@ h6 {
     opacity: 1;
     transform: scale(1.05);
   }
+}
+
+/* ---- Map container — keep on GPU compositor layer to avoid repaint jitter on scroll ---- */
+.actual-map-container {
+  will-change: opacity, transform;
+  isolation: isolate;
+}
+
+/* ---- MapLibre marker — NO transition on the wrapper transform.
+   MapLibre updates this every frame during scroll/pan; any CSS transition
+   here makes marker positions lag/vibrate. Inner elements handle their own
+   hover transitions independently. ---- */
+.maplibregl-marker {
+  transition: none !important;
+  will-change: transform;
+}
+
+/* ---- MapLibre NavigationControl — dark theme override ---- */
+.maplibregl-ctrl-group {
+  background: rgba(15, 23, 42, 0.75) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  overflow: hidden !important;
+}
+.maplibregl-ctrl-group button {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease !important;
+}
+.maplibregl-ctrl-group button:hover {
+  background: rgba(197, 148, 74, 0.15) !important;
+  color: rgba(197, 148, 74, 0.9) !important;
+}
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+.maplibregl-ctrl-icon {
+  filter: invert(1) !important;
+  opacity: 0.7 !important;
 }
